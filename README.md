@@ -1,2 +1,2 @@
 # jot
-Ironhack Project - Sean and Tommy
+Ironhack Project - Sean and Tommy yay
