@@ -31,7 +31,8 @@ router.post('/entries', (req, res, next) => {
         emojis,
         comments,
         image,
-        user
+        user,
+        likes
     } = req.body);
 
     theEntry.save()

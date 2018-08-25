@@ -70,10 +70,12 @@ app.locals.title = 'Jot - Express';
 const index = require('./routes/index');
 const entryApi = require('./routes/entry-api')
 const authRoutes = require('./routes/auth-routes');
+const userApi = require('./routes/user-api')
 
 app.use('/', index);
 app.use('/api', entryApi)
 app.use('/', authRoutes);
+app.use('/api', userApi)
 
 
 app.use((req, res, next) => {
