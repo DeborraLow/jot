@@ -24,9 +24,8 @@ const entrySchema = new Schema(
             type: Array,
             default: []
         },
-        image: {
-            type: String, default: ''
-        },
+        // imgName: String,
+        // imgPath: String,
         // user: {
         //     type: Schema.Types.ObjectId,
         //     ref: "User",

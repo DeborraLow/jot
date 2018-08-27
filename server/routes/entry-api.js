@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+// const uploadCloud = require('../config/cloudinary.js');
 
 const Entry = require('../models/entry');
 
@@ -19,31 +20,34 @@ router.get('/entries', (req, res, next) => {
 
 
 /* CREATE a new Entry. */
-router.post('/entries', (req, res, next) => {
-    console.log("Req, Res");
-    const theEntry = new Entry({
-        title,
-        summary,
-        entry_text,
-        publish_date,
-        isPublic,
-        permitted_followers,
-        emojis,
-        comments,
-        image,
-        user,
-        likes
-    } = req.body);
+router.post('/entries',
+    //  uploadCloud.single('photo'), 
+    (req, res, next) => {
+        console.log("Req, Res");
+        const theEntry = new Entry({
+            title,
+            summary,
+            entry_text,
+            publish_date,
+            isPublic,
+            permitted_followers,
+            emojis,
+            comments,
+            user,
+            // imgPath = req.file.url,
+            // imgName = req.file.originalname,
+            likes
+        } = req.body);
 
-    theEntry.save()
-        .then(theEntry => {
-            res.json({
-                message: 'New Entry created!',
-                id: theEntry._id
-            });
-        })
-        .catch(error => next(error))
-});
+        theEntry.save()
+            .then(theEntry => {
+                res.json({
+                    message: 'New Entry created!',
+                    id: theEntry._id
+                });
+            })
+            .catch(error => next(error))
+    });
 
 /* GET a single Entry. */
 router.get('/entries/:id', (req, res, next) => {
@@ -60,32 +64,35 @@ router.get('/entries/:id', (req, res, next) => {
 });
 
 /* EDIT an Entry. */
-router.put('/entries/:id', (req, res, next) => {
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-        res.status(400).json({ message: 'Specified id is not valid' });
-        return;
-    }
+router.put('/entries/:id',
+    // uploadCloud.single('photo'), 
+    (req, res, next) => {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            res.status(400).json({ message: 'Specified id is not valid' });
+            return;
+        }
 
-    const updates = {
-        title,
-        summary,
-        entry_text,
-        publish_date,
-        isPublic,
-        permitted_followers,
-        emojis,
-        comments,
-        image,
-    } = req.body;
+        const updates = {
+            title,
+            summary,
+            entry_text,
+            publish_date,
+            isPublic,
+            permitted_followers,
+            emojis,
+            comments,
+            // imgName,
+            // imgPath,
+        } = req.body;
 
-    Entry.findByIdAndUpdate(req.params.id, updates)
-        .then(entry => {
-            res.json({
-                message: 'Entry has been updated successfully'
-            });
-        })
-        .catch(error => next(error))
-})
+        Entry.findByIdAndUpdate(req.params.id, updates)
+            .then(entry => {
+                res.json({
+                    message: 'Entry has been updated successfully'
+                });
+            })
+            .catch(error => next(error))
+    })
 
 /* DELETE an Entry. */
 
