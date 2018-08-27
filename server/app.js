@@ -8,11 +8,29 @@ const hbs = require('hbs');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
+const session = require('express-session');
+const passport = require('passport');
+
+
+const passportSetup = require('./config/passport');
+passportSetup(passport);
+
+const app = express();
+
+app.use(session({
+  secret: 'angular auth passport secret shh',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { httpOnly: true, maxAge: 2419200000 }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/server', { useMongoClient: true })
+  .connect('mongodb://localhost/jot', { useMongoClient: true })
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -22,7 +40,6 @@ mongoose
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
-const app = express();
 
 // Middleware Setup
 app.use(logger('dev'));
@@ -45,14 +62,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
-
 // default value for title local
 app.locals.title = 'Jot - Express';
 
 
 
 const index = require('./routes/index');
+const entryApi = require('./routes/entry-api')
+const authRoutes = require('./routes/auth-routes');
+const userApi = require('./routes/user-api')
+
 app.use('/', index);
+app.use('/api', entryApi)
+app.use('/', authRoutes);
+app.use('/api', userApi)
+
+
+app.use((req, res, next) => {
+  res.sendfile(__dirname + '/public/index.html');
+});
 
 
 module.exports = app;
