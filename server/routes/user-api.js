@@ -33,10 +33,11 @@ router.put('/user/:id',
             email,
             firstName,
             lastName,
+            penName,
             entries,
             friends,
             // avatarName,
-            // avatarPath,
+            avatarPath,
         } = req.body;
 
         User.findByIdAndUpdate(req.params.id, updates)

@@ -2,37 +2,37 @@
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 
 const entrySchema = new Schema(
     {
-        title: { type: String, default: "New Entry" },
+        title: { type: String, default: `New Entry` },
         summary: String,
         entry_text: String,
         publish_date: Date,
         isPublic: { type: Boolean, default: false },
-        permitted_followers: {
-            type: Array,
-            default: []
+        permitted_followers: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }],
+        emojis: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Emoji'
+        }], //Check if max number of array items can be done in mongoose schema
+
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
         },
-        emojis: {
-            type: Array,
-            default: [],
-            maxlength: 5,
-        },
-        comments: {
-            type: Array,
-            default: []
-        },
+        engagement: { type: Schema.Types.ObjectId, ref: 'Engagement' }
+        // comments: {
+        //     type: Array,
+        //     default: []
+        // },
         // imgName: String,
         // imgPath: String,
-        // user: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: "User",
-        //     required: true
-        // },
-        likes: Array
 
+        // POTENTIAL ADD TYPES
+        // types: ["Profile", "Explorer", "Timeline"]
     },
     {
         timestamps: {

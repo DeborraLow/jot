@@ -7,11 +7,11 @@ const userSchema = new Schema(
         password: String,
         firstName: String,
         lastName: String,
+        penName: String,
         email: { type: String, unique: true },
-        entries: Array,
-        friends: Array,
+
         // avatarName: { type: String, default: "/images/default-avatar.jpg" },
-        // avatarPath: String,
+        avatarPath: String,
     },
     {
         timestamps: {

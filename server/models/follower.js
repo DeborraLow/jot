@@ -1,0 +1,29 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const followerSchema = new Schema(
+    {
+        user1: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        },
+        user2: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        },
+        status: String,
+        actionUser: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
+    },
+    {
+        timestamps: {
+            createdAt: "created_at",
+            updatedAt: "updated_at"
+        }
+    }
+)
+const Follower = mongoose.model("Follower", friendSchema);
+
+module.exports = Follower;
