@@ -1,10 +1,10 @@
-interface User {
+export interface User {
     id: string;
     pen_name: string;
     avatar: string;
 }
 
-interface UserSettings {
+export interface UserSettings {
     email: string;
     username: string;
     first_name: string;
