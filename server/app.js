@@ -10,12 +10,15 @@ const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
+const cors = require('cors');
 
 
 const passportSetup = require('./config/passport');
 passportSetup(passport);
 
 const app = express();
+
+app.use(cors());
 
 app.use(session({
   secret: 'angular auth passport secret shh',
