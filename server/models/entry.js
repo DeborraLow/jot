@@ -24,6 +24,7 @@ const entrySchema = new Schema(
             ref: "User"
         },
         engagement: { type: Schema.Types.ObjectId, ref: 'Engagement' }
+
         // comments: {
         //     type: Array,
         //     default: []
