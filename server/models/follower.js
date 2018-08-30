@@ -24,6 +24,6 @@ const followerSchema = new Schema(
         }
     }
 )
-const Follower = mongoose.model("Follower", friendSchema);
+const Follower = mongoose.model("Follower", followerSchema);
 
 module.exports = Follower;
