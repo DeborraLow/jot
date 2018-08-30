@@ -71,14 +71,17 @@ app.locals.title = 'Jot - Express';
 
 
 const index = require('./routes/index');
-const entryApi = require('./routes/entry-api')
 const authRoutes = require('./routes/auth-routes');
+const entryApi = require('./routes/entry-api')
 const userApi = require('./routes/user-api')
+const emojiApi = require('./routes/emoji-api')
 
 app.use('/', index);
-app.use('/api', entryApi)
 app.use('/', authRoutes);
+app.use('/api', entryApi)
+
 app.use('/api', userApi)
+app.use('/api', emojiApi)
 
 
 app.use((req, res, next) => {
