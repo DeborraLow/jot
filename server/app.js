@@ -75,7 +75,8 @@ const authRoutes = require('./routes/auth-routes');
 const entryApi = require('./routes/entry-api')
 const userApi = require('./routes/user-api')
 const emojiApi = require('./routes/emoji-api')
-const followerApi = require('./routes/emoji-api')
+const followerApi = require('./routes/follower-api')
+const engagementApi = require('./routes/engagement-api')
 
 app.use('/', index);
 app.use('/', authRoutes);
@@ -84,6 +85,7 @@ app.use('/api', entryApi)
 app.use('/api', userApi)
 app.use('/api', emojiApi)
 app.use('/api', followerApi)
+app.use('/api', engagementApi)
 
 
 app.use((req, res, next) => {

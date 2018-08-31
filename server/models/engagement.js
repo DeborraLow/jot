@@ -36,4 +36,4 @@ const engagementSchema = new Schema(
 
 const Engagement = mongoose.model("Engagement", engagementSchema);
 
-model.exports = Entry;
+module.exports = Engagement;
