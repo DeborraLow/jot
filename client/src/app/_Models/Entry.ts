@@ -1,9 +1,9 @@
 export interface Entry {
     id: string;
-    account: User;
+    // account: User;
     title: string;
     summary: string;
     entry_text: string;
-    publisher: User;
-    emojis: Emoji[];
+    // publisher: User;
+    // emojis: Emoji[];
 }

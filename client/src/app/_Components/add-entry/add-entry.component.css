@@ -1,0 +1,41 @@
+
+.container {
+    width: 50%;
+    border: 1px solid black;
+    padding: 1em;
+}
+
+input{
+    border:0;
+    outline:0;
+    transition: 2000ms;
+    width: 100%;
+  border-bottom: 1px solid #5362f1;
+  background: transparent;
+  margin: 1em 0;
+  box-sizing: border-box;
+  padding: 1em 0;
+}
+
+.form {
+    background: #eecf7a;
+    width: 400px;
+    margin: auto;
+    padding: 3em;
+}
+
+button {
+    background: #eecf7a;
+    width: 15em;
+    border:0;
+    padding: 1em;
+    text-align: center;
+    cursor: pointer;
+    outline:0;
+    margin: 1em  
+}
+button:hover{
+    transition: 1000ms;
+    background: #5362f1;
+    color:#fff;
+} 

@@ -6,17 +6,20 @@ import { routes } from './app.routing';
 
 
 import { AppComponent } from './app.component';
-import { EntryComponent } from './_Components/entry/entry.component';
 
+import { EntryComponent } from './_Components/entry/entry.component';
+import { AddEntryComponent } from './_Components/add-entry/add-entry.component';
+import { EntryListComponent } from './_Components/entry-list/entry-list.component';
 
 import { EntriesService } from './_Services/entries.service';
-
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    EntryComponent
+    EntryComponent,
+    AddEntryComponent,
+    EntryListComponent
   ],
   imports: [
     BrowserModule,

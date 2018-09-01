@@ -1,0 +1,13 @@
+<p>
+  entry-list works!
+</p>
+
+<div>
+  <div *ngFor="let entry of entries">
+    <h3> {{ entry.title }}&nbsp;</h3>
+    <p> {{ entry.summary }} </p>
+    <p> {{ entry.entry_text }}</p>
+
+    <a [routerLink]="['/entry', entry._id]"> Go to Entry </a>
+  </div>
+</div>

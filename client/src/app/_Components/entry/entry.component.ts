@@ -1,6 +1,8 @@
-import { Entry } from './../../_Models/Entries';
+import { Entry } from './../../_Models/Entry';
 import { EntriesService } from './../../_Services/entries.service';
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-entry',
@@ -10,15 +12,37 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class EntryComponent implements OnInit {
-  entries: any = [];
-  constructor(private entry: EntriesService) { }
+  entry: any;
+
+  constructor(
+    private entriesService: EntriesService,
+    private router: Router,
+    private route: ActivatedRoute,
+
+  ) { }
 
   ngOnInit() {
-    console.log(this.entry);
-    this.entry.getEntries().subscribe((entries) => {
-      this.entries = entries;
+    this.route.params.subscribe(params => {
+      this.getEntryDetails(params['id']);
     });
-    console.log(this.entries);
   }
+
+  getEntryDetails(id) {
+    this.entriesService.get(id)
+      .subscribe((entry) => {
+        this.entry = entry;
+      });
+  }
+
+  deleteEntry() {
+    if (window.confirm('Are you sure?')) {
+      this.entriesService.remove(this.entry._id)
+        .subscribe(() => {
+          this.router.navigate(['']);
+        });
+    }
+
+  }
+
 
 }
