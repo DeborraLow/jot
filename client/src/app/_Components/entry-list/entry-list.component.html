@@ -5,10 +5,26 @@
 <div>
   <div *ngFor="let entry of entries">
     <div class="entry-container">
-      <h3> {{ entry.title }}&nbsp;</h3>
-      <p> {{ entry.summary }} </p>
-      <p> {{ entry.entry_text }}</p>
-      <a [routerLink]="['/entry', entry._id]"> Go to Entry </a>
+      <div class="title">
+        <div *ngIf="!showForm">
+          <div> {{ entry.title }} </div>
+          <div class="summary"> {{ entry.summary }} </div>
+        </div>
+        <div *ngIf="showForm">
+          <input type="text" name="title" value="{{entry.title }}">
+          <input type="text" name="summary" value="{{entry.summary }}">
+        </div>
+        <button (click)="showEditForm()">Edit</button>
+
+      </div>
+      <div class="emojis"> Emojis</div>
+      <div class="entry-text-container">
+        <!-- <textarea class="entry-text" name="entry-text">{{entry.entry_text}}</textarea> -->
+        <input type="text" class="entry-text" name="entry-text" value="{{entry.entry_text }}">
+
+      </div>
+      <a [routerLink]="[ '/entry ', entry._id] "> Go to Entry </a>
+
     </div>
 
   </div>

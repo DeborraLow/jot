@@ -21,7 +21,7 @@ export class EntriesService {
   }
 
   post(form) {
-    return this.http.post(`${environment.BASE_URL}/api/entries`, form)
+    return this.http.post(`${environment.api_url}/api/entries`, form)
       .pipe(map((res) => res.json()));
   }
 

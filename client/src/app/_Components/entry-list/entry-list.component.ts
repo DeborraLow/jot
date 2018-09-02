@@ -11,16 +11,39 @@ import { Entry } from './../../_Models/Entry';
 
 })
 export class EntryListComponent implements OnInit {
+
   entries: any = [];
+  showForm: boolean;
+
   constructor(private entry: EntriesService) { }
 
   ngOnInit() {
+    this.showForm = false;
+
     console.log(this.entry);
     this.entry.getEntries()
       .subscribe((entries) => {
         this.entries = entries;
       });
     console.log(this.entries);
+  }
+
+  showEditForm() {
+
+    if (this.showForm) {
+      this.showForm = false;
+    } else {
+      this.showForm = true;
+    }
+  }
+
+
+  editEntry() {
+
+  }
+
+  save() {
+
   }
 
 }
