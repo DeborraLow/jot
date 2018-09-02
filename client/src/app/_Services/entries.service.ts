@@ -20,6 +20,11 @@ export class EntriesService {
       .pipe(map((res) => res.json()));
   }
 
+  post(form) {
+    return this.http.post(`${environment.BASE_URL}/api/entries`, form)
+      .pipe(map((res) => res.json()));
+  }
+
   edit(entry) {
     return this.http.put(`${environment.api_url}/api/entries/${entry.id}`, entry)
       .pipe(map((res) => res.json()));
