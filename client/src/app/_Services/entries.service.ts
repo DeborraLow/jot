@@ -11,12 +11,12 @@ export class EntriesService {
   constructor(private http: Http) { }
 
   getEntries() {
-    return this.http.get(`${environment.BASE_URL}/api/entries`)
+    return this.http.get(`${environment.api_url}/api/entries`)
       .pipe(map((res) => res.json()));
   }
 
   get(id) {
-    return this.http.get(`${environment.BASE_URL}/api/entries/${id}`)
+    return this.http.get(`${environment.api_url}/api/entries/${id}`)
       .pipe(map((res) => res.json()));
   }
 
@@ -26,12 +26,12 @@ export class EntriesService {
   }
 
   edit(entry) {
-    return this.http.put(`${environment.BASE_URL}/api/entries/${entry.id}`, entry)
+    return this.http.put(`${environment.api_url}/api/entries/${entry.id}`, entry)
       .pipe(map((res) => res.json()));
   }
 
   remove(id) {
-    return this.http.delete(`${environment.BASE_URL}/api/entries/${id}`)
+    return this.http.delete(`${environment.api_url}/api/entries/${id}`)
       .pipe(map((res) => res.json()));
   }
 }
