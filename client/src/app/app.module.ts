@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routing';
-
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
@@ -25,6 +25,7 @@ import { EntriesService } from './_Services/entries.service';
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(routes),
+    FormsModule
 
   ],
   providers: [EntriesService],

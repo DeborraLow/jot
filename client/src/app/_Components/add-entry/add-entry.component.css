@@ -1,7 +1,7 @@
 
 .container {
-    width: 50%;
-    border: 1px solid black;
+    width: 40%;
+    /* border: 1px solid black; */
     padding: 1em;
 }
 
@@ -39,3 +39,11 @@ button:hover{
     background: #5362f1;
     color:#fff;
 } 
+
+.message{
+    width: 40%;
+    background: green;
+    color:#fff;
+    padding: .5em;
+    text-align: center;
+}
