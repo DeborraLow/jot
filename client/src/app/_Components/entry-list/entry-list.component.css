@@ -4,7 +4,7 @@
     border-radius: 10px
 }
 
-.title {
+.entry-header {
     background-color: salmon;
     font-size: 24px;
     padding: 1em;
@@ -12,7 +12,7 @@
     text-align: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 100px;
+    height: 200px;
 }
 
 .summary {
@@ -21,6 +21,17 @@
     padding: 1em;
 
 }
+
+.edit-input{
+    text-align: center;
+    margin: 0px;
+    border:0;
+    outline:0;
+    transition: 2000ms;
+    background: transparent;
+    font-style: italic
+}
+
 
 
 .entry-text {
@@ -37,3 +48,21 @@
 .emojis {
     text-align: center;
 }
+
+.edit-button {
+    float:   right;
+    border-top-right-radius: 10px;
+    background: transparent;
+    border:0;
+    outline:0;
+    color: whitesmoke
+}
+
+.edit-button :active {
+    color: yellowgreen
+
+}
+
+.display-none{
+    display: none
+} 

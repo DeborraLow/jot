@@ -5,18 +5,32 @@
 <div>
   <div *ngFor="let entry of entries">
     <div class="entry-container">
-      <div class="title">
+      <div [class]="display2">
+        <div class="edit-button">
+          <button class="edit-button" (click)="showEditForm()">Edit</button>
+        </div>
+      </div>
+
+      <div [class]="display">
+        <button type="submit" class="edit-button" (click)="editEntry()">Submit</button>
+      </div>
+
+      <div class="entry-header">
         <div *ngIf="!showForm">
-          <div> {{ entry.title }} </div>
+          <div class="title"> {{ entry.title }} </div>
           <div class="summary"> {{ entry.summary }} </div>
         </div>
-        <div *ngIf="showForm">
-          <input type="text" name="title" value="{{entry.title }}">
-          <input type="text" name="summary" value="{{entry.summary }}">
-        </div>
-        <button (click)="showEditForm()">Edit</button>
+        <div class="edit-input" *ngIf="showForm">
+          <form (ngSubmit)="editEntry(form)" #form="ngForm">
+            <div>
+              <input class="edit-input" [(ngModel)]="entry.title" type="text" name="title">
+            </div>
+            <input class="edit-input summary" [(ngModel)]="entry.summary" type="text" name="summary">
+          </form>
 
+        </div>
       </div>
+
       <div class="emojis"> Emojis</div>
       <div class="entry-text-container">
         <!-- <textarea class="entry-text" name="entry-text">{{entry.entry_text}}</textarea> -->

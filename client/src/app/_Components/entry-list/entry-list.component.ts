@@ -14,6 +14,8 @@ export class EntryListComponent implements OnInit {
 
   entries: any = [];
   showForm: boolean;
+  display = 'display-none'
+  display2 = '';
 
   constructor(private entry: EntriesService) { }
 
@@ -29,6 +31,9 @@ export class EntryListComponent implements OnInit {
   }
 
   showEditForm() {
+    this.display = '';
+    this.display2 = 'display-none';
+
 
     if (this.showForm) {
       this.showForm = false;
@@ -38,8 +43,21 @@ export class EntryListComponent implements OnInit {
   }
 
 
-  editEntry() {
+  editEntry(form) {
+    this.display = 'display-none';
+    this.display2 = ''
 
+    if (this.showForm) {
+      this.showForm = false;
+    } else {
+      this.showForm = true;
+    }
+    console.log(`FORM: ${form}`)
+
+    this.entry.edit(form)
+      .subscribe(() => {
+        console.log(form);
+      });
   }
 
   save() {
