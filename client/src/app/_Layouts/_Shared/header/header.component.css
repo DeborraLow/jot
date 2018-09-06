@@ -1,0 +1,49 @@
+header{
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+
+.modal-wrapper {
+    background: rgba(0, 0, 0, 0.50);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+}
+.modal /deep/ h2 {
+    position: absolute;
+    top: -1em;
+    background: #337ab7;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    padding: .5em;
+    box-sizing: border-box;
+    z-index: 1;
+    font-family: 'HiraginoKaku-GothicPro', PingFang SC, Arial;
+    text-transform: capitalize;
+    font-weight: 100;
+}
+.modal {
+    position: relative;
+    width: 50%;
+    margin: 5em auto;
+    padding: 5em 2em 2em 2em;
+    background: #fff;
+    box-sizing: border-box;
+    border-radius: 6px;
+    z-index: 10;
+}
+.modal button{
+    outline: 0;
+    border: 0;
+    position: absolute;
+    right: 1.4em;
+    top: 1.3em;
+    z-index: 2;
+    background: transparent;
+    color: #fff;
+}

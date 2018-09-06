@@ -1,0 +1,9 @@
+.message-wrapper.error {
+    background: #fdb6b6;
+}
+.message-wrapper.default {
+    background: #b6d6fd;
+}
+.message-wrapper p {
+    padding: .5em;
+}

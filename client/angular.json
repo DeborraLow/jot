@@ -23,7 +23,8 @@
               "src/assets",
               "src/assets/css",
               "src/assets/images",
-              "src/assets/js"
+              "src/assets/js",
+              "src/assets/fonts"
             ],
             "styles": [
               "src/styles.css"

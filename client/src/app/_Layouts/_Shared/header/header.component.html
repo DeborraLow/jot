@@ -1,0 +1,25 @@
+<header class="jot-g">
+  <div class="container">
+    <div class="u-3-4">
+      <img src="/assets/images/logo.png" width="60" class="logo"/>
+    </div>
+    <div class="u-1-4">
+      <ul>
+        <li>
+            <button (click)="toggleLogin()" class="btn btn-default">login</button>
+        </li>
+        <li>
+            <button class="btn" (click)="toggleSignup()">signup</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="modal-wrapper" *ngIf="showModal" (click)="closeModal()"></div>
+<div class="modal"  *ngIf="showModal">
+    <app-message></app-message>
+    <button (click)="closeModal()">X</button>
+    <app-login *ngIf="showLogin" (showForgot)="toggleForgot($event)"></app-login>
+    <app-forgot *ngIf="showForgot"></app-forgot>
+    <app-signup *ngIf="showSignup"></app-signup>
+</div>
