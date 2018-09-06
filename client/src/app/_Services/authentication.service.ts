@@ -10,6 +10,8 @@ import {MessageService}from '../_Services/message.service';
 })
 export class AuthenticationService {
 
+  LoggedIn = false;
+  
   constructor( private http:HttpClient, private messageService:MessageService) {}
  
   private handleError<T> (operation = 'operation', result?: T) {
@@ -21,6 +23,12 @@ export class AuthenticationService {
 
   private log(message: string) {
     this.messageService.add(`${message}`, 'error');
+  }
+
+  isLoggedIn() {
+      return this.http.get(`${environment.api_url}/api/isloggedin`).pipe(
+        catchError(this.handleError('Login Check'))
+      );
   }
 
   login(login) {

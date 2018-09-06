@@ -82,9 +82,9 @@ authRoutes.post('/api/logout', (req, res, next) => {
     res.status(200).json({ message: 'Success' });
 });
 
-authRoutes.get('/api/loggedin', (req, res, next) => {
+authRoutes.get('/api/isloggedin', (req, res, next) => {
     if (req.isAuthenticated()) {
-        res.status(200).json(req.user);
+        res.status(200).json(true);
         return;
     }
 

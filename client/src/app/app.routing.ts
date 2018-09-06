@@ -18,15 +18,17 @@ import { SignupComponent } from './_Components/Authorization/signup/signup.compo
 import { LogoutComponent } from './_Components/Authorization/logout/logout.component';
 import { ForgotComponent } from './_Components/Authorization/forgot/forgot.component';
 
+import {AuthGuardService} from './_Services/auth-guard.service';
+
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'explorer', component: ExplorerComponent },
+    { path: 'me', component: ProfileComponent,  canActivate: [AuthGuardService] },
     { path: 'timeline', component: TimelineComponent },
     { path: 'entry/:id', component: EntryComponent },
     { path: 'entry-add', component: AddEntryComponent },
     { path: 'entry-list', component: EntryListComponent },
-
-    { path: ':username', component: ProfileComponent },
+    // { path: ':username', component: ProfileComponent },
 
     // { path: '**', redirectTo: '' }
 

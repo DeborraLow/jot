@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
       } else {
           this.authService.login(this.login).subscribe(login=> {
               if(login) {
+                this.authService.LoggedIn = true;
                 this.messageService.add('Logged in!','default');
                 setTimeout(()=>this.route.navigate(['/me']), 2000);
               }

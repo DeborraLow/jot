@@ -27,6 +27,7 @@ import { ForgotComponent } from './_Components/Authorization/forgot/forgot.compo
 
 import {MessageService} from './_Services/message.service';
 import {AuthenticationService} from './_Services/authentication.service';
+import {AuthGuardService} from './_Services/auth-guard.service';
 import { MessageComponent } from './_Layouts/_Shared/message/message.component';
 
 @NgModule({
@@ -55,7 +56,7 @@ import { MessageComponent } from './_Layouts/_Shared/message/message.component';
     FormsModule
 
   ],
-  providers: [EntriesService,AuthenticationService,MessageService],
+  providers: [EntriesService,AuthenticationService,MessageService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
