@@ -9,14 +9,17 @@ const authRoutes = express.Router();
 
 
 
-authRoutes.post('/signup', (req, res, next) => {
-    const { username, password, firstName, lastName, penName, email, avatarPath } = req.body
+authRoutes.post('/api/signup', (req, res, next) => {
+    const { username, password, confirm_password, email } = req.body
 
-    if (!username || !password) {
-        res.status(400).json({ message: 'Provide username and password' });
+    if (!username || !password || !confirm_password || !email) {
+        res.status(400).json({ message: 'All fields are required' });
         return;
     }
-
+    if(password !== confirm_password){
+        res.status(400).json({ message: 'Password mismatch.' });
+        return;
+    }
     User.findOne({ username }, '_id', (err, foundUser) => {
         if (foundUser) {
             res.status(400).json({ message: 'The username already exists' });
@@ -29,11 +32,7 @@ authRoutes.post('/signup', (req, res, next) => {
         const theUser = new User({
             username,
             password: hashPass,
-            firstName,
-            lastName,
-            penName,
             email,
-            avatarPath
         });
 
         theUser.save((err) => {
@@ -47,7 +46,6 @@ authRoutes.post('/signup', (req, res, next) => {
                     res.status(500).json({ message: 'Something went wrong' });
                     return;
                 }
-
                 res.status(200).json(req.user);
             });
         }
@@ -55,7 +53,7 @@ authRoutes.post('/signup', (req, res, next) => {
     });
 });
 
-authRoutes.post('/login', (req, res, next) => {
+authRoutes.post('/api/login', (req, res, next) => {
     passport.authenticate('local', (err, theUser, failureDetails) => {
         if (err) {
             res.status(500).json({ message: 'Something went wrong' });
@@ -79,12 +77,12 @@ authRoutes.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-authRoutes.post('/logout', (req, res, next) => {
+authRoutes.post('/api/logout', (req, res, next) => {
     req.logout();
     res.status(200).json({ message: 'Success' });
 });
 
-authRoutes.get('/loggedin', (req, res, next) => {
+authRoutes.get('/api/loggedin', (req, res, next) => {
     if (req.isAuthenticated()) {
         res.status(200).json(req.user);
         return;
