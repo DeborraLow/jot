@@ -1,4 +1,7 @@
+import { AddEntryComponent } from './../add-entry/add-entry.component';
 import { Component, OnInit } from '@angular/core';
+
+
 import { EntriesService } from './../../_Services/entries.service';
 import { Entry } from './../../_Models/Entry';
 
@@ -13,17 +16,24 @@ import { Entry } from './../../_Models/Entry';
 export class EntryListComponent implements OnInit {
 
   entries: any = [];
+  entry: any = {};
   showForm: boolean;
-  display = 'display-none'
+  display = 'display-none';
   display2 = '';
+  showPublish: boolean;
 
-  constructor(private entry: EntriesService) { }
+
+
+
+  constructor(
+    private entryService: EntriesService,
+  ) { }
 
   ngOnInit() {
     this.showForm = false;
 
-    console.log(this.entry);
-    this.entry.getEntries()
+    console.log('HERE = ', this.entry);
+    this.entryService.getEntries()
       .subscribe((entries) => {
         this.entries = entries;
       });
@@ -44,17 +54,15 @@ export class EntryListComponent implements OnInit {
 
 
   editEntry(form) {
+    console.log('FORM =', form, form.id);
+
     this.display = 'display-none';
-    this.display2 = ''
+    this.display2 = '';
 
-    if (this.showForm) {
-      this.showForm = false;
-    } else {
-      this.showForm = true;
-    }
-    console.log(`FORM: ${form}`)
+    this.showForm = !this.showForm;
 
-    this.entry.edit(form)
+
+    this.entryService.edit(form)
       .subscribe(() => {
         console.log(form);
       });
@@ -63,5 +71,17 @@ export class EntryListComponent implements OnInit {
   save() {
 
   }
+
+  showPublisher() {
+    if (this.showPublish) {
+      this.showPublish = false;
+    } else {
+      this.showPublish = true;
+    }
+  }
+
+  // toggleActive() {
+  //   this.isActive = !this.isActive;
+  // }
 
 }

@@ -30,6 +30,11 @@ export class EntriesService {
       .pipe(map((res) => res.json()));
   }
 
+  // editListEntries(entry) {
+  //   return this.http.put(`${environment.api_url}/api/entries/${entry.id}`, entry)
+  //     .pipe(map((res) => res.json()));
+  // }
+
   remove(id) {
     return this.http.delete(`${environment.api_url}/api/entries/${id}`)
       .pipe(map((res) => res.json()));
