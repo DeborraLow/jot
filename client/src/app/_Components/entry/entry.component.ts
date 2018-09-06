@@ -12,7 +12,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 })
 export class EntryComponent implements OnInit {
-  entry: any;
+  entry: any = {};
+  showForm: boolean;
+  display = 'display-none';
+  display2 = '';
+  showPublish: boolean;
 
   constructor(
     private entriesService: EntriesService,
@@ -25,6 +29,10 @@ export class EntryComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.getEntryDetails(params['id']);
     });
+
+
+    this.showForm = false; // Hides edit form Onit
+
   }
 
   getEntryDetails(id) {
@@ -41,7 +49,38 @@ export class EntryComponent implements OnInit {
           this.router.navigate(['']);
         });
     }
+  }
 
+  showEditForm() {
+    this.display = '';
+    this.display2 = 'display-none';
+
+    if (this.showForm) {
+      this.showForm = false;
+    } else {
+      this.showForm = true;
+    }
+  }
+
+  editEntry(form) {
+    console.log("Form ", form)
+    this.display = 'display-none';
+    this.display2 = '';
+
+    this.showForm = !this.showForm;
+
+    this.entriesService.edit(form)
+      .subscribe(() => {
+        console.log(form);
+      });
+  }
+
+  showPublisher() {
+    if (this.showPublish) {
+      this.showPublish = false;
+    } else {
+      this.showPublish = true;
+    }
   }
 
 

@@ -26,9 +26,9 @@ export class AddEntryComponent implements OnInit {
   ngOnInit() { }
 
   submit() {
-    const date = Date.now;
+    const date = new Date();
     const newEntry = {
-      title: 'New Entry'
+      title: 'New Entry - ' + date
       // summary: '',
     };
     this.entriesService.post(newEntry)

@@ -1,13 +1,113 @@
-<p>
-  entry-list works!
-</p>
-
 <div>
   <div *ngFor="let entry of entries">
-    <h3> {{ entry.title }}&nbsp;</h3>
-    <p> {{ entry.summary }} </p>
-    <p> {{ entry.entry_text }}</p>
+    <!-- INDIVIDUAL ENTRY BEGINS -->
+    <div class="entry-container">
 
-    <a [routerLink]="['/entry', entry._id]"> Go to Entry </a>
+      <!-- Entry Header -->
+
+      <!-- buttons -->
+      <div [class]="display2">
+        <div class="edit-button">
+          <button class="edit-button" (click)="showEditForm()">Edit</button>
+        </div>
+      </div>
+
+
+      <form (ngSubmit)="editEntry(form)" #form="ngForm">
+
+        <div [class]="display">
+          <button type="submit" class="edit-button">Submit</button>
+        </div>
+        <div class="entry-header">
+
+          <!-- Show title and summary -->
+          <div *ngIf="!showForm">
+            <div class="title"> {{ entry.title }} </div>
+            <div class="summary"> {{ entry.summary }} </div>
+          </div>
+
+          <!-- HIDDEN - Edit title and summary -->
+
+          <div class="edit-input" *ngIf="showForm">
+            <!-- <input [(ngModel)]="entry.id" type="hidden" name="id" value="entry.id"> -->
+
+            <div>
+              <label class="edit-label">Title: </label>
+              <input class="edit-input" [(ngModel)]="title" type="text" name="title">
+            </div>
+            <div>
+              <label class="edit-label">Summary: </label>
+              <input class="edit-input summary" [(ngModel)]="summary" type="text" name="summary">
+            </div>
+
+          </div>
+
+        </div>
+      </form>
+
+      <!-- Emojis -->
+      <div class="emojis"> Emojis</div>
+
+
+      <!-- Entry text -->
+      <div class="entry-text-container">
+        <!-- <textarea class="entry-text" name="entry-text">{{entry.entry_text}}</textarea> -->
+        <textarea type="text" class="entry-text" name="entry-text" value="{{entry.entry_text }}"></textarea>
+      </div>
+
+      <!-- HIDDEN - Publish detail -->
+
+      <div class="publisher" *ngIf="showPublish">
+        <form [ngSwitch]="published">
+          <span>Share: </span>
+          <span class=" radio">
+            <label for="private">Private </label>
+            <input type="radio" class="publish-radio" name="publish-type" value="private" (click)="setradio('private')" ngModel>
+          </span>
+          <span class="radio">
+            <label for="public">Public </label>
+            <input type="radio" class="publish-radio" name="publish-type" value="public" (click)="setradio('public')" ngModel>
+          </span>
+          <!-- <span class="radio ">
+            <label for="anonymous">Anonymous </label>
+            <input type="radio" class="publish-radio" name="publish-type" value="anonymous" (click)="setradio('anonymous')" ngModel>
+          </span> -->
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+      <!--NOT WORKING display message for each radio -->
+      <!-- <div *ngIf="isSelected('private')">
+          <div>
+            <p>Only you will see this entry.</p>
+          </div>
+          <div *ngIf="isSelected('public')">
+            <p>Everyone can see this entry.</p>
+          </div>
+          <div *ngIf="isSelected('anonymous')">
+            <p>Everyone can see this entry, but it will be anonymous.</p>
+          </div> -->
+      <!-- </div> -->
+
+      <!-- footer for entry -->
+      <div class="entry-footer">
+
+        <input class="show-publisher-button" type="image" (click)="showPublisher()" src="../../../assets/images/iconmonstr-share-8.svg"
+        />
+        <div>
+          <button class="extend-entry-button" (click)="lessEntry()">SHOW LESS</button> <span>|</span>
+          <button class="extend-entry-button" (click)="moreEntry()">SHOW MORE</button>
+        </div>
+        <div class="likes">
+          <img src="../../../assets/images/heart.svg">
+          <span>1</span>
+        </div>
+      </div>
+      <a [routerLink]="['/entry', entry._id]"> Go to Entry </a>
+    </div>
+
+
+
   </div>
 </div>
