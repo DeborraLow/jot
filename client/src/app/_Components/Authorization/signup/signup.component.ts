@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit {
       this.messageService.add('All fields are required to signup.','error');
     } else {
         this.authService.signup(this.signup).subscribe(res => {
+          console.log()
           this.messageService.add('Congratulations, your JOT account has been created. ','default');
           setTimeout(()=>this.route.navigate(['/me']), 2000);
         });

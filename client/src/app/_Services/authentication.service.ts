@@ -52,7 +52,7 @@ export class AuthenticationService {
   logout() {
     return this.http.get(`${environment.api_url}/api/logout`).pipe(
       catchError(this.handleError('Logout'))
-    );
+    ).subscribe();
   }
 
  

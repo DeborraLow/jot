@@ -5,10 +5,13 @@
     </div>
     <div class="u-1-4">
       <ul>
-        <li>
+        <li *ngIf="isLoggedIn">
+          <button (click)="logout()" class="btn btn-default">Logout</button>
+        </li>
+        <li *ngIf="!isLoggedIn">
             <button (click)="toggleLogin()" class="btn btn-default">login</button>
         </li>
-        <li>
+        <li *ngIf="!isLoggedIn">
             <button class="btn" (click)="toggleSignup()">signup</button>
         </li>
       </ul>

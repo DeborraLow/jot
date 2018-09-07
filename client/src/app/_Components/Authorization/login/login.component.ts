@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
           });
       }
   }
+  
   toggleForgot() {
       this.showForgot.emit(true);
   }

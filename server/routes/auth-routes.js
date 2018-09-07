@@ -77,7 +77,7 @@ authRoutes.post('/api/login', (req, res, next) => {
     })(req, res, next);
 });
 
-authRoutes.post('/api/logout', (req, res, next) => {
+authRoutes.get('/api/logout', (req, res, next) => {
     req.logout();
     res.status(200).json({ message: 'Success' });
 });

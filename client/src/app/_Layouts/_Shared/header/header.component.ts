@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
+import {AuthenticationService} from '../../../_Services/authentication.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  isLoggedIn:boolean;
+  constructor(private authService:AuthenticationService) {
+    this.isLoggedIn = this.authService.LoggedIn;
+  }
 
   showLogin : boolean;
   showSignup : boolean;
@@ -18,6 +20,10 @@ export class HeaderComponent implements OnInit {
 
   }
   
+  logout() {
+      this.isLoggedIn = false;
+      this.authService.logout();
+  }
   closeModal() {
     this.showModal = false;
     this.showLogin = false;
