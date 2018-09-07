@@ -3,7 +3,6 @@ import { EntriesService } from './../../_Services/entries.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
@@ -12,7 +11,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 })
 export class EntryComponent implements OnInit {
-  entry: any = {};
+  entry:any = {
+    _id: '',
+    title: '',
+    summary: '',
+    entry_text: '',
+    emojis:[]
+  };
   showForm: boolean;
   display = 'display-none';
   display2 = '';
