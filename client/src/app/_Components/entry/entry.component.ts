@@ -62,16 +62,16 @@ export class EntryComponent implements OnInit {
     }
   }
 
-  editEntry(form) {
-    console.log("Form ", form)
+  editEntry(entryForm) {
+    console.log('FORM ', entryForm);
     this.display = 'display-none';
     this.display2 = '';
 
     this.showForm = !this.showForm;
 
-    this.entriesService.edit(form)
+    this.entriesService.edit(entryForm)
       .subscribe(() => {
-        console.log(form);
+        console.log(entryForm);
       });
   }
 
@@ -81,6 +81,11 @@ export class EntryComponent implements OnInit {
     } else {
       this.showPublish = true;
     }
+  }
+
+  // TEST --SEE JSON ENTRY
+  get diagnostic() {
+    return JSON.stringify(this.entry);
   }
 
 

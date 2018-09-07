@@ -1,3 +1,6 @@
+{{diagnostic}}
+
+
 <div class="entry-container">
 
   <!-- Entry Header -->
@@ -10,7 +13,7 @@
   </div>
 
   <!-- Edit form -->
-  <form (ngSubmit)="editEntry(form)" #form="ngForm">
+  <form (ngSubmit)="editEntry(entryForm)" #entryForm="ngForm">
 
     <div [class]="display">
       <button type="submit" class="edit-button">Submit</button>
@@ -26,13 +29,15 @@
       <!-- HIDDEN - Edit title and summary -->
 
       <div class="edit-input" *ngIf="showForm">
+        <!-- <input [(ngModel)]="entry.id" type="hidden" name="id" value="entry.id"> -->
+
         <div>
           <label class="edit-label">Title: </label>
-          <input class="edit-input" [(ngModel)]="entry.title" type="text" name="title">
+          <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title">
         </div>
         <div>
           <label class="edit-label">Summary: </label>
-          <input class="edit-input summary" [(ngModel)]="entry.summary" type="text" name="summary">
+          <input class="edit-input summary" type="text" [(ngModel)]="entry.summary" name="summary">
         </div>
 
       </div>
@@ -53,7 +58,7 @@
   <!-- HIDDEN - Publish detail -->
 
   <div class="publisher" *ngIf="showPublish">
-    <form [ngSwitch]="published">
+    <form [ngSwitch]="published" #publishForm="ngForm">
       <span>Share: </span>
       <span class=" radio">
         <label for="private">Private </label>

@@ -26,7 +26,7 @@ export class EntriesService {
   }
 
   edit(entry) {
-    return this.http.put(`${environment.api_url}/api/entries/${entry.id}`, entry)
+    return this.http.put(`${environment.api_url}/api/entry/${entry.id}`, entry)
       .pipe(map((res) => res.json()));
   }
 
