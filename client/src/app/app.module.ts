@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routing';
 import { FormsModule } from '@angular/forms';
 
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 import { AppComponent } from './app.component';
 
 import { EntryComponent } from './_Components/entry/entry.component';
@@ -56,8 +58,9 @@ import { EmojiService } from './_Services/emoji.service';
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    FormsModule
-
+    FormsModule,
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot()
   ],
   providers: [
     EntriesService,

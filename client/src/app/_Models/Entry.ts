@@ -2,11 +2,14 @@ import {User} from './User';
 import {Emoji} from './Emoji';
 
 export interface Entry {
-    id: string;
-    account: User;
-    title: string;
-    summary: string;
-    entry_text: string;
-    publisher: User;
-    emojis: Emoji[];
+    id?: string;
+    account?: User;
+    title?: string;
+    summary?: string;
+    entry_text?: string;
+    publisher?: User;
+    publish_date: Date;
+    created_at: Date;
+    emojis?: Emoji[];
+    isPublic?:boolean;
 }

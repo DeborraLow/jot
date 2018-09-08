@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Output, EventEmitter} from '@angular/core';
 
 import { EntriesService } from './../../_Services/entries.service';
 import { Entry } from './../../_Models/Entry';
@@ -23,44 +23,19 @@ export class AddEntryComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
+  @Output() newEntry = new EventEmitter();  
+
   ngOnInit() { }
 
   submit() {
-    const date = new Date();
-    const newEntry = {
-      title: 'New Entry - ' + date
-      // summary: '',
-    };
-    this.entriesService.post(newEntry)
-      .subscribe(() => {
-        console.log(newEntry);
-      });
+
+    this.entriesService.post({}).subscribe((entry) => {
+      this.newEntry.emit(entry);
+    });
+
     this.successMessage = 'New Entry Created.';
     this.displayMessage = 'message';
 
   }
 
-
 }
-
-// ngOnInit() {
-//   this.showForm = false;
-
-// }
-
-// showFormFn() {
-//   if (this.showForm) {
-//     this.showForm = false;
-//   } else {
-//     this.showForm = true;
-//   }
-// }
-
-
-// addEntry(newEntry) {
-
-//   this.entriesService.post(newEntry)
-//     .subscribe(() => {
-//       this.router.navigate(['']);
-//     });
-// }

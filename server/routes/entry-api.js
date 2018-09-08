@@ -4,47 +4,54 @@ const mongoose = require('mongoose');
 // const uploadCloud = require('../config/cloudinary.js');
 
 const Entry = require('../models/entry');
-
+const DateOptions = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 /* GET Entry listing. */
 router.get('/entries', (req, res, next) => {
-    Entry.find()
+    Entry.find().sort('-created_at')
         .then((entryList, err) => {
             if (err) {
                 res.json(err);
                 return;
             }
-            res.json(entryList);
+
+            const entries = entryList.map(e=> {
+                return {
+                    id:e._id, 
+                    title:e.title, 
+                    entry_text:e.entry_text,
+                    emojis:e.emojis,
+                    isPublic:e.isPublic,
+                    likes:e.likes,
+                    publish_date:new Date(e.publish_date).toLocaleDateString("en-US",DateOptions),
+                    created_at:new Date(e.created_at).toLocaleDateString("en-US",DateOptions),
+                    status:e.status
+                }
+            })
+            res.json(entries);
         })
         .catch(error => next(error))
 });
 
 
 /* CREATE a new Entry. */
-router.post('/entries',
-    //  uploadCloud.single('photo'), 
-    (req, res, next) => {
-        console.log("Req, Res");
+router.post('/entries', (req, res, next) => {
+        const created_at = new Date().toLocaleDateString("en-US",DateOptions)
+
         const theEntry = new Entry({
-            title,
-            summary,
-            entry_text,
-            publish_date,
-            isPublic,
-            permitted_followers,
-            emojis,
-            comments,
-            user,
-            // imgPath = req.file.url,
-            // imgName = req.file.originalname,
-            likes
-        } = req.body);
+            title:`Draft - ${created_at}`,
+        });
 
         theEntry.save()
-            .then(theEntry => {
-                res.json({
-                    message: 'New Entry created!',
-                    id: theEntry._id
-                });
+            .then(e => {
+                console.log(e)
+                const entries = {
+                    id:e._id, 
+                    title:e.title, 
+                    created_at:new Date(e.created_at).toLocaleDateString("en-US",DateOptions),
+                    status:e.status,
+                }
+
+                res.json(entries);
             })
             .catch(error => next(error))
     });
@@ -81,10 +88,8 @@ router.put('/entry/:id',
             permitted_followers,
             emojis,
             comments,
-            // imgName,
-            // imgPath,
         } = req.body;
-
+        updates.publish_date = new Date();
         Entry.findByIdAndUpdate(req.params.id, updates)
             .then(entry => {
                 res.json({
