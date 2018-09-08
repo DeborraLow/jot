@@ -64,7 +64,7 @@ router.get('/entries/:id', (req, res, next) => {
 });
 
 /* EDIT an Entry. */
-router.put('/entries/:id',
+router.put('/entry/:id',
     // uploadCloud.single('photo'), 
     (req, res, next) => {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

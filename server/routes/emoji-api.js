@@ -18,4 +18,21 @@ router.get('/emojis', (req, res, next) => {
         .catch(error => next(error))
 });
 
+/* CREATE a new Emoji. */
+router.post('/emojis', (req, res, next) => {
+    const theEmoji = new Emoji({
+        name,
+        url
+    } = req.body);
+
+    theEmoji.save()
+        .then(theEmoji => {
+            res.json({
+                message: 'New Emoji created!',
+                id: theEmoji._id
+            })
+        })
+        .catch(error => next(error))
+})
+
 module.exports = router;
