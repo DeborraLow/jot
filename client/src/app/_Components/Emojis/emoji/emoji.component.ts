@@ -10,12 +10,13 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class EmojiComponent implements OnInit {
-  emojis: any = [];
-  emoji: any = {};
 
   constructor(
     private emojiService: EmojiService,
   ) { }
+
+  emojis: any = [];
+  emoji: any = {};
 
   ngOnInit() {
     this.emojiService.getEmojis()

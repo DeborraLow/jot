@@ -1,0 +1,26 @@
+img {
+    height: 2em;
+
+}
+
+.list-emojis-container {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: flex-start;
+/* border: 2px solid salmon; */ 
+padding: 5px;
+background-color: whitesmoke
+
+}
+
+.emoji {
+    height: 2em;
+}
+
+ input:hover {
+    height: 2.5em;
+    transition: 800ms;
+    
+
+}

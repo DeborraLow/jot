@@ -1,6 +1,6 @@
 import { Entry } from './../../_Models/Entry';
 import { EntriesService } from './../../_Services/entries.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,6 +11,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 })
 export class EntryComponent implements OnInit {
+  @Input() emojis: any = [];
+
+
   entry: any = {
     _id: '',
     title: '',
