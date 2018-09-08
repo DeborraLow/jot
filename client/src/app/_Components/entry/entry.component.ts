@@ -11,12 +11,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 })
 export class EntryComponent implements OnInit {
-  entry:any = {
+  entry: any = {
     _id: '',
     title: '',
     summary: '',
     entry_text: '',
-    emojis:[]
+    emojis: []
   };
   showForm: boolean;
   display = 'display-none';
@@ -36,7 +36,7 @@ export class EntryComponent implements OnInit {
     });
 
 
-    this.showForm = false; // Hides edit form Onit
+    this.showForm = false; // Hides edit form OnInit
 
   }
 

@@ -1,8 +1,10 @@
+import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { EntryComponent } from './_Components/entry/entry.component';
 import { AddEntryComponent } from './_Components/add-entry/add-entry.component';
 import { EntryListComponent } from './_Components/entry-list/entry-list.component';
+import { EmojiComponent } from './_Components/Emojis/emoji/emoji.component';
 
 /* Layouts */
 import { HomeComponent } from './_Layouts/home/home.component';
@@ -18,16 +20,17 @@ import { SignupComponent } from './_Components/Authorization/signup/signup.compo
 import { LogoutComponent } from './_Components/Authorization/logout/logout.component';
 import { ForgotComponent } from './_Components/Authorization/forgot/forgot.component';
 
-import {AuthGuardService} from './_Services/auth-guard.service';
+import { AuthGuardService } from './_Services/auth-guard.service';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'explorer', component: ExplorerComponent },
-    { path: 'me', component: ProfileComponent,  canActivate: [AuthGuardService] },
+    { path: 'me', component: ProfileComponent, canActivate: [AuthGuardService] },
     { path: 'timeline', component: TimelineComponent },
     { path: 'entry/:id', component: EntryComponent },
     { path: 'entry-add', component: AddEntryComponent },
     { path: 'entry-list', component: EntryListComponent },
+    { path: 'emoji', component: EmojiComponent },
     // { path: ':username', component: ProfileComponent },
 
     // { path: '**', redirectTo: '' }
