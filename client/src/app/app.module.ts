@@ -33,6 +33,7 @@ import { AuthenticationService } from './_Services/authentication.service';
 import { AuthGuardService } from './_Services/auth-guard.service';
 import { MessageComponent } from './_Layouts/_Shared/message/message.component';
 import { EmojiService } from './_Services/emoji.service';
+import { EntryEmojisComponent } from './_Components/Emojis/entry-emojis/entry-emojis.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { EmojiService } from './_Services/emoji.service';
     HomeComponent,
     HeaderComponent,
     MessageComponent,
-    EmojiComponent
+    EmojiComponent,
+    EntryEmojisComponent
   ],
   imports: [
     BrowserModule,

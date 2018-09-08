@@ -1,6 +1,6 @@
 import { Emoji } from './../../../_Models/Emoji';
 import { EmojiService } from './../../../_Services/emoji.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-emoji',
@@ -10,13 +10,13 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class EmojiComponent implements OnInit {
+  @Input() entry: Emoji;
 
   constructor(
     private emojiService: EmojiService,
   ) { }
 
   emojis: any = [];
-  emoji: any = {};
 
   ngOnInit() {
     this.emojiService.getEmojis()

@@ -2,10 +2,10 @@
 
   <ul class="actions">
     <li *ngIf="!isEditing">
-        <button class="edit-button" (click)="editEntry()"><i class="fas fa-pencil-alt"></i></button>
+      <button class="edit-button" (click)="editEntry()"><i class="fas fa-pencil-alt"></i></button>
     </li>
     <li *ngIf="isEditing">
-        <button class="edit-button" (click)="updateEntry()"><i class="fas fa-save"></i></button>
+      <button class="edit-button" (click)="updateEntry()"><i class="fas fa-save"></i></button>
     </li>
   </ul>
   <!-- Entry Header -->
@@ -19,25 +19,33 @@
 
       <!-- HIDDEN - Edit title and summary -->
       <div class="edit-input" *ngIf="isEditing">
-          <label class="edit-label">Title: </label>
-          <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title">
+        <label class="edit-label">Title: </label>
+        <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title">
       </div>
 
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
 
+      <div class="emojis">
+        <app-entry-emojis></app-entry-emojis>
+      </div>
+
     </div>
+
+
   </form>
 
   <!-- Emojis -->
-  <!-- <div class="emojis"> Emojis</div> -->
-  <app-emoji> [emojis]="emojis"</app-emoji>
 
+
+  <div class="edit-emoji" *ngIf="isEditing">
+    <app-emoji> [emojis]="emojis"</app-emoji>
+  </div>
   <!-- Entry text -->
   <div class="entry-text-container" [ngClass]="{ 'show-more': isEditing || showMore }" [ngStyle]="{'min-height':  isEditing || showMore ? entryHeight+'px': '' }">
-    <div *ngIf="isEditing" >
-        <textarea [froalaEditor]='EditorOptions' [(froalaModel)]="entry.entry_text"></textarea>
+    <div *ngIf="isEditing">
+      <textarea [froalaEditor]='EditorOptions' [(froalaModel)]="entry.entry_text"></textarea>
     </div>
-    <div *ngIf="!isEditing" id="entry-content" >
+    <div *ngIf="!isEditing" id="entry-content">
       <div [outerHTML]="entry.entry_text"></div>
     </div>
   </div>
@@ -49,11 +57,13 @@
       <span>Share: </span>
       <span class=" radio">
         <label for="private">Private </label>
-        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private" (click)="setPrivacy('private')" ngModel>
+        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private" (click)="setPrivacy('private')"
+          ngModel>
       </span>
       <span class="radio">
         <label for="public">Public </label>
-        <input type="radio" class="publish-radio" name="publish-type" value="public" [ngModel]="entry.isPublic" (click)="setPrivacy('public')" ngModel>
+        <input type="radio" class="publish-radio" name="publish-type" value="public" [ngModel]="entry.isPublic" (click)="setPrivacy('public')"
+          ngModel>
       </span>
     </form>
   </div>
@@ -64,7 +74,7 @@
     <div>
       <button class="extend-entry-button" (click)="showMoreToggler()">
         {{ (showMore) ? 'SHOW LESS' : 'SHOW MORE' }}
-      </button> 
+      </button>
     </div>
     <div class="likes">
       <i class="fas fa-heart"></i>

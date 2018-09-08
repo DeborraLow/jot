@@ -22,10 +22,10 @@ export class EntryComponent implements OnInit, AfterViewInit {
   //   entry_text: '',
   //   emojis: []
   // };
-  showForm: boolean;
-  display = 'display-none';
-  display2 = '';
-  showPublish: boolean;
+  // showForm: boolean;
+  // display = 'display-none';
+  // display2 = '';
+  // showPublish: boolean;
 
   constructor(
     private entriesService: EntriesService,
