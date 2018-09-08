@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routing';
 import { FormsModule } from '@angular/forms';
@@ -26,11 +26,13 @@ import { LoginComponent } from './_Components/Authorization/login/login.componen
 import { SignupComponent } from './_Components/Authorization/signup/signup.component';
 import { LogoutComponent } from './_Components/Authorization/logout/logout.component';
 import { ForgotComponent } from './_Components/Authorization/forgot/forgot.component';
+import { EmojiComponent } from './_Components/Emojis/emoji/emoji.component';
 
-import {MessageService} from './_Services/message.service';
-import {AuthenticationService} from './_Services/authentication.service';
-import {AuthGuardService} from './_Services/auth-guard.service';
+import { MessageService } from './_Services/message.service';
+import { AuthenticationService } from './_Services/authentication.service';
+import { AuthGuardService } from './_Services/auth-guard.service';
 import { MessageComponent } from './_Layouts/_Shared/message/message.component';
+import { EmojiService } from './_Services/emoji.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { MessageComponent } from './_Layouts/_Shared/message/message.component';
     ExplorerComponent,
     HomeComponent,
     HeaderComponent,
-    MessageComponent
+    MessageComponent,
+    EmojiComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,12 @@ import { MessageComponent } from './_Layouts/_Shared/message/message.component';
     FroalaEditorModule.forRoot(), 
     FroalaViewModule.forRoot()
   ],
-  providers: [EntriesService,AuthenticationService,MessageService,AuthGuardService],
+  providers: [
+    EntriesService,
+    AuthenticationService,
+    MessageService,
+    AuthGuardService,
+    EmojiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

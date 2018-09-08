@@ -11,9 +11,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 })
 export class EntryComponent implements OnInit {
+<<<<<<< HEAD
 
   @Input() entry:Entry;
 
+=======
+  entry: any = {
+    _id: '',
+    title: '',
+    summary: '',
+    entry_text: '',
+    emojis: []
+  };
+>>>>>>> b72d56448d1b4a6cab485a5c662c592041380393
   showForm: boolean;
   display = 'display-none';
   display2 = '';
@@ -35,8 +45,13 @@ export class EntryComponent implements OnInit {
     '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
   };
 
+<<<<<<< HEAD
   ngOnInit() {
     this.showForm = false; // Hides edit form Onit
+=======
+    this.showForm = false; // Hides edit form OnInit
+
+>>>>>>> b72d56448d1b4a6cab485a5c662c592041380393
   }
 
 

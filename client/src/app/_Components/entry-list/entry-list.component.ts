@@ -1,7 +1,6 @@
 import { AddEntryComponent } from './../add-entry/add-entry.component';
 import { Component, OnInit } from '@angular/core';
 
-
 import { EntriesService } from './../../_Services/entries.service';
 import { Entry } from './../../_Models/Entry';
 
