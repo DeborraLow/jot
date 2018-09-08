@@ -1,6 +1,6 @@
 import { Entry } from './../../_Models/Entry';
 import { EntriesService } from './../../_Services/entries.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,29 +10,15 @@ import { Router, ActivatedRoute } from '@angular/router';
   providers: [EntriesService]
 
 })
-export class EntryComponent implements OnInit {
-<<<<<<< HEAD
+export class EntryComponent implements OnInit , AfterViewInit {
 
   @Input() entry:Entry;
-
-=======
-  entry: any = {
-    _id: '',
-    title: '',
-    summary: '',
-    entry_text: '',
-    emojis: []
-  };
->>>>>>> b72d56448d1b4a6cab485a5c662c592041380393
-  showForm: boolean;
-  display = 'display-none';
-  display2 = '';
-  showPublish: boolean;
 
   constructor(
     private entriesService: EntriesService,
     private router: Router,
     private route: ActivatedRoute,
+    private el: ElementRef
   ) { }
 
   public EditorOptions: Object = {
@@ -45,16 +31,46 @@ export class EntryComponent implements OnInit {
     '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
   };
 
-<<<<<<< HEAD
-  ngOnInit() {
-    this.showForm = false; // Hides edit form Onit
-=======
-    this.showForm = false; // Hides edit form OnInit
 
->>>>>>> b72d56448d1b4a6cab485a5c662c592041380393
+  isEditing:boolean;
+  showMore:boolean;
+  entryHeight:number;
+
+  ngAfterViewInit() {
+    const entryHeight = this.el.nativeElement.firstChild.childNodes[3].getElementsByTagName('div').item(0);
+    this.entryHeight = entryHeight.offsetHeight;
   }
 
+  ngOnInit() {
+   
+    this.isEditing = false;
+    this.showMore = false;
+  }
 
+  setPrivacy(privacy:string) {
+    switch(privacy) {
+      case 'private':
+        this.entry.isPublic = false;
+      break;
+      default:
+        this.entry.isPublic = true;
+    }
+    console.log(this.entry);
+  }
+
+  editEntry() {
+    this.isEditing = true;    
+  }
+
+  updateEntry() {
+    this.entriesService.edit(this.entry).subscribe();
+    this.isEditing = false;    
+    this.showMore = false;
+  }
+
+  showMoreToggler() {
+    (this.showMore) ? this.showMore = false : this.showMore = true;
+  }
 
   deleteEntry() {
     if (window.confirm('Are you sure?')) {
@@ -63,43 +79,6 @@ export class EntryComponent implements OnInit {
           this.router.navigate(['']);
         });
     }
-  }
-
-  showEditForm() {
-    this.display = '';
-    this.display2 = 'display-none';
-
-    if (this.showForm) {
-      this.showForm = false;
-    } else {
-      this.showForm = true;
-    }
-  }
-
-  editEntry(entryForm) {
-    console.log('FORM ', entryForm);
-    this.display = 'display-none';
-    this.display2 = '';
-
-    this.showForm = !this.showForm;
-
-    this.entriesService.edit(entryForm)
-      .subscribe(() => {
-        console.log(entryForm);
-      });
-  }
-
-  showPublisher() {
-    if (this.showPublish) {
-      this.showPublish = false;
-    } else {
-      this.showPublish = true;
-    }
-  }
-
-  // TEST --SEE JSON ENTRY
-  get diagnostic() {
-    return JSON.stringify(this.entry);
   }
 
 

@@ -25,7 +25,7 @@ export class EntriesService {
   }
 
   edit(entry) {
-    return this.http.put(`${environment.api_url}/api/entry/${entry.id}`, entry);
+    return this.http.put(`${environment.api_url}/api/entries/${entry.id}`, entry);
   }
 
   // editListEntries(entry) {
@@ -37,5 +37,3 @@ export class EntriesService {
     return this.http.delete(`${environment.api_url}/api/entries/${id}`);
   }
 }
-
- 

@@ -1,46 +1,29 @@
-{{diagnostic}}
-
-
 <div class="entry-container">
 
+  <ul class="actions">
+    <li *ngIf="!isEditing">
+        <button class="edit-button" (click)="editEntry()"><i class="fas fa-pencil-alt"></i></button>
+    </li>
+    <li *ngIf="isEditing">
+        <button class="edit-button" (click)="updateEntry()"><i class="fas fa-save"></i></button>
+    </li>
+  </ul>
   <!-- Entry Header -->
 
-  <!-- edit button -->
-  <div [class]="display2">
-    <div class="edit-button">
-      <button class="edit-button" (click)="showEditForm()">Edit</button>
-    </div>
-  </div>
-
   <!-- Edit form -->
-  <form (ngSubmit)="editEntry(entryForm)" #entryForm="ngForm">
-
-    <div [class]="display">
-      <button type="submit" class="edit-button">Submit</button>
-    </div>
+  <form #entryForm="ngForm">
     <div class="entry-header">
 
       <!-- Show title and summary -->
-      <div *ngIf="!showForm">
-        <div class="title">{{entry.title}}</div>
-        <div class="summary">{{entry.summary}}</div>
-      </div>
+      <div class="title" *ngIf="!isEditing">{{entry.title}}</div>
 
       <!-- HIDDEN - Edit title and summary -->
-
-      <div class="edit-input" *ngIf="showForm">
-        <!-- <input [(ngModel)]="entry.id" type="hidden" name="id" value="entry.id"> -->
-
-        <div>
+      <div class="edit-input" *ngIf="isEditing">
           <label class="edit-label">Title: </label>
           <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title">
-        </div>
-        <div>
-          <label class="edit-label">Summary: </label>
-          <input class="edit-input summary" type="text" [(ngModel)]="entry.summary" name="summary">
-        </div>
-
       </div>
+
+      <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
 
     </div>
   </form>
@@ -48,60 +31,42 @@
   <!-- Emojis -->
   <div class="emojis"> Emojis</div>
 
-
   <!-- Entry text -->
-  <div class="entry-text-container">
-    <!-- <textarea class="entry-text" name="entry-text">{{entry.entry_text}}</textarea> -->
-    <textarea [froalaEditor]='EditorOptions' [(froalaModel)]="entry.entry_text"></textarea>
-    <!-- <textarea type="text" class="entry-text" name="entry-text" value="{{entry.entry_text }}"></textarea> -->
+  <div class="entry-text-container" [ngClass]="{ 'show-more': isEditing || showMore }" [ngStyle]="{'min-height':  isEditing || showMore ? entryHeight+'px': '' }">
+    <div *ngIf="isEditing" >
+        <textarea [froalaEditor]='EditorOptions' [(froalaModel)]="entry.entry_text"></textarea>
+    </div>
+    <div *ngIf="!isEditing" id="entry-content" >
+      <div [outerHTML]="entry.entry_text"></div>
+    </div>
   </div>
 
   <!-- HIDDEN - Publish detail -->
 
-  <div class="publisher" *ngIf="showPublish">
+  <div class="publisher" *ngIf="isEditing">
     <form [ngSwitch]="published" #publishForm="ngForm">
       <span>Share: </span>
       <span class=" radio">
         <label for="private">Private </label>
-        <input type="radio" class="publish-radio" name="publish-type" value="private" (click)="setradio('private')" ngModel>
+        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private" (click)="setPrivacy('private')" ngModel>
       </span>
       <span class="radio">
         <label for="public">Public </label>
-        <input type="radio" class="publish-radio" name="publish-type" value="public" (click)="setradio('public')" ngModel>
+        <input type="radio" class="publish-radio" name="publish-type" value="public" [ngModel]="entry.isPublic" (click)="setPrivacy('public')" ngModel>
       </span>
-      <!-- <span class="radio ">
-          <label for="anonymous">Anonymous </label>
-          <input type="radio" class="publish-radio" name="publish-type" value="anonymous" (click)="setradio('anonymous')" ngModel>
-        </span> -->
-
-      <button type="submit">Submit</button>
     </form>
   </div>
 
-  <!--NOT WORKING display message for each radio -->
-  <!-- <div *ngIf="isSelected('private')">
-        <div>
-          <p>Only you will see this entry.</p>
-        </div>
-        <div *ngIf="isSelected('public')">
-          <p>Everyone can see this entry.</p>
-        </div>
-        <div *ngIf="isSelected('anonymous')">
-          <p>Everyone can see this entry, but it will be anonymous.</p>
-        </div> -->
-  <!-- </div> -->
-
   <!-- footer for entry -->
   <div class="entry-footer">
-
-    <input class="show-publisher-button" type="image" (click)="showPublisher()" src="../../../assets/images/iconmonstr-share-8.svg"
-    />
+    <div></div>
     <div>
-      <button class="extend-entry-button" (click)="lessEntry()">SHOW LESS</button> <span>|</span>
-      <button class="extend-entry-button" (click)="moreEntry()">SHOW MORE</button>
+      <button class="extend-entry-button" (click)="showMoreToggler()">
+        {{ (showMore) ? 'SHOW LESS' : 'SHOW MORE' }}
+      </button> 
     </div>
     <div class="likes">
-      <img src="../../../assets/images/heart.svg">
+      <i class="fas fa-heart"></i>
       <span>1</span>
     </div>
   </div>

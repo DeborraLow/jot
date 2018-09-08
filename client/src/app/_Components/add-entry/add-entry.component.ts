@@ -29,12 +29,7 @@ export class AddEntryComponent implements OnInit {
 
   submit() {
 
-    const date = new Date();
-    const newEntry = {
-      title: 'New Entry - ' + date
-    };
-
-    this.entriesService.post(newEntry).subscribe((entry) => {
+    this.entriesService.post({}).subscribe((entry) => {
       this.newEntry.emit(entry);
     });
 
@@ -43,27 +38,4 @@ export class AddEntryComponent implements OnInit {
 
   }
 
-
 }
-
-// ngOnInit() {
-//   this.showForm = false;
-
-// }
-
-// showFormFn() {
-//   if (this.showForm) {
-//     this.showForm = false;
-//   } else {
-//     this.showForm = true;
-//   }
-// }
-
-
-// addEntry(newEntry) {
-
-//   this.entriesService.post(newEntry)
-//     .subscribe(() => {
-//       this.router.navigate(['']);
-//     });
-// }

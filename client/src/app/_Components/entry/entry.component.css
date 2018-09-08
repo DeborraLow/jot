@@ -5,11 +5,26 @@ textarea {
 
 /* WRAPS ENTIRE ENTRY */
 .entry-container {
-    /* border: 1px solid black; */
-    margin: 1em;
+    position: relative;
+    margin: 1em 1em 4em;
+    box-shadow: -1px 1px 20px 0px rgba(0, 0, 0, 0.20);
     border-radius: 10px;
 }
-
+.entry-container .actions {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    padding: 0;
+    margin: 0;
+    width: 2em;
+    height: 2em;
+    border-radius: 100%;
+    background: #b9b9b9;
+    text-align: right;
+}
+.entry-container .actions li{
+    display: inline-block;
+}
 /* ENTRY-HEADER */
 .entry-header {
     background-color: salmon;
@@ -36,7 +51,9 @@ textarea {
     outline:0;
     transition: 2000ms;
     background: transparent;
-    font-style: italic
+    font-style: italic;
+    width: 100%;
+    font-size: 1em;
 }
 
 .edit-label {
@@ -44,12 +61,13 @@ textarea {
 }
 
 .edit-button {
-    float:   right;
-    border-top-right-radius: 10px;
     background: transparent;
-    border:0;
-    outline:0;
-    color: whitesmoke
+    border: 0;
+    outline: 0;
+    color: black;
+    line-height: 30px;
+    text-align: center;
+    padding: 1px 10px;
 }
 
 .edit-button :active {
@@ -73,8 +91,20 @@ textarea {
 /* ENTRY-TEXT */
 
 .entry-text-container{
+    overflow: hidden;
+    transition: 500ms;
     min-height: 300px;
+    height: 300px;
     padding:1em;
+}
+
+.entry-text-container.show-more{
+    min-height: 300px;
+    padding-bottom:5em;
+}
+
+.entry-text-container /deep/ * {
+    word-wrap: break-word!important;
 }
 .entry-text {
     box-sizing: border-box;
@@ -106,14 +136,14 @@ textarea {
 
 /* FOOTER */
 
-.entry-footer {
-    display: flex; 
+.entry-footer  {
+    display: flex;
     justify-content: space-between;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    /* border: 1px black solid; */
     padding: 10px;
     opacity: 0.5;
+    box-shadow: 0px -7px 56px -11px rgba(0, 0, 0, 0.70);
 }
 
 .show-publisher-button {

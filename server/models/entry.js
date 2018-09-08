@@ -18,22 +18,16 @@ const entrySchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Emoji'
         }], //Check if max number of array items can be done in mongoose schema
-
         user: {
             type: Schema.Types.ObjectId,
             ref: "User"
         },
-        engagement: { type: Schema.Types.ObjectId, ref: 'Engagement' }
-
-        // comments: {
-        //     type: Array,
-        //     default: []
-        // },
-        // imgName: String,
-        // imgPath: String,
-
-        // POTENTIAL ADD TYPES
-        // types: ["Profile", "Explorer", "Timeline"]
+        engagement: { type: Schema.Types.ObjectId, ref: 'Engagement' },
+        status: {
+            type: String,
+            enum: ["draft","published"],
+            default: "draft"
+        }
     },
     {
         timestamps: {

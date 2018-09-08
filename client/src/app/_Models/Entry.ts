@@ -8,5 +8,8 @@ export interface Entry {
     summary?: string;
     entry_text?: string;
     publisher?: User;
+    publish_date: Date;
+    created_at: Date;
     emojis?: Emoji[];
+    isPublic?:boolean;
 }

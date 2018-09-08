@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
     this.entryService.getEntries().subscribe( (entries:any) => { 
       this.entries = entries;
     });
-    
   }
 
   initNewEntry(e) {
