@@ -1,33 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-
+import {Entry} from '../_Models/Entry';
 @Injectable({
   providedIn: 'root'
 })
 export class EntriesService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
+
+  entries:Entry[]=[];
 
   getEntries() {
-    return this.http.get(`${environment.api_url}/api/entries`)
-      .pipe(map((res) => res.json()));
+    return this.http.get(`${environment.api_url}/api/entries`);
   }
 
   get(id) {
-    return this.http.get(`${environment.api_url}/api/entries/${id}`)
-      .pipe(map((res) => res.json()));
+    return this.http.get(`${environment.api_url}/api/entries/${id}`);
   }
 
   post(form) {
-    return this.http.post(`${environment.api_url}/api/entries`, form)
-      .pipe(map((res) => res.json()));
+    return this.http.post(`${environment.api_url}/api/entries`, form);
   }
 
   edit(entry) {
-    return this.http.put(`${environment.api_url}/api/entry/${entry.id}`, entry)
-      .pipe(map((res) => res.json()));
+    return this.http.put(`${environment.api_url}/api/entry/${entry.id}`, entry);
   }
 
   // editListEntries(entry) {
@@ -36,8 +34,8 @@ export class EntriesService {
   // }
 
   remove(id) {
-    return this.http.delete(`${environment.api_url}/api/entries/${id}`)
-      .pipe(map((res) => res.json()));
+    return this.http.delete(`${environment.api_url}/api/entries/${id}`);
   }
 }
 
+ 

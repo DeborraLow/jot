@@ -1,1 +1,12 @@
 <app-header></app-header>
+<div class="jot-g container">
+    <div class="u-3-4">
+        <div *ngFor="let entry of entries">
+            {{entry}}
+            <app-entry [entry]="entry"></app-entry>
+        </div>
+    </div>
+    <div class="u-1-4">
+        <app-add-entry (newEntry)="initNewEntry($event)"></app-add-entry>
+    </div>
+</div>

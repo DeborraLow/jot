@@ -13,17 +13,27 @@ router.get('/entries', (req, res, next) => {
                 res.json(err);
                 return;
             }
-            res.json(entryList);
+
+            const entries = entryList.map(e=> {
+                return {
+                    id:e._id, 
+                    title:e.title, 
+                    summary:e.summary,
+                    emojis:e.emojis,
+                    isPublic:e.isPublic,
+                    likes:e.likes,
+                    publish_date:e.publish_date
+                }
+            })
+            res.json(entries);
         })
         .catch(error => next(error))
 });
 
 
 /* CREATE a new Entry. */
-router.post('/entries',
-    //  uploadCloud.single('photo'), 
-    (req, res, next) => {
-        console.log("Req, Res");
+router.post('/entries', (req, res, next) => {
+        
         const theEntry = new Entry({
             title,
             summary,
@@ -34,16 +44,14 @@ router.post('/entries',
             emojis,
             comments,
             user,
-            // imgPath = req.file.url,
-            // imgName = req.file.originalname,
             likes
         } = req.body);
 
         theEntry.save()
             .then(theEntry => {
                 res.json({
-                    message: 'New Entry created!',
-                    id: theEntry._id
+                    id: theEntry._id,
+                    title: theEntry.title
                 });
             })
             .catch(error => next(error))

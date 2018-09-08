@@ -3,7 +3,7 @@
     <div class="u-3-4">
       <img src="/assets/images/logo.png" width="60" class="logo"/>
     </div>
-    <div class="u-1-4">
+    <div class="u-1-4 align-right">
       <ul>
         <li *ngIf="isLoggedIn">
           <button (click)="logout()" class="btn btn-default">Logout</button>
@@ -18,7 +18,7 @@
     </div>
   </div>
 </header>
-<div class="modal-wrapper" *ngIf="showModal" (click)="closeModal()"></div>
+<div class="modal-wrapper" *ngIf="showModal" (click)="closeModal()"></div>–
 <div class="modal"  *ngIf="showModal">
     <app-message></app-message>
     <button (click)="closeModal()">X</button>

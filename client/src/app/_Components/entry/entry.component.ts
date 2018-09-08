@@ -1,6 +1,6 @@
 import { Entry } from './../../_Models/Entry';
 import { EntriesService } from './../../_Services/entries.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,13 +11,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 })
 export class EntryComponent implements OnInit {
-  entry:any = {
-    _id: '',
-    title: '',
-    summary: '',
-    entry_text: '',
-    emojis:[]
-  };
+
+  @Input() entry:Entry;
+
   showForm: boolean;
   display = 'display-none';
   display2 = '';
@@ -27,29 +23,27 @@ export class EntryComponent implements OnInit {
     private entriesService: EntriesService,
     private router: Router,
     private route: ActivatedRoute,
-
   ) { }
 
+  public EditorOptions: Object = {
+    toolbarInline:true,
+    heightMin: 300,
+    placeholderText: 'Edit Your Content Here!',
+    charCounterCount: true,
+    toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'color', 'emoticons', 
+    '-', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'indent', 'outdent', 
+    '-', 'insertImage', 'insertLink', 'insertFile', 'insertVideo', 'undo', 'redo']
+  };
+
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.getEntryDetails(params['id']);
-    });
-
-
     this.showForm = false; // Hides edit form Onit
-
   }
 
-  getEntryDetails(id) {
-    this.entriesService.get(id)
-      .subscribe((entry) => {
-        this.entry = entry;
-      });
-  }
+
 
   deleteEntry() {
     if (window.confirm('Are you sure?')) {
-      this.entriesService.remove(this.entry._id)
+      this.entriesService.remove(this.entry.id)
         .subscribe(() => {
           this.router.navigate(['']);
         });

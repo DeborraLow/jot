@@ -33,10 +33,8 @@ export class EntryListComponent implements OnInit {
     this.showForm = false;
 
     console.log('HERE = ', this.entry);
-    this.entryService.getEntries()
-      .subscribe((entries) => {
-        this.entries = entries;
-      });
+    this.entryService.getEntries();
+     
     console.log(this.entries);
   }
 
