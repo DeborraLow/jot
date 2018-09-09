@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import {Entry} from '../_Models/Entry';
+import { Entry } from '../_Models/Entry';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +10,7 @@ export class EntriesService {
 
   constructor(private http: HttpClient) { }
 
-  entries:Entry[]=[];
+  entries: Entry[] = [];
 
   getEntries() {
     return this.http.get(`${environment.api_url}/api/entries`);
@@ -25,7 +25,7 @@ export class EntriesService {
   }
 
   edit(entry) {
-    return this.http.put(`${environment.api_url}/api/entries/${entry.id}`, entry);
+    return this.http.put(`${environment.api_url}/api/entry/${entry.id}`, entry);
   }
 
   // editListEntries(entry) {

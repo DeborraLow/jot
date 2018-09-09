@@ -25,8 +25,11 @@
 
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
 
-      <div class="emojis">
+      <div class="emojis" *ngIf="isEditing">
+
+        
         <app-entry-emojis></app-entry-emojis>
+        <img src="{{emoji.url}}">
       </div>
 
     </div>

@@ -10,13 +10,16 @@ import { Component, OnInit, Input } from '@angular/core';
 
 })
 export class EmojiComponent implements OnInit {
-  @Input() entry: Emoji;
+  @Input() emoji: Emoji;
+
 
   constructor(
     private emojiService: EmojiService,
   ) { }
 
   emojis: any = [];
+  entryEmojis: any = [];
+
 
   ngOnInit() {
     this.emojiService.getEmojis()
@@ -25,5 +28,14 @@ export class EmojiComponent implements OnInit {
       });
     console.log(this.emojis);
   }
+
+  addEmoji() {
+    console.log('EMOJIS: ', this.emojis);
+    console.log('EMOJI ADDED: ', this.emoji);
+  }
+
+
+
+
 
 }

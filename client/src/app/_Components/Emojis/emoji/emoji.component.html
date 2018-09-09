@@ -2,7 +2,8 @@
 
   <div *ngFor="let emoji of emojis">
     <div class="list-emojis-container">
-      <input class="emoji" type="image" (click)="addEmoji()" src="{{emoji.url}}" alt="{{emoji.name}}">
+
+      <input class="emoji" type="image" (click)="addEmoji()" src="{{emoji.url}}" alt="{{emoji.name}}" name="{{emoji}}" value="{{emoji}}">
 
     </div>
 

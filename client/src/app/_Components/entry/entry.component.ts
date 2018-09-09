@@ -94,5 +94,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
     }
   }
 
+ 
+
 
 }
