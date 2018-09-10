@@ -14,7 +14,6 @@ export class EntryComponent implements OnInit, AfterViewInit {
   @Input() emojis: any = [];
   @Input() entry: Entry;
 
-
   // entry: any = {
   //   _id: '',
   //   title: '',
@@ -57,6 +56,9 @@ export class EntryComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.isEditing = false;
     this.showMore = false;
+    console.log("EMOJIS", this.emojis)
+    console.log("ENTRY", this.entry)
+
   }
 
   setPrivacy(privacy: string) {
