@@ -25,13 +25,6 @@
 
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
 
-      <div class="emojis" *ngIf="isEditing">
-
-        
-        <app-entry-emojis></app-entry-emojis>
-        <img src="{{emoji.url}}">
-      </div>
-
     </div>
 
 
@@ -39,10 +32,10 @@
 
   <!-- Emojis -->
 
-
   <div class="edit-emoji" *ngIf="isEditing">
-    <app-emoji> [emojis]="emojis"</app-emoji>
+    <app-emoji (emojiEmitter)="emojiEmtter($event)"></app-emoji>
   </div>
+
   <!-- Entry text -->
   <div class="entry-text-container" [ngClass]="{ 'show-more': isEditing || showMore }" [ngStyle]="{'min-height':  isEditing || showMore ? entryHeight+'px': '' }">
     <div *ngIf="isEditing">
@@ -60,8 +53,8 @@
       <span>Share: </span>
       <span class=" radio">
         <label for="private">Private </label>
-        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private" (click)="setPrivacy('private')"
-          ngModel>
+        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private"
+          (click)="setPrivacy('private')" ngModel>
       </span>
       <span class="radio">
         <label for="public">Public </label>

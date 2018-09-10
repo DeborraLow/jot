@@ -1,5 +1,5 @@
 export interface Emoji {
     id: string;
-    name: string;
+    name?: string;
     url: string;
 }

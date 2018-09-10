@@ -55,7 +55,6 @@ export class EntryComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-
     this.isEditing = false;
     this.showMore = false;
   }
@@ -94,7 +93,9 @@ export class EntryComponent implements OnInit, AfterViewInit {
     }
   }
 
- 
+  emojiEmtter(emojis) {
+    this.entry.emojis = emojis;
+  }
 
 
 }

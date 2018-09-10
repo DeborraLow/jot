@@ -1,6 +1,6 @@
 import { Emoji } from './../../../_Models/Emoji';
 import { EmojiService } from './../../../_Services/emoji.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-emoji',
@@ -10,28 +10,32 @@ import { Component, OnInit, Input } from '@angular/core';
 
 })
 export class EmojiComponent implements OnInit {
-  @Input() emoji: Emoji;
 
+  @Input() emoji: Emoji[];
+  @Output() emojiEmitter: EventEmitter<Emoji[]> = new EventEmitter();
 
   constructor(
     private emojiService: EmojiService,
   ) { }
 
-  emojis: any = [];
-  entryEmojis: any = [];
-
+  emojis: Emoji[] = [];
+  entryEmojis: Emoji[] = [];
 
   ngOnInit() {
+
     this.emojiService.getEmojis()
       .subscribe((emojis) => {
         this.emojis = emojis;
       });
+
     console.log(this.emojis);
   }
-
-  addEmoji() {
-    console.log('EMOJIS: ', this.emojis);
-    console.log('EMOJI ADDED: ', this.emoji);
+  remove(emoji) {
+    this.entryEmojis = this.entryEmojis.filter(i => i.id !== emoji.id);
+  }
+  addEmoji(emoji) {
+    this.entryEmojis.push(emoji)
+    this.emojiEmitter.emit(this.entryEmojis);
   }
 
 
