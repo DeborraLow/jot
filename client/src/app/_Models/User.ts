@@ -1,6 +1,5 @@
 export interface User {
     id: string;
-    pen_name: string;
     avatar: string;
 }
 

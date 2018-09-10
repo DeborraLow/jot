@@ -34,6 +34,10 @@ import { AuthGuardService } from './_Services/auth-guard.service';
 import { MessageComponent } from './_Layouts/_Shared/message/message.component';
 import { EmojiService } from './_Services/emoji.service';
 import { EntryEmojisComponent } from './_Components/Emojis/entry-emojis/entry-emojis.component';
+import { FollowersComponent } from './_Components/followers/followers.component';
+import { FileUploaderComponent } from './_Components/file-uploader/file-uploader.component';
+import { UploaderDirective } from './_Directives/uploader.directive';
+import { UploaderService } from './_Services/uploader.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import { EntryEmojisComponent } from './_Components/Emojis/entry-emojis/entry-em
     HeaderComponent,
     MessageComponent,
     EmojiComponent,
-    EntryEmojisComponent
+    EntryEmojisComponent,
+    FollowersComponent,
+    FileUploaderComponent,
+    UploaderDirective
   ],
   imports: [
     BrowserModule,
@@ -69,7 +76,8 @@ import { EntryEmojisComponent } from './_Components/Emojis/entry-emojis/entry-em
     AuthenticationService,
     MessageService,
     AuthGuardService,
-    EmojiService],
+    EmojiService,
+    UploaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
