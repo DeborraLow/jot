@@ -73,6 +73,7 @@ const userApi = require('./routes/user-api')
 const emojiApi = require('./routes/emoji-api')
 const followerApi = require('./routes/follower-api')
 const engagementApi = require('./routes/engagement-api')
+const uploadApi = require('./routes/upload-api')
 
 app.use('/', index);
 app.use('/', authRoutes);
@@ -82,6 +83,7 @@ app.use('/api', userApi)
 app.use('/api', emojiApi)
 app.use('/api', followerApi)
 app.use('/api', engagementApi)
+app.use('/api', uploadApi)
 
 
 app.use((req, res, next) => {

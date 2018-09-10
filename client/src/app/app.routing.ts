@@ -23,7 +23,7 @@ import { ForgotComponent } from './_Components/Authorization/forgot/forgot.compo
 import { AuthGuardService } from './_Services/auth-guard.service';
 
 export const routes: Routes = [
-    { path: '', component: ProfileComponent },
+    { path: '', component: HomeComponent },
     { path: 'explorer', component: ExplorerComponent },
     { path: 'me', component: ProfileComponent, canActivate: [AuthGuardService] },
     { path: 'timeline', component: TimelineComponent },
