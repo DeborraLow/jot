@@ -34,7 +34,7 @@ export class EmojiComponent implements OnInit {
     this.entryEmojis = this.entryEmojis.filter(i => i.id !== emoji.id);
   }
   addEmoji(emoji) {
-    this.entryEmojis.push(emoji)
+    this.entryEmojis.push(emoji);
     this.emojiEmitter.emit(this.entryEmojis);
   }
 

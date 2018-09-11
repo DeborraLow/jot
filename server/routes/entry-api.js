@@ -5,26 +5,29 @@ const mongoose = require('mongoose');
 
 const Entry = require('../models/entry');
 const DateOptions = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+
+
 /* GET Entry listing. */
 router.get('/entries', (req, res, next) => {
     Entry.find().sort('-created_at')
+        .populate("emojis")
         .then((entryList, err) => {
             if (err) {
                 res.json(err);
                 return;
             }
 
-            const entries = entryList.map(e=> {
+            const entries = entryList.map(e => {
                 return {
-                    id:e._id, 
-                    title:e.title, 
-                    entry_text:e.entry_text,
-                    emojis:e.emojis,
-                    isPublic:e.isPublic,
-                    likes:e.likes,
-                    publish_date:new Date(e.publish_date).toLocaleDateString("en-US",DateOptions),
-                    created_at:new Date(e.created_at).toLocaleDateString("en-US",DateOptions),
-                    status:e.status
+                    id: e._id,
+                    title: e.title,
+                    entry_text: e.entry_text,
+                    emojis: e.emojis,
+                    isPublic: e.isPublic,
+                    likes: e.likes,
+                    publish_date: new Date(e.publish_date).toLocaleDateString("en-US", DateOptions),
+                    created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
+                    status: e.status
                 }
             })
             res.json(entries);
@@ -32,29 +35,63 @@ router.get('/entries', (req, res, next) => {
         .catch(error => next(error))
 });
 
+/* GET Entry by User listing. */
+router.get('/profile', (req, res, next) => {
+    const entryUser = req.session.passport.user;
+
+    console.log("USER", entryUser)
+
+    Entry.find({ user: entryUser }).sort('-created_at')
+        .populate("emojis")
+        .then((entryList, err) => {
+            if (err) {
+                res.json(err);
+                return;
+            }
+
+            const entries = entryList.map(e => {
+                return {
+                    id: e._id,
+                    title: e.title,
+                    entry_text: e.entry_text,
+                    emojis: e.emojis,
+                    isPublic: e.isPublic,
+                    likes: e.likes,
+                    publish_date: new Date(e.publish_date).toLocaleDateString("en-US", DateOptions),
+                    created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
+                    status: e.status
+                }
+            })
+            res.json(entries);
+        })
+        .catch(error => next(error))
+});
 
 /* CREATE a new Entry. */
 router.post('/entries', (req, res, next) => {
-        const created_at = new Date().toLocaleDateString("en-US",DateOptions)
+    const created_at = new Date().toLocaleDateString("en-US", DateOptions)
+    // const user = req.user._id;
 
-        const theEntry = new Entry({
-            title:`Draft - ${created_at}`,
-        });
-
-        theEntry.save()
-            .then(e => {
-                console.log(e)
-                const entries = {
-                    id:e._id, 
-                    title:e.title, 
-                    created_at:new Date(e.created_at).toLocaleDateString("en-US",DateOptions),
-                    status:e.status,
-                }
-
-                res.json(entries);
-            })
-            .catch(error => next(error))
+    const theEntry = new Entry({
+        title: `Draft - ${created_at}`,
+        user: req.session.passport.user
     });
+
+    theEntry.save()
+        .then(e => {
+            console.log(e)
+            console.log("USER HERE:", req.session.passport.user)
+            const entries = {
+                id: e._id,
+                title: e.title,
+                created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
+                status: e.status,
+            }
+
+            res.json(entries);
+        })
+        .catch(error => next(error))
+});
 
 /* GET a single Entry. */
 router.get('/entries/:id', (req, res, next) => {
@@ -64,6 +101,7 @@ router.get('/entries/:id', (req, res, next) => {
     }
 
     Entry.findById(req.params.id)
+        .populate("emojis")
         .then(theEntry => {
             res.json(theEntry);
         })

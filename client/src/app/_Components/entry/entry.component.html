@@ -17,13 +17,22 @@
       <!-- Show title and summary -->
       <div class="title" *ngIf="!isEditing">{{entry.title}}</div>
 
+
+
+
       <!-- HIDDEN - Edit title and summary -->
       <div class="edit-input" *ngIf="isEditing">
         <label class="edit-label">Title: </label>
         <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title">
       </div>
 
+      <!-- DATE -->
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
+
+      <!-- EMOJI -->
+      <div class="emojis" *ngFor="let emoji of entry.emojis">
+        <img src="{{emoji.url}}">
+      </div>
 
     </div>
 
@@ -53,8 +62,8 @@
       <span>Share: </span>
       <span class=" radio">
         <label for="private">Private </label>
-        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private"
-          (click)="setPrivacy('private')" ngModel>
+        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private" (click)="setPrivacy('private')"
+          ngModel>
       </span>
       <span class="radio">
         <label for="public">Public </label>

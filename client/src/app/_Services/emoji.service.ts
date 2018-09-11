@@ -15,9 +15,7 @@ export class EmojiService {
       .pipe(map((res) => res.json()));
   }
 
-  addEmoji() {
 
-  }
 
 }
 
