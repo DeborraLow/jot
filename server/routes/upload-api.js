@@ -1,14 +1,23 @@
 const express = require('express');
-var fs = require('fs');
 const router = express.Router();
-const mongoose = require('mongoose');
+const multer = require('multer');
+const path = require('path');
 
-/* GET all Emojis listing. */
-
-router.post('/upload', (req, res, next) => {
-    req.pipe(fs.createWriteStream('./uploads'));
-    req.on('end', next);
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads/avatars/')
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}${path.extname(file.originalname)}`)
+  }
 });
+
+const upload   = multer({ storage });
+
+
+router.post('/upload', upload.single('file'), function (req, res) {
+    res.status(201).json({path:`/uploads/avatars/${req.file.filename}`})
+})
 
 
 module.exports = router;

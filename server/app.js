@@ -21,7 +21,7 @@ const app = express();
 app.use(cors(
   {
     credentials: true,
-    origin: ["http://localhost:4200"]
+    origin: ["http://127.0.0.1:4200"]
   }
 ));
 

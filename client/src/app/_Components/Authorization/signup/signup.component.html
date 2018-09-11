@@ -4,7 +4,7 @@
         <input type="text" [(ngModel)]="signup.username" required="required">
         <label for="input" class="control-label">Username</label><i class="bar"></i>
     </div>
-     <div class="form-group">
+    <div class="form-group">
       <input type="text" [(ngModel)]="signup.email" required="required">
       <label for="input" class="control-label">Email</label><i class="bar"></i>
     </div>
@@ -21,8 +21,29 @@
     </div>
     
 </div>
-<app-file-uploader></app-file-uploader>
+
 <div class="account-setup" *ngIf="hasSignedUp">
-    
+
+        <div class="form-group">
+            <label for="input" class="control-label" style="top: -30px;">Avatar</label>
+            <app-file-uploader (UploadPath)="uploadPath($event)"></app-file-uploader>
+        </div>
+        <div class="jot-g">
+            <div class="u-1-2">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="signup.first_name" required="required">
+                        <label for="input" class="control-label">First Name</label><i class="bar"></i>
+                    </div>
+            </div>
+            <div class="u-1-2">
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="signup.last_name" required="required">
+                        <label for="input" class="control-label">Last Name</label><i class="bar"></i>
+                    </div>
+            </div>
+        </div>
+        <div class="button-container align-right">
+                <button type="button" class="btn btn-default" (click)="completeSignup()"><span>Complete</span></button>
+        </div>
 </div>
   

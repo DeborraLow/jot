@@ -1,3 +1,17 @@
+.message-wrapper{
+    position: fixed;
+    top: 0;
+    transition: 500ms;
+    opacity: 0;
+    visibility: hidden;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.message-wrapper.active{
+    opacity: 1;
+    visibility: visible;
+}
 .message-wrapper.error {
     background: #fdb6b6;
 }
@@ -5,5 +19,6 @@
     background: #b6d6fd;
 }
 .message-wrapper p {
-    padding: .5em;
+    padding: .5em 1em;
 }
+

@@ -1,26 +1,56 @@
-img {
-    height: 2em;
-
-}
 
 .list-emojis-container {
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 align-items: flex-start;
-/* border: 2px solid salmon; */ 
-padding: 5px;
+padding:1em 5px 5px;
 background-color: whitesmoke;
-
 }
 
 .emoji {
     height: 2em;
+    outline: 0;
 }
 
- input:hover {
-    height: 2.5em;
-    transition: 800ms;
-    
+.emoji-wrapper {
+    position: relative;
+}
 
+input:hover {
+}
+
+ul.entry-emojis-container li {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+    border-radius: 100%;
+    width: 2em;
+    padding: .2em;
+    height: 2em;
+    margin: 0 .4em;
+}
+
+ul.entry-emojis-container {
+    position: absolute;
+    top: -1em;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+ul.entry-emojis-container li button {
+    position: absolute;
+    right: -5px;
+    top: -3px;
+    width: 15px;
+    height: 15px;
+    padding: 1px 0 0 0;
+    border-radius: 100%;
+    border: 0;
+    background: #000;
+    font-size: .5em;
+    color: #fff;
 }

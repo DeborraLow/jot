@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 
 import { EntryComponent } from './_Components/entry/entry.component';
 import { AddEntryComponent } from './_Components/add-entry/add-entry.component';
-import { EntryListComponent } from './_Components/entry-list/entry-list.component';
 
 import { HeaderComponent } from './_Layouts/_Shared/header/header.component';
 import { AuthorizationComponent } from './_Layouts/authorization/authorization.component';
@@ -24,7 +23,6 @@ import { HomeComponent } from './_Layouts/home/home.component';
 import { EntriesService } from './_Services/entries.service';
 import { LoginComponent } from './_Components/Authorization/login/login.component';
 import { SignupComponent } from './_Components/Authorization/signup/signup.component';
-import { LogoutComponent } from './_Components/Authorization/logout/logout.component';
 import { ForgotComponent } from './_Components/Authorization/forgot/forgot.component';
 import { EmojiComponent } from './_Components/Emojis/emoji/emoji.component';
 
@@ -33,7 +31,6 @@ import { AuthenticationService } from './_Services/authentication.service';
 import { AuthGuardService } from './_Services/auth-guard.service';
 import { MessageComponent } from './_Layouts/_Shared/message/message.component';
 import { EmojiService } from './_Services/emoji.service';
-import { EntryEmojisComponent } from './_Components/Emojis/entry-emojis/entry-emojis.component';
 import { FollowersComponent } from './_Components/followers/followers.component';
 import { FileUploaderComponent } from './_Components/file-uploader/file-uploader.component';
 import { UploaderDirective } from './_Directives/uploader.directive';
@@ -44,10 +41,8 @@ import { UploaderService } from './_Services/uploader.service';
     AppComponent,
     EntryComponent,
     AddEntryComponent,
-    EntryListComponent,
     LoginComponent,
     SignupComponent,
-    LogoutComponent,
     ForgotComponent,
     AuthorizationComponent,
     ProfileComponent,
@@ -57,7 +52,6 @@ import { UploaderService } from './_Services/uploader.service';
     HeaderComponent,
     MessageComponent,
     EmojiComponent,
-    EntryEmojisComponent,
     FollowersComponent,
     FileUploaderComponent,
     UploaderDirective

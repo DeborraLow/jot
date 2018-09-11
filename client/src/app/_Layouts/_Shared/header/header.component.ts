@@ -19,6 +19,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  signUpComplete(trigger:boolean) {
+    if(trigger) {
+      this.closeModal();
+      this.toggleLogin();
+    }
+  }
   
   logout() {
       this.isLoggedIn = false;

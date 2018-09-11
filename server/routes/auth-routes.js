@@ -7,7 +7,28 @@ const User = require('../models/user');
 
 const authRoutes = express.Router();
 
+authRoutes.post('/api/signup/:id', (req, res, next) => {
 
+    const { avatar, first_name, last_name } = req.body;
+
+    if (avatar === '') {
+        res.status(400).json({ message: 'Please upload your avatar to continue.' });
+        return;
+      }else if(first_name === '' || last_name === ''){
+        res.status(400).json({ message: 'First and last name is required to proceed.' });
+        return;
+      }else{
+
+        User.findByIdAndUpdate(req.params.id, {avatar, first_name, last_name})
+        .then(entry => {
+            res.json({
+                message: 'Account has been updated successfully'
+            });
+        })
+        .catch(error => next(error))
+        
+      }
+})
 
 authRoutes.post('/api/signup', (req, res, next) => {
     const { username, password, confirm_password, email } = req.body
