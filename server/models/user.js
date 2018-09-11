@@ -5,13 +5,10 @@ const userSchema = new Schema(
     {
         username: { type: String, unique: true },
         password: String,
-        firstName: String,
-        lastName: String,
-        penName: String,
+        first_name: String,
+        last_name: String,
         email: { type: String, unique: true },
-
-        // avatarName: { type: String, default: "/images/default-avatar.jpg" },
-        avatarPath: String,
+        avatar: { type: String, default: "/images/default-avatar.jpg" },
     },
     {
         timestamps: {
