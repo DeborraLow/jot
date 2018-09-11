@@ -14,18 +14,6 @@ export class EntryComponent implements OnInit, AfterViewInit {
   @Input() emojis: any = [];
   @Input() entry: Entry;
 
-  // entry: any = {
-  //   _id: '',
-  //   title: '',
-  //   summary: '',
-  //   entry_text: '',
-  //   emojis: []
-  // };
-  // showForm: boolean;
-  // display = 'display-none';
-  // display2 = '';
-  // showPublish: boolean;
-
   constructor(
     private entriesService: EntriesService,
     private router: Router,
@@ -54,11 +42,9 @@ export class EntryComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.emojis = this.entry.emojis;
     this.isEditing = false;
     this.showMore = false;
-    console.log("EMOJIS", this.emojis)
-    console.log("ENTRY", this.entry)
-
   }
 
   setPrivacy(privacy: string) {
@@ -97,6 +83,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   emojiEmtter(emojis) {
     this.entry.emojis = emojis;
+    console.log(this.entry)
   }
 
 

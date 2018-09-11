@@ -83,7 +83,7 @@ textarea {
 
 /* EMOJIS */
 .emojis {
-    display: flex; */
+    display: flex; 
     flex-direction: row;
     flex-wrap: nowrap;
     padding: 5px;

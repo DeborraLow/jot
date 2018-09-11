@@ -17,9 +17,6 @@
       <!-- Show title and summary -->
       <div class="title" *ngIf="!isEditing">{{entry.title}}</div>
 
-
-
-
       <!-- HIDDEN - Edit title and summary -->
       <div class="edit-input" *ngIf="isEditing">
         <label class="edit-label">Title: </label>
@@ -29,26 +26,17 @@
       <!-- DATE -->
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
 
-      <!-- EMOJI -->
-      <div class="emojis">
-        <div *ngFor="let emoji of entry.emojis">
-          <img class="emoji" src="{{emoji.url}}">
-        </div>
-      </div>
-
     </div>
-
-
   </form>
 
   <!-- Emojis -->
 
-  <div class="edit-emoji" *ngIf="isEditing">
-    <app-emoji (emojiEmitter)="emojiEmtter($event)"></app-emoji>
+  <div class="edit-emoji">
+    <app-emoji (emojiEmitter)="emojiEmtter($event)" [isEditing]="isEditing" [emoji]="emojis"></app-emoji>
   </div>
 
   <!-- Entry text -->
-  <div class="entry-text-container" [ngClass]="{ 'show-more': isEditing || showMore }" [ngStyle]="{'min-height':  isEditing || showMore ? entryHeight+'px': '' }">
+  <div class="entry-text-container" [ngClass]="{ 'show-more': isEditing || showMore }" [ngStyle]="{'height':  isEditing || showMore ? entryHeight+'px': '' }">
     <div *ngIf="isEditing">
       <textarea [froalaEditor]='EditorOptions' [(froalaModel)]="entry.entry_text"></textarea>
     </div>

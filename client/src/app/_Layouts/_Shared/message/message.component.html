@@ -1,1 +1,1 @@
-<div class="message-wrapper {{messageType}}" *ngIf="showMessage"><p>{{message}}</p></div>
+<div class="message-wrapper {{messageType}}" [ngClass]="{'active': showMessage}"><p>{{message}}</p></div>

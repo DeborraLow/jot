@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
   }
 
   signUpComplete(trigger:boolean) {
-    console.log(trigger)
     if(trigger) {
       this.closeModal();
       this.toggleLogin();

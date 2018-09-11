@@ -27,6 +27,9 @@ export class MessageComponent implements OnInit {
 
   displayMessage() {
     this.showMessage = true;
+    setTimeout(()=> {
+        this.showMessage = false;
+    },1500);
   }
 
 }
