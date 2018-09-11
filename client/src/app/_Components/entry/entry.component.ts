@@ -86,6 +86,11 @@ export class EntryComponent implements OnInit, AfterViewInit {
     (this.showMore) ? this.showMore = false : this.showMore = true;
   }
 
+  // publishToggler() {
+  //   (this.entry.isPublic) ? this.entry.isPublic = false : this.entry.isPublic = true;
+
+  // }
+
   deleteEntry() {
     if (window.confirm('Are you sure?')) {
       this.entriesService.remove(this.entry.id)
