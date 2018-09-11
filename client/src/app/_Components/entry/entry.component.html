@@ -30,8 +30,10 @@
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
 
       <!-- EMOJI -->
-      <div class="emojis" *ngFor="let emoji of entry.emojis">
-        <img src="{{emoji.url}}">
+      <div class="emojis">
+        <div *ngFor="let emoji of entry.emojis">
+          <img class="emoji" src="{{emoji.url}}">
+        </div>
       </div>
 
     </div>

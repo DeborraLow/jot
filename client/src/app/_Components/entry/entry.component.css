@@ -52,7 +52,7 @@ textarea {
     transition: 2000ms;
     background: transparent;
     font-style: italic;
-    width: 100%;
+    width: 80%;
     font-size: 1em;
 }
 
@@ -83,15 +83,18 @@ textarea {
 
 /* EMOJIS */
 .emojis {
-    text-align: center;
-    display: flex;
+    display: flex; */
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    padding: 5px;
+    justify-content: center;
+
+}
+.emoji {
+    width: 2em;
     padding: 5px;
 
 }
-
-
 
 /* ENTRY-TEXT */
 

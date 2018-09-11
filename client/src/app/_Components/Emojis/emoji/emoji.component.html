@@ -1,9 +1,9 @@
-<div class="list-emojis-container">
+<!-- <div class="list-emojis-container">
   <div *ngFor="let emoji of entryEmojis">
     <img src="{{emoji.url}}">
     <button (click)="remove(emoji)">X</button>
   </div>
-</div>
+</div> -->
 
 <div class="list-emojis-container">
 
@@ -13,6 +13,13 @@
       <input class="emoji" type="image" (click)="addEmoji(emoji)" src="{{emoji.url}}" alt="{{emoji.name}}" name="{{emoji}}">
 
     </div>
-
   </div>
+  <div class="list-emojis-container">
+    <div *ngIf="emojiLength >= 1">Remove:</div>
+    <div *ngFor="let emoji of entryEmojis">
+      <img src="{{emoji.url}}">
+      <button (click)="remove(emoji)">X</button>
+    </div>
+  </div>
+
 </div>
