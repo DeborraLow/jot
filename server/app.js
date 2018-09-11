@@ -18,7 +18,12 @@ passportSetup(passport);
 
 const app = express();
 
-app.use(cors());
+app.use(cors(
+  {
+    credentials: true,
+    origin: ["http://localhost:4200"]
+  }
+));
 
 app.use(session({
   secret: 'jkhads98yasdiuansjkda78y',

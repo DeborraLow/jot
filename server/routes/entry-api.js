@@ -42,13 +42,14 @@ router.post('/entries', (req, res, next) => {
     // const user = req.user._id;
 
     const theEntry = new Entry({
-        title: `Draft - ${created_at}`
-        // user
+        title: `Draft - ${created_at}`,
+        user: req.session.passport.user
     });
 
     theEntry.save()
         .then(e => {
             console.log(e)
+            console.log("USER HERE:", req.session.passport.user)
             const entries = {
                 id: e._id,
                 title: e.title,
