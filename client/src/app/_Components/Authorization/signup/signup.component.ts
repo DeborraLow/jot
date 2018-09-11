@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { AuthenticationService } from '../../../_Services/authentication.service';
 import { MessageService } from '../../../_Services/message.service';
 import { Router } from '@angular/router';
@@ -14,6 +14,8 @@ export class SignupComponent implements OnInit {
 
   hasSignedUp:boolean;
 
+  @Output() signUpComplete:EventEmitter<boolean> = new EventEmitter(false);
+
   signup: any = {
     id:'',
     username: '',
@@ -28,22 +30,43 @@ export class SignupComponent implements OnInit {
   Signup() {
     if (this.signup.username === '' || this.signup.password === '' || this.signup.confirm_password === '' || this.signup.email === '') {
       this.messageService.add('All fields are required to signup.', 'error');
-    }else if(this.signup.password !==  this.signup.confirm_password){
+    } else if(this.signup.password !==  this.signup.confirm_password) {
       this.messageService.add('Password do not match.', 'error');
-    }else {
+    } else {
       this.authService.signup(this.signup).subscribe((res:any) => {
-
-        if(res._id){
+        if(res) {
           this.signup.id = res._id;
           this.hasSignedUp = true;
         }
-
-        //this.messageService.add('Congratulations, your JOT account has been created. ', 'default');
-        //setTimeout(() => this.route.navigate(['/me']), 2000);
       });
     }
   }
 
+  completeSignup() {
+
+    if (this.signup.avatar === '') {
+
+      this.messageService.add('Please upload your avatar to continue.', 'error');
+
+    } else if(this.signup.first_name === '' || this.signup.last_name === '') {
+      this.messageService.add('Please upload your avatar to continue.', 'error');
+    } else {
+
+      const {avatar, first_name, last_name} = this.signup;
+
+      this.authService.setupAccount(this.signup.id, {avatar,first_name, last_name}).subscribe((res:any) => {
+        this.messageService.add('Congratulations, your JOT account has been created.', 'default');
+        setTimeout(() =>  this.signUpComplete.emit(true) , 2000);
+      });
+
+    }
+
+  }
+
+  uploadPath(path) {
+    this.signup.avatar = path;
+  }
+  
   ngOnInit() {
     this.hasSignedUp = false;
   }

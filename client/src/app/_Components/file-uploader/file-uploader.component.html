@@ -1,5 +1,14 @@
-<div class="dropzone" jotUploader>
+<div *ngIf="!fileDropped" class="dropzone" jotUploader (filesChangeEmiter)="onFilesChange($event)" (fileDropped)="onFileDrop($event)" [allowed_extensions]="['png', 'jpg', 'gif']">
   <div class="text-wrapper">
     <div class="centered">Drop your file here!</div>
   </div>
 </div>
+ <div class="dropzone-list" *ngIf="fileDropped">
+  <ul>
+    <li *ngFor="let file of fileList">
+      <p>{{ file.name }}</p>
+      <div class="progress " [ngStyle]="{ 'width': uploadStatus + '%' }"></div>
+    </li>
+  </ul>
+</div>
+

@@ -37,6 +37,12 @@ export class AuthenticationService {
     );
   }
 
+  setupAccount( id, setup ) {
+    return this.http.post(`${environment.api_url}/api/signup/${id}`, setup).pipe(
+      catchError(this.messageService.handleError('Forgot Account'))
+    );
+  }
+
   logout() {
     return this.http.get(`${environment.api_url}/api/logout`).pipe(
       catchError(this.messageService.handleError('Logout'))
