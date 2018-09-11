@@ -19,10 +19,6 @@
 
 
 
-      <!-- EMOJI -->
-      <div *ngFor="let emoji of entry.emojis">
-        <img src="{{emoji.url}}">
-      </div>
 
       <!-- HIDDEN - Edit title and summary -->
       <div class="edit-input" *ngIf="isEditing">
@@ -30,10 +26,13 @@
         <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title">
       </div>
 
+      <!-- DATE -->
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
 
-      <!-- >>>>INSERT entry EMOJIS HERE -->
-
+      <!-- EMOJI -->
+      <div class="emojis" *ngFor="let emoji of entry.emojis">
+        <img src="{{emoji.url}}">
+      </div>
 
     </div>
 

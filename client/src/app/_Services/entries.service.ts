@@ -20,8 +20,17 @@ export class EntriesService {
     return this.http.get(`${environment.api_url}/api/entries/${id}`);
   }
 
+  getMyEntries() {
+    return this.http.get(`${environment.api_url}/api/profile`,
+      { withCredentials: true }
+    );
+
+  }
+
   post(form) {
-    return this.http.post(`${environment.api_url}/api/entries`, form);
+    return this.http.post(`${environment.api_url}/api/entries`,
+      form,
+      { withCredentials: true });
   }
 
   edit(entry) {

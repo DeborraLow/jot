@@ -20,9 +20,11 @@ export class AuthenticationService {
   }
 
   login(login) {
-    return this.http.post(`${environment.api_url}/api/login`, login).pipe(
-      catchError(this.messageService.handleError('Login'))
-    );
+    return this.http.post(`${environment.api_url}/api/login`,
+      login,
+      { withCredentials: true }).pipe(
+        catchError(this.messageService.handleError('Login'))
+      );
   }
 
   signup(signup) {
