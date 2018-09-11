@@ -35,6 +35,37 @@ router.get('/entries', (req, res, next) => {
         .catch(error => next(error))
 });
 
+/* GET Entry by User listing. */
+router.get('/profile', (req, res, next) => {
+    const entryUser = req.session.passport.user;
+
+    console.log("USER", entryUser)
+
+    Entry.find({ user: entryUser }).sort('-created_at')
+        .populate("emojis")
+        .then((entryList, err) => {
+            if (err) {
+                res.json(err);
+                return;
+            }
+
+            const entries = entryList.map(e => {
+                return {
+                    id: e._id,
+                    title: e.title,
+                    entry_text: e.entry_text,
+                    emojis: e.emojis,
+                    isPublic: e.isPublic,
+                    likes: e.likes,
+                    publish_date: new Date(e.publish_date).toLocaleDateString("en-US", DateOptions),
+                    created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
+                    status: e.status
+                }
+            })
+            res.json(entries);
+        })
+        .catch(error => next(error))
+});
 
 /* CREATE a new Entry. */
 router.post('/entries', (req, res, next) => {
