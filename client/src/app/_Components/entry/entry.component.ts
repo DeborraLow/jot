@@ -83,7 +83,6 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   emojiEmtter(emojis) {
     this.entry.emojis = emojis;
-    console.log(this.entry)
   }
 
 

@@ -1,4 +1,4 @@
-<div *ngIf="!fileDropped" class="dropzone" jotUploader (filesChangeEmiter)="onFilesChange($event)" (fileDropped)="onFileDrop($event)" [allowed_extensions]="['png', 'jpg', 'gif']">
+<div *ngIf="!fileDropped" class="dropzone" appJotUploader (filesChangeEmiter)="onFilesChange($event)" (fileDropped)="onFileDrop($event)" [allowed_extensions]="['png', 'jpg', 'gif']">
   <div class="text-wrapper">
     <div class="centered">Drop your file here!</div>
   </div>

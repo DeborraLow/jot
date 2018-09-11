@@ -2,7 +2,7 @@ import { Directive, HostListener, HostBinding, EventEmitter, Output,Input } from
 import { Subscription } from 'rxjs';
 import {UploaderService} from '../_Services/uploader.service';
 @Directive({
-  selector: '[jotUploader]'
+  selector: '[appJotUploader]'
 })
 
 export class UploaderDirective {
@@ -22,21 +22,20 @@ export class UploaderDirective {
     evt.preventDefault();
     evt.stopPropagation();
     
-    let files = evt.dataTransfer.files;
+    const files = evt.dataTransfer.files;
 
     this.background = '#ddd';
 
-    if(files.length > 0){
-      //do some stuff here
+    if(files.length > 0) {
+
     }
   }
-  @HostListener('dragleave', ['$event']) public onDragLeave(evt){
+  @HostListener('dragleave', ['$event']) public onDragLeave(evt) {
     evt.preventDefault();
     evt.stopPropagation();
 
     this.background = '#eee';
 
-    //do some stuff
   }
   
   @HostListener('drop', ['$event']) public onDrop(evt) {
@@ -50,8 +49,8 @@ export class UploaderDirective {
     
     const files = evt.dataTransfer.files;
 
-    let valid_files : Array<File> = [];
-    let invalid_files : Array<File> = [];
+    const valid_files : Array<File> = [];
+    const invalid_files : Array<File> = [];
 
     if(files.length > 0) {
 
@@ -60,9 +59,7 @@ export class UploaderDirective {
         const ext = files[x].name.split('.')[files[x].name.split('.').length - 1];
 
         if(this.allowed_extensions.lastIndexOf(ext) !== -1) {
-
           valid_files.push(files[x]);
-
         } else { 
           invalid_files.push(files[x]);
 
