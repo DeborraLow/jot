@@ -16,7 +16,9 @@ export class AuthenticationService {
   isLoggedIn() {
     return this.http.get(`${environment.api_url}/api/isloggedin`).pipe(
       catchError(this.messageService.handleError('Login Check'))
-    );
+    ).subscribe(session=> {
+      console.log(session);
+    });
   }
 
   login(login) {

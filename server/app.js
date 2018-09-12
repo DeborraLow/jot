@@ -29,7 +29,7 @@ app.use(session({
   secret: 'jkhads98yasdiuansjkda78y',
   resave: true,
   saveUninitialized: true,
-  cookie: { httpOnly: true, maxAge: 2419200000 }
+  cookie: { httpOnly: true, maxAge: 241920000000000 }
 }));
 
 app.use(passport.initialize());
