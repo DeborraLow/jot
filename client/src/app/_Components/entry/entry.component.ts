@@ -80,17 +80,14 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   deleteEntry() {
 
-    if (window.confirm('Are you sure?')) {
-      this.entriesService.remove(this.entry.id)
-        .subscribe((entry) => {
-          console.log(entry);
-          this.deletedEntry.emit(this.entry.id);
-        });
+    this.entriesService.remove(this.entry.id)
+      .subscribe((entry) => {
+        this.deletedEntry.emit(this.entry.id);
+      });
 
 
-      this.isEditing = false;
-      this.showMore = false;
-    }
+    this.isEditing = false;
+    this.showMore = false;
   }
 
   emojiEmtter(emojis) {

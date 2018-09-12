@@ -91,27 +91,31 @@ authRoutes.post('/api/login', (req, res, next) => {
                 res.status(500).json({ message: 'Something went wrong' });
                 return;
             }
-
-            // We are now logged in (notice req.user)
-            res.status(200).json(req.user);
+            req.session.timestamp = new Date();
+            req.session.save(function(){
+                res.status(200).json(req.user);
+            });
+            
         });
     })(req, res, next);
 });
 
 authRoutes.get('/api/logout', (req, res, next) => {
-    req.logout();
-    res.status(200).json({ message: 'Success' });
+    req.session.destroy(function (err) {
+        res.status(200).json({ message: 'Success' });
+    });
 });
 
-authRoutes.get('/api/isloggedin', (req, res, next) => {
-    console.log(req.session)
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated())
+      return next();
+    else
+      res.status(403).json({ message: 'Unauthorized' });
+}
 
-    if (req.isAuthenticated()) {
-        res.status(200).json(true);
-        return;
-    }
-
-    res.status(403).json({ message: req.user });
+authRoutes.get('/api/isloggedin', ensureAuthenticated, (req, res) => {
+    res.status(200).json(true);
+    return;
 });
 
 authRoutes.get('/private', (req, res, next) => {
@@ -119,7 +123,6 @@ authRoutes.get('/private', (req, res, next) => {
         res.json({ message: 'This is a private message' });
         return;
     }
-
     res.status(403).json({ message: 'Unauthorized' });
 });
 
