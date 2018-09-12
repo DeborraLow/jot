@@ -101,8 +101,9 @@ authRoutes.post('/api/login', (req, res, next) => {
 });
 
 authRoutes.get('/api/logout', (req, res, next) => {
-    req.logout();
-    res.status(200).json({ message: 'Success' });
+    req.session.destroy(function (err) {
+        res.status(200).json({ message: 'Success' });
+    });
 });
 
 function ensureAuthenticated(req, res, next) {
@@ -122,7 +123,6 @@ authRoutes.get('/private', (req, res, next) => {
         res.json({ message: 'This is a private message' });
         return;
     }
-
     res.status(403).json({ message: 'Unauthorized' });
 });
 

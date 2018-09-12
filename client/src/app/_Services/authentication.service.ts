@@ -20,8 +20,10 @@ export class AuthenticationService {
       catchError(this.messageService.handleError('Login Check')),
       map(res=> {
         if(res) {
+          this.LoggedIn = true;
              return true; 
         } else {
+            this.LoggedIn = false;
             this.router.navigate(['/']);
             return false;
         }
@@ -56,9 +58,12 @@ export class AuthenticationService {
   }
 
   logout() {
-    return this.http.get(`${environment.api_url}/api/logout`).pipe(
+    return this.http.get(`${environment.api_url}/api/logout`, { withCredentials: true }).pipe(
       catchError(this.messageService.handleError('Logout'))
-    ).subscribe();
+    ).subscribe(d=>{
+      this.LoggedIn = false;
+      this.router.navigate(['/']);
+    });
   }
 
 
