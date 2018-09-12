@@ -27,4 +27,9 @@ export class ExplorerComponent implements OnInit {
     console.log(e);
   }
 
+  deletedEntry(entry) {
+    console.log(entry);
+    this.entries = this.entries.filter((i: any) => i._id !== entry._id);
+  }
+
 }

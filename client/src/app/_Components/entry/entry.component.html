@@ -7,6 +7,7 @@
     <li *ngIf="isEditing">
       <button class="edit-button" (click)="updateEntry()"><i class="fas fa-save"></i></button>
     </li>
+
   </ul>
   <!-- Entry Header -->
 
@@ -25,6 +26,9 @@
 
       <!-- DATE -->
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
+      <div *ngIf="isEditing">
+        <button class="edit-button" (click)="deleteEntry()"><i class="fas fa-trash"></i></button>
+      </div>
 
     </div>
   </form>
@@ -52,8 +56,8 @@
       <span>Share: </span>
       <span class=" radio">
         <label for="private">Private </label>
-        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private" (click)="setPrivacy('private')"
-          ngModel>
+        <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private"
+          (click)="setPrivacy('private')" ngModel>
       </span>
       <span class="radio">
         <label for="public">Public </label>
@@ -65,7 +69,15 @@
 
   <!-- footer for entry -->
   <div class="entry-footer">
-    <div></div>
+    <!-- <div class="extend-entry-button">
+      <button class="extend-entry-button" (click)="publishToggler()">
+        {{ (isPublic) ? 'PRIVATE' : 'PUBLIC' }}
+      </button> </div>
+      <div> -->
+    <div>
+
+    </div>
+
     <div>
       <button class="extend-entry-button" (click)="showMoreToggler()">
         {{ (showMore) ? 'SHOW LESS' : 'SHOW MORE' }}
