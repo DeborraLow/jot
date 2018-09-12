@@ -1,7 +1,8 @@
 import { Entry } from './../../_Models/Entry';
 import { EntriesService } from './../../_Services/entries.service';
-import { Component, OnInit, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, AfterViewInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-entry',
@@ -13,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EntryComponent implements OnInit, AfterViewInit {
   @Input() emojis: any = [];
   @Input() entry: Entry;
+  @Output() deletedEntry: EventEmitter = new EventEmitter();
 
   constructor(
     private entriesService: EntriesService,
@@ -78,11 +80,17 @@ export class EntryComponent implements OnInit, AfterViewInit {
   // }
 
   deleteEntry() {
+
     if (window.confirm('Are you sure?')) {
       this.entriesService.remove(this.entry.id)
-        .subscribe(() => {
-          this.router.navigate(['']);
+        .subscribe((entry) => {
+          console.log(entry);
+          this.deletedEntry.emit(this.entry.id);
         });
+
+
+      this.isEditing = false;
+      this.showMore = false;
     }
   }
 

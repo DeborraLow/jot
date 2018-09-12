@@ -39,7 +39,7 @@ export class AuthenticationService {
     );
   }
 
-  setupAccount( id, setup ) {
+  setupAccount(id, setup) {
     return this.http.post(`${environment.api_url}/api/signup/${id}`, setup).pipe(
       catchError(this.messageService.handleError('Forgot Account'))
     );
