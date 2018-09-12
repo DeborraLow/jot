@@ -22,9 +22,9 @@ export class ProfileComponent implements OnInit {
   }
 
   deletedEntry(entry) {
-    this.entries = this.entries.filter((i: any) => i._id !== entry._id);
+    this.entries = this.entries.filter((i: any) => i.id !== entry);
   }
-  
+
   initNewEntry(e) {
     this.entries = [e, ...this.entries];
     console.log(e);

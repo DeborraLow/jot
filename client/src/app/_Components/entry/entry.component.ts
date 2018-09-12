@@ -1,8 +1,7 @@
 import { Entry } from './../../_Models/Entry';
 import { EntriesService } from './../../_Services/entries.service';
-import { Component, OnInit, Input, ElementRef, AfterViewInit, Output } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-entry',
@@ -14,7 +13,7 @@ import { EventEmitter } from 'events';
 export class EntryComponent implements OnInit, AfterViewInit {
   @Input() emojis: any = [];
   @Input() entry: Entry;
-  @Output() deletedEntry: EventEmitter = new EventEmitter();
+  @Output() deletedEntry: EventEmitter<string> = new EventEmitter();
 
   constructor(
     private entriesService: EntriesService,
