@@ -27,6 +27,13 @@ export class EntriesService {
 
   }
 
+  getPublicEntries() {
+    return this.http.get(`${environment.api_url}/api/public`,
+      { withCredentials: true }
+    );
+
+  }
+
   post(form) {
     return this.http.post(`${environment.api_url}/api/entries`,
       form,
