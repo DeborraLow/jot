@@ -30,7 +30,7 @@ export class AddEntryComponent implements OnInit {
   submit() {
 
     this.entriesService.post({}).subscribe((entry) => {
-      this.newEntry.emit(entry);
+      this.newEntry.emit({...entry, emojis:[], isPublic:false});
     });
 
     this.successMessage = 'New Entry Created.';

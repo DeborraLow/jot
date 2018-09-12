@@ -3,7 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { MessageService } from '../_Services/message.service';
-
+import { Observable } from 'rxjs';
+import { map  } from 'rxjs/operators';
+import { Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,14 +13,20 @@ export class AuthenticationService {
 
   LoggedIn = false;
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(private http: HttpClient, private messageService: MessageService, private router: Router) { }
 
-  isLoggedIn() {
-    return this.http.get(`${environment.api_url}/api/isloggedin`).pipe(
-      catchError(this.messageService.handleError('Login Check'))
-    ).subscribe(session=> {
-      console.log(session);
-    });
+  isLoggedIn():Observable<boolean> {
+    return this.http.get(`${environment.api_url}/api/isloggedin`, { withCredentials: true }).pipe(
+      catchError(this.messageService.handleError('Login Check')),
+      map(res=> {
+        if(res) {
+             return true; 
+        } else {
+            this.router.navigate(['/']);
+            return false;
+        }
+      })
+    );
   }
 
   login(login) {
