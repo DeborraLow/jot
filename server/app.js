@@ -11,10 +11,6 @@ const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const MongoStore  = require('connect-mongo')(session);
-const LocalStrategy = require('passport-local').Strategy;
-
-const User = require('./models/user');
-const bcrypt = require('bcrypt');
 
 const cors = require('cors');
 
@@ -23,7 +19,7 @@ const app = express();
 app.use(cors(
   {
     credentials: true,
-    origin: ["http://127.0.0.1:4200"]
+    origin: ["http://127.0.0.1:4200","http://127.0.0.1:3000","http://localhost:4200"]
   }
 ));
 
@@ -35,42 +31,17 @@ mongoose.connect('mongodb://localhost/jot', { useMongoClient: true }).then(() =>
     console.error('Error connecting to mongo', err)
   });
 
-  passport.use(new LocalStrategy((username, password, next) => {
-    User.findOne({ username }, (err, foundUser) => {
-        if (err) {
-            next(err);
-            return;
-        }
-  
-        if (!foundUser) {
-            next(null, false, { message: 'Incorrect username' });
-            return;
-        }
-  
-        if (!bcrypt.compareSync(password, foundUser.password)) {
-            next(null, false, { message: 'Incorrect password' });
-            return;
-        }
-  
-        next(null, foundUser);
-    });
-  }));
-  
-  passport.serializeUser((loggedInUser, cb) => {
-    cb(null, loggedInUser._id);
-  });
-  
-  passport.deserializeUser((userIdFromSession, cb) => {
-    User.findById(userIdFromSession, (err, userDocument) => {
-        if (err) {
-            cb(err);
-            return;
-        }
-  
-        cb(null, userDocument);
-    });
-  });
+  const passportSetup = require('./config/passport');
+  passportSetup(passport);
 
+const app_name = require('./package.json').name;
+const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
+
+// Middleware Setup
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.use(session({
   secret: 'jkhads98yasdiuansjkda78y',
@@ -85,17 +56,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
-const app_name = require('./package.json').name;
-const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
-
-// Middleware Setup
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 // Express View engine setup
 
