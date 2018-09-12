@@ -104,13 +104,14 @@ authRoutes.get('/api/logout', (req, res, next) => {
 });
 
 authRoutes.get('/api/isloggedin', (req, res, next) => {
-    console.log(req)
+    console.log(req.session)
+
     if (req.isAuthenticated()) {
         res.status(200).json(true);
         return;
     }
 
-    res.status(403).json({ message: 'Unauthorized' });
+    res.status(403).json({ message: req.user });
 });
 
 authRoutes.get('/private', (req, res, next) => {
