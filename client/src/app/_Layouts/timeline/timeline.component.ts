@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { EntriesService } from '../../_Services/entries.service';
+import { Entry } from '../../_Models/Entry';
 
 @Component({
   selector: 'app-timeline',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimelineComponent implements OnInit {
 
-  constructor() { }
+  entries: Entry[];
+
+
+  constructor(private entryService: EntriesService) { }
 
   ngOnInit() {
+    this.entryService.getEntries().subscribe((entries: any) => {
+      this.entries = entries;
+    });
+  }
+
+  initNewEntry(e) {
+    this.entries = [e, ...this.entries];
+    console.log(e);
   }
 
 }

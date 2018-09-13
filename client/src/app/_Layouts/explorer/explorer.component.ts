@@ -16,7 +16,7 @@ export class ExplorerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.entryService.getEntries().subscribe((entries: any) => {
+    this.entryService.getPublicEntries().subscribe((entries: any) => {
       this.entries = entries;
     });
 
@@ -27,9 +27,10 @@ export class ExplorerComponent implements OnInit {
     console.log(e);
   }
 
+  // DELETE THIS AFTER TESTING -- DON'T WANT ON PUBLIC PAGE.
   deletedEntry(entry) {
-    console.log(entry);
-    this.entries = this.entries.filter((i: any) => i.id !== entry );
+    this.entries = this.entries.filter((i: any) => i.id !== entry);
+
   }
 
 }

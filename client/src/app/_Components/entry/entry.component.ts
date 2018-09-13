@@ -36,6 +36,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
   isEditing: boolean;
   showMore: boolean;
   entryHeight: number;
+  youSure: boolean;
 
   ngAfterViewInit() {
     const entryHeight = this.el.nativeElement.firstChild.childNodes[3].getElementsByTagName('div').item(0);
@@ -46,6 +47,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.emojis = this.entry.emojis;
     this.isEditing = false;
     this.showMore = false;
+    this.youSure = false;
   }
 
   setPrivacy(privacy: string) {
@@ -61,6 +63,11 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   editEntry() {
     this.isEditing = true;
+    this.youSure = false;
+  }
+
+  areYouSure() {
+    (this.youSure) ? this.youSure = false : this.youSure = true;
   }
 
   updateEntry() {
@@ -72,11 +79,6 @@ export class EntryComponent implements OnInit, AfterViewInit {
   showMoreToggler() {
     (this.showMore) ? this.showMore = false : this.showMore = true;
   }
-
-  // publishToggler() {
-  //   (this.entry.isPublic) ? this.entry.isPublic = false : this.entry.isPublic = true;
-
-  // }
 
   deleteEntry() {
 
@@ -92,6 +94,11 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   emojiEmtter(emojis) {
     this.entry.emojis = emojis;
+  }
+
+  likeEntry() {
+    console.log('I like it');
+    this.entriesService.entryLikes(this.entry.id).subscribe();
   }
 
 

@@ -22,6 +22,44 @@ textarea {
     background: #b9b9b9;
     text-align: right;
 }
+
+/* DELETE */
+.action-delete {
+    position: absolute;
+    top: 200px;
+    right: 5px;
+    padding: 0;
+    margin: 0;
+    width: 2em;
+    height: 2em;
+    border-radius: 100%;
+    background: #b9b9b9;
+    z-index: 1;
+    text-align: center;
+}
+
+.do-not-delete {
+    position: absolute;
+    top: 200px;
+    right: 55px;
+    padding: 0;
+    margin: 0;
+    width: 2em;
+    height: 2em;
+    border-radius: 100%;
+    background: #b9b9b9;
+    z-index: 1;
+    text-align: center;
+}
+
+.are-you-sure {
+    float: right;
+    color: gray;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1em;
+}
+
 .entry-container .actions li{
     display: inline-block;
 }
@@ -174,4 +212,5 @@ likes {
 img {
     height: 25px;
 }
+
 

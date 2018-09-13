@@ -26,8 +26,27 @@
 
       <!-- DATE -->
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
+
+      <!-- DELETE BUTTON -->
       <div *ngIf="isEditing">
-        <button class="edit-button" (click)="deleteEntry()"><i class="fas fa-trash"></i></button>
+
+        <div *ngIf="!youSure" class="action-delete">
+          <button class="edit-button" (click)="areYouSure()"><i class="fas fa-trash"></i></button>
+        </div>
+
+        <div *ngIf="youSure">
+          <div class="are-you-sure">
+            <p>Are you sure you want to delete this?</p>
+          </div>
+          <div class="do-not-delete">
+            <button class="edit-button" (click)="areYouSure()"><i class="fas fa-undo" style="color:lightseagreen"></i></button>
+          </div>
+
+          <div class="action-delete">
+            <button class="edit-button" (click)="deleteEntry()"><i class="fas fa-trash" style="color:red"></i></button>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -44,7 +63,7 @@
     <div *ngIf="isEditing">
       <textarea [froalaEditor]='EditorOptions' [(froalaModel)]="entry.entry_text"></textarea>
     </div>
-    <div *ngIf="!isEditing" id="entry-content">
+    <div *ngIf="!isEditing" class="fr-view" id="entry-content">
       <div [outerHTML]="entry.entry_text"></div>
     </div>
   </div>
@@ -57,7 +76,7 @@
       <span class=" radio">
         <label for="private">Private </label>
         <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private"
-          (click)="setPrivacy('private')" ngModel>
+          (click)="setPrivacy('private')" checked ngModel>
       </span>
       <span class="radio">
         <label for="public">Public </label>
@@ -66,6 +85,8 @@
       </span>
     </form>
   </div>
+
+
 
   <!-- footer for entry -->
   <div class="entry-footer">
@@ -84,7 +105,7 @@
       </button>
     </div>
     <div class="likes">
-      <i class="fas fa-heart"></i>
+      <button (click)="likeEntry()"><i class="fas fa-heart"></i></button>
       <span>1</span>
     </div>
   </div>

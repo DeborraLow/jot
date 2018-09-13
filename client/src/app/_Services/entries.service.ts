@@ -27,6 +27,13 @@ export class EntriesService {
 
   }
 
+  getPublicEntries() {
+    return this.http.get(`${environment.api_url}/api/public`,
+      { withCredentials: true }
+    );
+
+  }
+
   post(form) {
     return this.http.post(`${environment.api_url}/api/entries`,
       form,
@@ -45,4 +52,13 @@ export class EntriesService {
   remove(id) {
     return this.http.delete(`${environment.api_url}/api/entries/${id}`);
   }
+
+
+  entryLikes(id) {
+    return this.http.put(`${environment.api_url}/api/likes/${id}`,
+      { withCredentials: true });
+
+  }
+
+
 }
