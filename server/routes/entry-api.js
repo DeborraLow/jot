@@ -193,6 +193,9 @@ router.put('/likes/:id',
             res.status(400).json({ message: 'Specified id is not valid' });
             return;
         }
+        const entryUser = req.session.passport.user;
+
+        console.log("USER for Likes", entryUser)
 
         const updates = {
             likes
