@@ -55,9 +55,8 @@ export class EntriesService {
 
 
   entryLikes(id) {
-    return this.http.put(`${environment.api_url}/api/likes/${id}`,
+    return this.http.put(`${environment.api_url}/api/likes/${id}`,{},
       { withCredentials: true });
-
   }
 
 
