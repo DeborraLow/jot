@@ -63,7 +63,7 @@
     <div *ngIf="isEditing">
       <textarea [froalaEditor]='EditorOptions' [(froalaModel)]="entry.entry_text"></textarea>
     </div>
-    <div *ngIf="!isEditing" id="entry-content">
+    <div *ngIf="!isEditing" class="fr-view" id="entry-content">
       <div [outerHTML]="entry.entry_text"></div>
     </div>
   </div>
@@ -76,7 +76,7 @@
       <span class=" radio">
         <label for="private">Private </label>
         <input type="radio" class="publish-radio" name="publish-type" [ngModel]="!entry.isPublic" value="private"
-          (click)="setPrivacy('private')" ngModel>
+          (click)="setPrivacy('private')" checked ngModel>
       </span>
       <span class="radio">
         <label for="public">Public </label>
@@ -85,6 +85,8 @@
       </span>
     </form>
   </div>
+
+
 
   <!-- footer for entry -->
   <div class="entry-footer">
@@ -103,7 +105,7 @@
       </button>
     </div>
     <div class="likes">
-      <i class="fas fa-heart"></i>
+      <button (click)="likeEntry()"><i class="fas fa-heart"></i></button>
       <span>1</span>
     </div>
   </div>

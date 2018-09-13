@@ -185,4 +185,32 @@ router.delete('/entries/:id', (req, res, next) => {
 });
 
 
+/* EDIT the LIKES in an Entry. */
+
+router.put('/likes/:id',
+    (req, res, next) => {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            res.status(400).json({ message: 'Specified id is not valid' });
+            return;
+        }
+
+        const updates = {
+            likes
+        } = req.body;
+        updates.likes = req.session.passport.user
+
+        console.log(updates)
+        console.log(update.likes)
+
+
+        Entry.findByIdAndUpdate(req.params.id, updates)
+            .then(entry => {
+                res.json({
+                    message: 'Entry has been updated successfully'
+                });
+            })
+            .catch(error => next(error))
+    })
+
+
 module.exports = router;

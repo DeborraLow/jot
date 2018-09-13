@@ -52,4 +52,13 @@ export class EntriesService {
   remove(id) {
     return this.http.delete(`${environment.api_url}/api/entries/${id}`);
   }
+
+
+  entryLikes(id) {
+    return this.http.put(`${environment.api_url}/api/likes/${id}`,
+      { withCredentials: true });
+
+  }
+
+
 }

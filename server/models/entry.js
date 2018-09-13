@@ -17,7 +17,7 @@ const entrySchema = new Schema(
         emojis: [{
             type: Schema.Types.ObjectId,
             ref: 'Emoji'
-        }], //Check if max number of array items can be done in mongoose schema
+        }],
         user: {
             type: Schema.Types.ObjectId,
             ref: "User"
@@ -25,9 +25,13 @@ const entrySchema = new Schema(
         engagement: { type: Schema.Types.ObjectId, ref: 'Engagement' },
         status: {
             type: String,
-            enum: ["draft","published"],
+            enum: ["draft", "published"],
             default: "draft"
-        }
+        },
+        likes: [{
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }]
     },
     {
         timestamps: {
