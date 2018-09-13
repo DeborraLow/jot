@@ -92,7 +92,9 @@ authRoutes.post('/api/login', (req, res, next) => {
                 return;
             }
             req.session.timestamp = new Date();
+
             req.session.save(function(){
+                req.session.user = theUser._id;
                 res.status(200).json(req.user);
             });
             
