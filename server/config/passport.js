@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 module.exports = function (passport) {
 
-    passport.use(new LocalStrategy((username, password, next) => {
+    passport.use(new LocalStrategy(function(username, password, next){
         User.findOne({ username }, (err, foundUser) => {
             if (err) {
                 next(err);
@@ -25,18 +25,17 @@ module.exports = function (passport) {
         });
     }));
 
-    passport.serializeUser((loggedInUser, cb) => {
+    passport.serializeUser(function(loggedInUser, cb){
         cb(null, loggedInUser._id);
     });
 
-    passport.deserializeUser((userIdFromSession, cb) => {
-        User.findById(userIdFromSession, (err, userDocument) => {
+    passport.deserializeUser(function(userIdFromSession, cb){
+        User.findById(userIdFromSession, function(err, userDocument){
             if (err) {
                 cb(err);
                 return;
             }
-
-            cb(null, userDocument);
+            cb(err, userDocument);
         });
     });
 

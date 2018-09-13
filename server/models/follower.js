@@ -11,7 +11,7 @@ const followerSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "User"
         },
-        status: String,
+        status: {enum :["pending","following","blocked"], type:String, default:"pending" },
         actionUser: {
             type: Schema.Types.ObjectId,
             ref: "User"

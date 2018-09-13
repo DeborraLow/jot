@@ -42,3 +42,12 @@ header ul li{
     background: #242424;
     color:#ffffff;
 }
+.align-left{
+    text-align: left;
+}
+.align-right{
+    text-align: right;
+}
+.align-center{
+    text-align: center;
+}

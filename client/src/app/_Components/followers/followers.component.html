@@ -1,12 +1,44 @@
+<div class="follower-container">
+  <div class="jot-g">
+    <div class="u-1">
+        <div class="joy-g">
+          <input autocomplete="off" type="text" (keyup)="searchFollowers($event)" #search name="search">
+        </div>
+    </div>
+</div>
 <div class="jot-g follower-wrapper">
-  <div class="u-1 follower">
+  <div class="u-1 follower" *ngFor="let user of searchResults">
       <div class="joy-g">
-        <div class="u-1-4">
-          <img class="avatar" src="">
+        <div class="u-1-6">
+          <!-- <img class="avatar" src="http://127.0.0.1:3000{{user.avatar}}"> -->
         </div>
-        <div class="u-3-4">
-            <strong class="name">John Smith</strong>
+        <div class="u-5-8 align-left">
+            <strong class="name">{{user.first_name}} {{user.last_name}}</strong>
         </div>
+        <div class="u-1-6">
+            <button (click)="addFollower(user.username)"><i class="fas fa-plus"></i></button>
+          </div>
       </div>
   </div>
+</div>
+
+<div class="jot-g ">
+  <div class="u-1 follower" *ngFor="let user of followers">
+      <div class="joy-g">
+        <div class="u-1-8">
+            <span class="status {{user.status}}"></span>
+        </div>
+        <div class="u-1-8">
+          <!-- <img class="avatar" src="http://127.0.0.1:3000{{user.avatar}}"> -->
+        </div>
+        <div class="u-5-8 align-left">
+            <strong class="name">{{user.first_name}} {{user.last_name}}</strong>
+        </div>
+        <div class="u-1-8">
+            <button (click)="removeFollower(user.username)" *ngIf="user.status == 'pending' || user.status == 'following' "><i class="fas fa-minus"></i></button>
+            <button (click)="followBack(user.username)" *ngIf="user.status == 'followback'"><i class="fas fa-check"></i></button>
+          </div>
+      </div>
+  </div>
+</div>
 </div>

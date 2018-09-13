@@ -31,8 +31,8 @@ mongoose.connect('mongodb://localhost/jot', { useMongoClient: true }).then(() =>
     console.error('Error connecting to mongo', err)
   });
 
-  const passportSetup = require('./config/passport');
-  passportSetup(passport);
+const passportSetup = require('./config/passport');
+passportSetup(passport);
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
@@ -40,12 +40,12 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser('jkhads98yasdiuansjkda78y'));
 
 app.use(session({
   secret: 'jkhads98yasdiuansjkda78y',
-  resave: true,
+  resave: false,
   saveUninitialized: true,
   cookie: { httpOnly: true, maxAge: 241920000000000 },
   store: new MongoStore({
