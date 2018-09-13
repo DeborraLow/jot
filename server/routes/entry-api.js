@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const Entry = require('../models/entry');
 const DateOptions = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-
+const Engagement = require('../models/engagement')
 
 /* GET Entry listing. */
 router.get('/entries', (req, res, next) => {
@@ -101,26 +101,50 @@ router.get('/public', (req, res, next) => {
 router.post('/entries', (req, res, next) => {
     const created_at = new Date().toLocaleDateString("en-US", DateOptions)
     // const user = req.user._id;
+    var EntryID = mongoose.Types.ObjectId();
 
-    const theEntry = new Entry({
-        title: `Draft - ${created_at}`,
-        user: req.session.passport.user
-    });
+    const entryEngagement = new Engagement({
+        entryId: EntryID,
+        like:{
+            total:0,
+            user:[]
+        },
+        share:{
+            total:0,
+            user:[]
+        }
+    })
 
-    theEntry.save()
-        .then(e => {
-            console.log(e)
-            console.log("USER HERE:", req.session.passport.user)
+    entryEngagement.save((err)=>{
+        if (err) {
+            res.status(400).json({ message: 'Something went wronh!' });
+            return;
+        }
+    }).then(engagement=>{
+
+        const theEntry = new Entry({
+            _id:EntryID,
+            title: `Draft - ${created_at}`,
+            user: req.session.passport.user,
+            engagement:engagement._id
+        });
+
+        theEntry.save().then(e => {
+
             const entries = {
                 id: e._id,
                 title: e.title,
                 created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
                 status: e.status,
+                engagement:e.engagement
             }
 
             res.json(entries);
-        })
-        .catch(error => next(error))
+
+        }).catch(error => next(error))
+
+    }).catch(error => next(error))
+
 });
 
 /* GET a single Entry. */
@@ -187,30 +211,48 @@ router.delete('/entries/:id', (req, res, next) => {
 
 /* EDIT the LIKES in an Entry. */
 
-router.put('/likes/:id',
-    (req, res, next) => {
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-            res.status(400).json({ message: 'Specified id is not valid' });
+router.put('/likes/:id',   (req, res, next) => {
+
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        res.status(400).json({ message: 'Specified id is not valid' });
+        return;
+    }
+
+    Engagement.findOne({entryId:req.params.id},(err, engagement)=>{
+       
+        if (err) {
+            res.status(400).json({ message: 'Something went wronh!' });
             return;
         }
 
-        const updates = {
-            likes
-        } = req.body;
-        updates.likes = req.session.passport.user
+        const check = engagement.like.user.find(i=> String(i) === String(req.user._id));
 
-        console.log(updates)
-        console.log(update.likes)
-
-
-        Entry.findByIdAndUpdate(req.params.id, updates)
-            .then(entry => {
-                res.json({
-                    message: 'Entry has been updated successfully'
-                });
+        if(check){
+            const newTotal = engagement.like.total-1;
+            Engagement.update({entryId:req.params.id},{ $set:{'like.total': newTotal}, $pull:{'like.user':req.user._id } },(err,data)=>{
+                if (err) {
+            
+                    res.status(400).json({ message: 'Something went wronh!' });
+                    return;
+                }
+                res.status(200).json({ message: 'Success!' });
             })
-            .catch(error => next(error))
+        }else{
+            const newTotal = engagement.like.total+1;
+            Engagement.update({entryId:req.params.id},{ $set:{'like.total': newTotal}, $push:{'like.user':req.user._id } }, (err,data)=>{
+                if (err) {
+                    console.log(err)
+                    res.status(400).json({ message: 'Something went wronh!' });
+                    return;
+                }
+
+                res.status(400).json({ message: 'Success' });
+            })
+        }
+        
     })
+
+})
 
 
 module.exports = router;
