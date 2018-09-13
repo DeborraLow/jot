@@ -26,8 +26,27 @@
 
       <!-- DATE -->
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
+
+      <!-- DELETE BUTTON -->
       <div *ngIf="isEditing">
-        <button class="edit-button" (click)="deleteEntry()"><i class="fas fa-trash"></i></button>
+
+        <div *ngIf="!youSure" class="action-delete">
+          <button class="edit-button" (click)="areYouSure()"><i class="fas fa-trash"></i></button>
+        </div>
+
+        <div *ngIf="youSure">
+          <div class="are-you-sure">
+            <p>Are you sure you want to delete this?</p>
+          </div>
+          <div class="do-not-delete">
+            <button class="edit-button" (click)="areYouSure()"><i class="fas fa-undo" style="color:lightseagreen"></i></button>
+          </div>
+
+          <div class="action-delete">
+            <button class="edit-button" (click)="deleteEntry()"><i class="fas fa-trash" style="color:red"></i></button>
+          </div>
+        </div>
+
       </div>
 
     </div>
