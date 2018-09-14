@@ -52,6 +52,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.isEditing = false;
     this.showMore = false;
     this.youSure = false;
+    this.likeClicked = false;
     this.checkHeart();
 
   }
@@ -106,17 +107,22 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.entriesService.entryLikes(this.entry.id).subscribe();
     this.checkHeart();
 
-    console.log(this.entry.engagement.like);
+    // console.log(this.entry.engagement.like);
 
   }
 
   checkHeart() {
     this.user.myID().subscribe(id => {
       console.log('ID', id);
+      console.log(this.entry.engagement.like.user);
       const check = this.entry.engagement.like.user.find(i => i === id);
       if (check) {
+        console.log('Match found:', this.likeClicked);
+
         this.likeClicked = false;
+
       } else {
+        console.log('No match found:', this.likeClicked);
         this.likeClicked = true;
       }
     });
