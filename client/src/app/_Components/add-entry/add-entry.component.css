@@ -4,34 +4,38 @@
     /* border: 1px solid black; */
 }
 i {
-    padding: 1em;
-    /* background: #584E62; */
     color: whitesmoke;
-    height: 100%;
     font-size: 25px;
-    
+    background: #584E62;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    bottom: 0;
+    padding: 11px 14px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
-
 
 
 button {
     background: #50455A;
-    width: 10em;
-    border:0;
+    border: 0;
     text-align: left;
     cursor: pointer;
-    outline:0;
-    font-size: 2em;
+    outline: 0;
     color: whitesmoke;
-    border-radius: 10px;
-    padding: 5px;
-    /* text-align: center; */
-    margin: 20px 0;
-
+    border-radius: 5px;
+    padding: 7px 0 5px;
+    margin: 16px 0;
+    position: relative;
+    padding-left: 67px;
+    font-weight: 100;
+    width: 100%;
+    font-size: 25px;
 }
 button:hover{
     transition: 1000ms;
-    background: rgb(105, 83, 126);
+    background: rgb(46, 39, 52);
     /* border: 1px solid rgb(182, 51, 39); */
 } 
 
