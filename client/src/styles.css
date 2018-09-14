@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 body,html{
     background: #FDF7F7;
+
+    background: 
+    /* top, transparent red, faked with gradient */ 
+    linear-gradient(
+      rgba(250, 247, 247, 0.725), 
+      rgba(226, 219, 219, 0.725)
+    ),
+    /* bottom, image */
+    url('./assets/images/seamless_denim_fabric_texture.jpg');
 }

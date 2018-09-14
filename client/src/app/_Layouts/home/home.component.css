@@ -1,4 +1,9 @@
-
+/deep/ body, /deep/ html{
+    height: 100%;
+}
+.bg{
+    height: 100%;
+}
 .logo{
     margin: .5em;
 }

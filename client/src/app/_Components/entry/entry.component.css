@@ -9,6 +9,7 @@ textarea {
     margin: 1em 1em 4em;
     box-shadow: -1px 1px 20px 0px rgba(0, 0, 0, 0.20);
     border-radius: 10px;
+    background: #fff;
 }
 .entry-container .actions {
     position: absolute;
