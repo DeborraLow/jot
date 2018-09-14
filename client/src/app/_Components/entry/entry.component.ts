@@ -52,6 +52,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.isEditing = false;
     this.showMore = false;
     this.youSure = false;
+    this.checkHeart();
 
   }
 
@@ -103,7 +104,13 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   likeEntry() {
     this.entriesService.entryLikes(this.entry.id).subscribe();
+    this.checkHeart();
 
+    console.log(this.entry.engagement.like);
+
+  }
+
+  checkHeart() {
     this.user.myID().subscribe(id => {
       console.log('ID', id);
       const check = this.entry.engagement.like.user.find(i => i === id);
@@ -113,10 +120,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
         this.likeClicked = true;
       }
     });
-    console.log(this.entry.engagement.like);
-
   }
-
 
 
 }
