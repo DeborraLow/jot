@@ -1,6 +1,6 @@
 <div class="entry-container">
 
-  <ul class="actions">
+  <ul class="actions" *ngIf="entry.mine">
     <li *ngIf="!isEditing">
       <button class="edit-button" (click)="editEntry()"><i class="fas fa-pencil-alt"></i></button>
     </li>
@@ -13,31 +13,28 @@
 
   <!-- Edit form -->
   <form #entryForm="ngForm">
-    <div class="entry-header">
+    <div class="entry-header" [ngStyle]="{'background-image':  true ? 'url('+entry.image+')': '' }">
 
       <!-- Show title and summary -->
       <div class="title" *ngIf="!isEditing">{{entry.title}}</div>
 
       <!-- HIDDEN - Edit title and summary -->
-      <div class="edit-input" *ngIf="isEditing">
-        <label class="edit-label">Title: </label>
-        <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title">
+      <div class="edit-input" *ngIf="isEditing && entry.mine">
+        <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title" placeholder="Title">
+        <app-file-uploader (UploadPath)="uploadPath($event)" [Path]="true"></app-file-uploader>
       </div>
 
       <!-- DATE -->
       <p class="entry-date">{{ (entry.status=="draft") ? entry.created_at : entry.publish_date }}</p>
 
       <!-- DELETE BUTTON -->
-      <div *ngIf="isEditing">
+      <div *ngIf="isEditing && entry.mine">
 
         <div *ngIf="!youSure" class="action-delete">
           <button class="edit-button" (click)="areYouSure()"><i class="fas fa-trash"></i></button>
         </div>
 
         <div *ngIf="youSure">
-          <div class="are-you-sure">
-            <p>Are you sure you want to delete this?</p>
-          </div>
           <div class="do-not-delete">
             <button class="edit-button" (click)="areYouSure()"><i class="fas fa-undo" style="color:lightseagreen"></i></button>
           </div>
@@ -70,7 +67,7 @@
 
   <!-- HIDDEN - Publish detail -->
 
-  <div class="publisher" *ngIf="isEditing">
+  <div class="publisher" *ngIf="isEditing && entry.mine">
     <form [ngSwitch]="published" #publishForm="ngForm">
       <span>Share: </span>
       <span class=" radio">

@@ -19,8 +19,25 @@ input{
     background: #fffafa;
     border: 1px solid #e0e0e0;
     border-radius: .2em;
+    z-index: 9;
 }
-
+.clearSearch{
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    border-radius: 100%;
+    border: 0;
+    background: transparent;
+    outline: 0;
+}
+.follower .avatar {
+    border-radius: 100%;
+    width: 23px;
+    height: 23px;
+    position: relative;
+    top: 2px;
+    left: -4px;
+}
 .follower button{
     border:0;
     background: transparent;
@@ -52,4 +69,61 @@ input{
 
 .follower .status.followback {
     background: #2a5485;
+}
+
+.list .u-1.follower .name {
+    position: relative;
+    top: 14px;
+    left: 25px;
+    font-weight: bolder;
+}
+.list .follower{
+    border-bottom: 1px solid;
+    padding: 2px;
+    box-sizing: border-box;
+    text-align: center;
+    border: 0;
+}
+.list .status {
+    position: relative;
+    top: 15px;
+    left: -9px;
+}
+
+.list .follower button {
+    position: relative;
+    top: 15px;
+}
+
+.list .follower .avatar {
+    border-radius: 100%;
+    width: 3em;
+    height: 3em;
+    position: relative;
+    top: 2px;
+    left: -4px;
+}
+
+.jot-g.follower-wrapper + div {
+    overflow-y: scroll;
+    height: 350px;
+    position: relative;
+    top: 20px;
+    border-radius: 3px;
+}
+
+.jot-g.follower-wrapper + div:after {
+    content: '';
+    position: absolute;
+    left: 28px;
+    right: 20px;
+    bottom: -20px;
+    background: #000;
+    box-shadow: 0px 19px 90px 20px;
+}
+
+h3{
+    font-size: 2em;
+    margin: 0;
+    font-weight: bolder;
 }

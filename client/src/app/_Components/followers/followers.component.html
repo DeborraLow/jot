@@ -1,8 +1,14 @@
 <div class="follower-container">
+    <div class="jot-g">
+        <h3>Followers</h3>
+    </div>
+</div>
+<div class="follower-container">
   <div class="jot-g">
     <div class="u-1">
         <div class="joy-g">
-          <input autocomplete="off" type="text" (keyup)="searchFollowers($event)" #search name="search">
+          <input autocomplete="off" type="text" (keyup)="searchFollowers($event)" [(ngModel)]="search" name="search" placeholder="Search for followers">
+          <button (click)="clearSearch()" class="clearSearch" *ngIf="toggleClear" ><i class="fa fa-times"></i></button>
         </div>
     </div>
 </div>
@@ -10,7 +16,7 @@
   <div class="u-1 follower" *ngFor="let user of searchResults">
       <div class="joy-g">
         <div class="u-1-6">
-          <!-- <img class="avatar" src="http://127.0.0.1:3000{{user.avatar}}"> -->
+          <img class="avatar" src="http://127.0.0.1:3000{{user.avatar}}">
         </div>
         <div class="u-5-8 align-left">
             <strong class="name">{{user.first_name}} {{user.last_name}}</strong>
@@ -22,14 +28,14 @@
   </div>
 </div>
 
-<div class="jot-g ">
+<div class="jot-g list">
   <div class="u-1 follower" *ngFor="let user of followers">
       <div class="joy-g">
         <div class="u-1-8">
             <span class="status {{user.status}}"></span>
         </div>
         <div class="u-1-8">
-          <!-- <img class="avatar" src="http://127.0.0.1:3000{{user.avatar}}"> -->
+          <img class="avatar" src="http://127.0.0.1:3000{{user.avatar}}">
         </div>
         <div class="u-5-8 align-left">
             <strong class="name">{{user.first_name}} {{user.last_name}}</strong>

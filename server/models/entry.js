@@ -9,6 +9,7 @@ const entrySchema = new Schema(
         summary: String,
         entry_text: String,
         publish_date: Date,
+        image:{type:String, default:"/assets/images/default.jpg"},
         isPublic: { type: Boolean, default: false },
         permitted_followers: [{
             type: Schema.Types.ObjectId,

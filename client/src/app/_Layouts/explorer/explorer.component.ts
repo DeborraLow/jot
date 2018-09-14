@@ -16,15 +16,13 @@ export class ExplorerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.entryService.getPublicEntries().subscribe((entries: any) => {
+    this.entryService.getEntries('explorer').subscribe((entries: any) => {
       this.entries = entries;
     });
-
   }
 
   initNewEntry(e) {
     this.entries = [e, ...this.entries];
-    console.log(e);
   }
 
   // DELETE THIS AFTER TESTING -- DON'T WANT ON PUBLIC PAGE.

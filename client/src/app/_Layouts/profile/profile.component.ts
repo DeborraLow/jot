@@ -11,12 +11,10 @@ export class ProfileComponent implements OnInit {
 
   entries: Entry[];
 
-  constructor(private entryService: EntriesService) {
-
-  }
+  constructor(private entryService: EntriesService) {}
 
   ngOnInit() {
-    this.entryService.getMyEntries().subscribe((entries: any) => {
+    this.entryService.getEntries('profile').subscribe((entries: any) => {
       this.entries = entries;
     });
   }

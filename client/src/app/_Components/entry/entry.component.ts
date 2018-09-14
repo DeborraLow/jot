@@ -56,7 +56,9 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.checkHeart();
 
   }
-
+  uploadPath(path) {
+      this.entry.image = path;
+  }
   setPrivacy(privacy: string) {
     switch (privacy) {
       case 'private':
@@ -65,7 +67,6 @@ export class EntryComponent implements OnInit, AfterViewInit {
       default:
         this.entry.isPublic = true;
     }
-    console.log(this.entry);
   }
 
   editEntry() {
@@ -88,13 +89,10 @@ export class EntryComponent implements OnInit, AfterViewInit {
   }
 
   deleteEntry() {
-
     this.entriesService.remove(this.entry.id)
       .subscribe((entry) => {
         this.deletedEntry.emit(this.entry.id);
       });
-
-
     this.isEditing = false;
     this.showMore = false;
   }
@@ -112,7 +110,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
   }
 
   checkHeart() {
-    this.user.myID().subscribe(id => {
+    this.user.getMyID().subscribe(id => {
       console.log('ID', id);
       console.log(this.entry.engagement.like.user);
       const check = this.entry.engagement.like.user.find(i => i === id);

@@ -15,7 +15,7 @@ export class TimelineComponent implements OnInit {
   constructor(private entryService: EntriesService) { }
 
   ngOnInit() {
-    this.entryService.getEntries().subscribe((entries: any) => {
+    this.entryService.getEntries('timeline').subscribe((entries: any) => {
       this.entries = entries;
     });
   }

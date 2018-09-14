@@ -11,7 +11,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  myID() {
+  getMyID() {
     return this.http.get(`${environment.api_url}/api/user/me`,
     { withCredentials: true });
   }

@@ -14,6 +14,7 @@ textarea {
     position: absolute;
     top: -5px;
     right: -5px;
+    z-index: 9;
     padding: 0;
     margin: 0;
     width: 2em;
@@ -27,29 +28,41 @@ textarea {
 .action-delete {
     position: absolute;
     top: 200px;
-    right: 5px;
+    right: -13px;
     padding: 0;
     margin: 0;
-    width: 2em;
-    height: 2em;
+    width: 1.4em;
+    height: 1.4em;
     border-radius: 100%;
-    background: #b9b9b9;
+    background: #ffd0d0;
     z-index: 1;
     text-align: center;
 }
 
 .do-not-delete {
     position: absolute;
-    top: 200px;
-    right: 55px;
+    top: 160px;
+    right: -13px;
     padding: 0;
     margin: 0;
-    width: 2em;
-    height: 2em;
+    width: 1.4em;
+    height: 1.4em;
     border-radius: 100%;
-    background: #b9b9b9;
+    background: #bcdbf7;
     z-index: 1;
     text-align: center;
+}
+.do-not-delete button {
+    position: relative;
+    left: -1px;
+    top: -3px;
+    font-size: 17px;
+}
+.action-delete button {
+    font-size: 16px;
+    top: -5px;
+    position: relative;
+    color: #000000;
 }
 
 .are-you-sure {
@@ -73,6 +86,36 @@ textarea {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+.entry-header:before {
+    content: '';
+    z-index: 1;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    color:#ffffff;
+}
+
+.entry-date, .title {
+    position: relative;
+    z-index: 5;
+    font-size: 1em;
+    margin: 0;
+    color:#ffffff;
+}
+
+.entry-date{
+    font-size: 0.6em;
 }
 
 .summary {
@@ -82,22 +125,29 @@ textarea {
 
 }
 
-.edit-input{
-    text-align: left;
+.edit-input {
     margin: 0px;
-    border:0;
-    outline:0;
+    border: 0;
+    outline: 0;
     transition: 2000ms;
     background: transparent;
     font-style: italic;
-    width: 80%;
+    width: 100%;
     font-size: 1em;
+    z-index: 9;
+    position: relative;
+    margin-bottom: 1em;
 }
 
 .edit-label {
     color: whitesmoke
 }
-
+input.edit-input{
+    margin: 10px 0;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.88);
+    color: #515151;
+}
 .edit-button {
     background: transparent;
     border: 0;
