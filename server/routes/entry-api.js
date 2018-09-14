@@ -11,6 +11,7 @@ const Engagement = require('../models/engagement')
 router.get('/entries', (req, res, next) => {
     Entry.find().sort('-created_at')
         .populate("emojis")
+        .populate("engagement")
         .then((entryList, err) => {
             if (err) {
                 res.json(err);
@@ -25,6 +26,7 @@ router.get('/entries', (req, res, next) => {
                     emojis: e.emojis,
                     isPublic: e.isPublic,
                     likes: e.likes,
+                    engagement: e.engagement,
                     publish_date: new Date(e.publish_date).toLocaleDateString("en-US", DateOptions),
                     created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
                     status: e.status
@@ -43,6 +45,7 @@ router.get('/profile', (req, res, next) => {
 
     Entry.find({ user: entryUser }).sort('-created_at')
         .populate("emojis")
+        .populate("engagement")
         .then((entryList, err) => {
             if (err) {
                 res.json(err);
@@ -57,6 +60,7 @@ router.get('/profile', (req, res, next) => {
                     emojis: e.emojis,
                     isPublic: e.isPublic,
                     likes: e.likes,
+                    engagement: e.engagement,
                     publish_date: new Date(e.publish_date).toLocaleDateString("en-US", DateOptions),
                     created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
                     status: e.status
@@ -73,6 +77,7 @@ router.get('/public', (req, res, next) => {
 
     Entry.find({ isPublic: true }).sort('-created_at')
         .populate("emojis")
+        .populate("engagement")
         .then((entryList, err) => {
             if (err) {
                 res.json(err);
@@ -87,6 +92,7 @@ router.get('/public', (req, res, next) => {
                     emojis: e.emojis,
                     isPublic: e.isPublic,
                     likes: e.likes,
+                    engagement: e.engagement,
                     publish_date: new Date(e.publish_date).toLocaleDateString("en-US", DateOptions),
                     created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
                     status: e.status
@@ -105,28 +111,28 @@ router.post('/entries', (req, res, next) => {
 
     const entryEngagement = new Engagement({
         entryId: EntryID,
-        like:{
-            total:0,
-            user:[]
+        like: {
+            total: 0,
+            user: []
         },
-        share:{
-            total:0,
-            user:[]
+        share: {
+            total: 0,
+            user: []
         }
     })
 
-    entryEngagement.save((err)=>{
+    entryEngagement.save((err) => {
         if (err) {
             res.status(400).json({ message: 'Something went wronh!' });
             return;
         }
-    }).then(engagement=>{
+    }).then(engagement => {
 
         const theEntry = new Entry({
-            _id:EntryID,
+            _id: EntryID,
             title: `Draft - ${created_at}`,
             user: req.session.passport.user,
-            engagement:engagement._id
+            engagement: engagement._id
         });
 
         theEntry.save().then(e => {
@@ -136,7 +142,7 @@ router.post('/entries', (req, res, next) => {
                 title: e.title,
                 created_at: new Date(e.created_at).toLocaleDateString("en-US", DateOptions),
                 status: e.status,
-                engagement:e.engagement
+                engagement: e.engagement
             }
 
             res.json(entries);
@@ -211,15 +217,15 @@ router.delete('/entries/:id', (req, res, next) => {
 
 /* EDIT the LIKES in an Entry. */
 
-router.put('/likes/:id',   (req, res, next) => {
+router.put('/likes/:id', (req, res, next) => {
 
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         res.status(400).json({ message: 'Specified id is not valid' });
         return;
     }
 
-    Engagement.findOne({entryId:req.params.id},(err, engagement)=>{
-       
+    Engagement.findOne({ entryId: req.params.id }, (err, engagement) => {
+
         if (err) {
             res.status(400).json({ message: 'Something went wronh!' });
             return;
@@ -228,31 +234,31 @@ router.put('/likes/:id',   (req, res, next) => {
 
         console.log("USER for Likes", entryUser)
 
-        const check = engagement.like.user.find(i=> String(i) === String(req.user._id));
+        const check = engagement.like.user.find(i => String(i) === String(req.user._id));
 
-        if(check){
-            const newTotal = engagement.like.total-1;
-            Engagement.update({entryId:req.params.id},{ $set:{'like.total': newTotal}, $pull:{'like.user':req.user._id } },(err,data)=>{
+        if (check) {
+            const newTotal = engagement.like.total - 1;
+            Engagement.update({ entryId: req.params.id }, { $set: { 'like.total': newTotal }, $pull: { 'like.user': req.user._id } }, (err, data) => {
                 if (err) {
-            
+
                     res.status(400).json({ message: 'Something went wronh!' });
                     return;
                 }
                 res.status(200).json({ message: 'Success!' });
             })
-        }else{
-            const newTotal = engagement.like.total+1;
-            Engagement.update({entryId:req.params.id},{ $set:{'like.total': newTotal}, $push:{'like.user':req.user._id } }, (err,data)=>{
+        } else {
+            const newTotal = engagement.like.total + 1;
+            Engagement.update({ entryId: req.params.id }, { $set: { 'like.total': newTotal }, $push: { 'like.user': req.user._id } }, (err, data) => {
                 if (err) {
                     console.log(err)
                     res.status(400).json({ message: 'Something went wronh!' });
                     return;
                 }
 
-                res.status(400).json({ message: 'Success' });
+                res.status(200).json({ message: 'Success' });
             })
         }
-        
+
     })
 
 })
