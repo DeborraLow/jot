@@ -9,6 +9,28 @@ header img{
     position: relative;
     top: -20px;
 }
+header .nav{
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.5em;
+    margin: .7em 0;
+    padding: 0;
+}
+
+ul.nav li {
+    margin: 0 10px;
+}
+
+ul.nav li a {
+    text-decoration: none;
+    color: #50455a;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+ul.nav a.active {
+    color: #584e62!important;
+    text-decoration: underline!important;
+}
 .modal-wrapper {
     background: rgba(0, 0, 0, 0.50);
     position: fixed;

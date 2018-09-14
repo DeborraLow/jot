@@ -21,14 +21,12 @@ export class ExplorerComponent implements OnInit {
     });
   }
 
-  initNewEntry(e) {
-    this.entries = [e, ...this.entries];
-  }
-
-  // DELETE THIS AFTER TESTING -- DON'T WANT ON PUBLIC PAGE.
   deletedEntry(entry) {
     this.entries = this.entries.filter((i: any) => i.id !== entry);
-
   }
 
+  initNewEntry(e) {
+    this.entries = [e, ...this.entries];
+    console.log(e);
+  }
 }

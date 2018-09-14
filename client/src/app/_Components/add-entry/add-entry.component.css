@@ -41,9 +41,12 @@ button:hover{
 } 
 
 .message{
-    width: 40%;
-    background: green;
-    color:#fff;
+    background: #fff;
+    color: #50455A;
     padding: .5em;
     text-align: center;
+    display: inline-block;
+    width: 100%!important;
+    box-sizing: border-box;
+    margin: 0px 0 15px;
 }

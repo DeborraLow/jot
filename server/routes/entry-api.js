@@ -24,13 +24,13 @@ router.get('/entries/:type', (req, res, next) => {
             query = {user:{$in: [...req.session.followers, req.user.id]}};
             break;
         case "explorer" :
-            query = {isPublic:true};
+            query = { isPublic:true };
             break;
         case "profile" :
             query = {user:req.user._id};
             break;
         default:
-            query = {isPublic:true};
+            query = { isPublic:true };
     }
 
     Entry.find(query).sort('-created_at')
