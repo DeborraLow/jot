@@ -6,6 +6,15 @@ const mongoose = require('mongoose');
 const User = require('../models/user');
 
 
+/* Get MY ID */
+router.get('/user/me', (req, res, next) => {
+    if(req.user){
+        res.status(200).json({ id:req.user._id });
+    }else{
+        res.status(400).json({ message: 'Unauthorized' });
+    }
+});
+
 /* GET a single User. */
 router.get('/user/:id', (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {

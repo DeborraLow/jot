@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Entry } from '../_Models/Entry';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -57,7 +59,7 @@ export class EntriesService {
 
 
   entryLikes(id) {
-    return this.http.put(`${environment.api_url}/api/likes/${id}`,{},
+    return this.http.put(`${environment.api_url}/api/likes/${id}`, {},
       { withCredentials: true });
   }
 

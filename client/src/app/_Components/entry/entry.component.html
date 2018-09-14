@@ -102,8 +102,8 @@
       </button>
     </div>
     <div class="likes">
-      <button (click)="likeEntry()"><i class="fas fa-heart"></i></button>
-      <span>1</span>
+      <span>{{entry.engagement.like.total}}</span>
+      <button (click)="likeEntry()"><i class="fas fa-heart" [ngStyle]="{'color':  likeClicked ? 'red': 'gray' }"></i></button>
     </div>
   </div>
 </div>

@@ -29,10 +29,10 @@ const entrySchema = new Schema(
             enum: ["draft", "published"],
             default: "draft"
         },
-        likes: [{
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        }]
+        // likes: [{
+        //     type: Schema.Types.ObjectId,
+        //     ref: "User"
+        // }]
     },
     {
         timestamps: {
