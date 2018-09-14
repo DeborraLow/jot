@@ -14,6 +14,9 @@ export class MessageService {
     this.Message.next({message:message, type:type});
   }
 
+  clear() {
+    this.Message.next({message:'', type:'none'});
+  }
   
   handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

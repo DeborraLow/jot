@@ -19,20 +19,18 @@ export class MessageComponent implements OnInit {
     this.showMessage = false;
     
     this.messageService.Message$.subscribe((message:any)=> {
-        if(message !== ''){
           this.displayMessage();
           this.message = message.message;
           this.messageType = message.type;
-        }
     });
   }
 
   displayMessage() {
     this.showMessage = true;
     setTimeout(()=> {
-        this.message = '';
         this.showMessage = false;
-    },1500);
+        
+    },3000);
   }
 
 }

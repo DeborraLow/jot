@@ -54,6 +54,9 @@ export class EmojiComponent implements OnInit, OnChanges {
 
       if(exists) {
         this.message.add('Emoji has already been selected. Select another one. ','error');
+        setTimeout(()=>{
+          this.message.clear();
+        },3000)
       } else {
         this.entryEmojis.push(emoji);
         this.emojiEmitter.emit(this.entryEmojis);
@@ -61,6 +64,9 @@ export class EmojiComponent implements OnInit, OnChanges {
 
     } else {
       this.message.add('Emoji limit reached, please remove a emoji to proceed. ','error');
+      setTimeout(()=>{
+        this.message.clear();
+      },3000)
     }
   }
 

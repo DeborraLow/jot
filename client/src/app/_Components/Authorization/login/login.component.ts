@@ -28,11 +28,17 @@ export class LoginComponent implements OnInit {
   Login() {
       if(this.login.username === '' || this.login.password ==='') {
         this.messageService.add('Username and Password is required.','error');
+        setTimeout(()=>{
+          this.messageService.clear();
+        },3000)
       } else {
           this.authService.login(this.login).subscribe(login=> {
               if(login) {
                 this.authService.LoggedIn = true;
                 this.messageService.add('Logged in!','default');
+                setTimeout(()=>{
+                  this.messageService.clear();
+                },3000)
                 setTimeout(()=>this.route.navigate(['/me']), 2000);
               }
           });
