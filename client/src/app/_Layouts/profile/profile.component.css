@@ -2,8 +2,8 @@
     background: 
       /* top, transparent red, faked with gradient */ 
       linear-gradient(
-        rgba(221, 171, 171, 0.45), 
-        rgba(145, 116, 116, 0.45)
+        rgba(250, 247, 247, 0.725), 
+        rgba(226, 219, 219, 0.725)
       ),
       /* bottom, image */
       url(../../../assets/images/seamless_denim_fabric_texture.jpg);
