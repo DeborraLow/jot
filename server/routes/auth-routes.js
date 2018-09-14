@@ -4,8 +4,17 @@ const bcrypt = require('bcrypt');
 
 // Our user model
 const User = require('../models/user');
+const Follower = require('../models/follower')
 
 const authRoutes = express.Router();
+
+function setFollowers(req, cb){
+    Follower.find({actionUser:req.user.id, status:"following"}).then(function(followers){
+                var sessData = req.session;
+                 sessData.followers = followers.map(f=>f.user2);
+                 cb(req)
+    })
+}
 
 authRoutes.post('/api/signup/:id', (req, res, next) => {
 
@@ -94,8 +103,14 @@ authRoutes.post('/api/login', (req, res, next) => {
             req.session.timestamp = new Date();
 
             req.session.save(function(){
-                req.session.user = theUser._id;
-                res.status(200).json(req.user);
+
+                setFollowers(req, (r)=>{
+                    r.session.user = theUser._id;
+                    req = r;
+                    console.log(req.session)
+                    res.status(200).json(req.user);
+                });
+            
             });
             
         });

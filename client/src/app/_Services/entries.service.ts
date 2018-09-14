@@ -12,8 +12,10 @@ export class EntriesService {
 
   entries: Entry[] = [];
 
-  getEntries() {
-    return this.http.get(`${environment.api_url}/api/entries`);
+  getEntries(type) {
+    return this.http.get(`${environment.api_url}/api/entries/${type}`,
+    { withCredentials: true }
+  );
   }
 
   get(id) {

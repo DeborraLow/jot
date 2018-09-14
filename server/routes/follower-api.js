@@ -119,6 +119,9 @@ router.delete('/follower/:username', (req, res, next) => {
                         if(!follower){
                             res.status(400).json({ message: 'You are not following this user.' });
                         }else{
+                            //remove follower from session
+                            req.session.followers = req.session.followers.filter(f=> f !== user._id);
+
                             res.status(200).json({ message: 'Unfollowed' });
                         }
                 
@@ -201,7 +204,8 @@ router.put('/follower', (req, res, next) => {
                         actionUser: req.user._id,
                         status: "following"
                     });
-
+                    
+                   
                    ConfirmFollow.save((err)=>{
 
                     if(err) {
@@ -210,10 +214,9 @@ router.put('/follower', (req, res, next) => {
                     }
 
                    }).then(data=>{
-
+                            //Add follower to session
+                            req.session.followers.push(user._id)
                             res.status(200).json({ message: 'Following' });
-
-
                    })
 
                 })

@@ -49,7 +49,9 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.showMore = false;
     this.youSure = false;
   }
-
+  uploadPath(path) {
+      this.entry.image = path;
+  }
   setPrivacy(privacy: string) {
     switch (privacy) {
       case 'private':
@@ -58,7 +60,6 @@ export class EntryComponent implements OnInit, AfterViewInit {
       default:
         this.entry.isPublic = true;
     }
-    console.log(this.entry);
   }
 
   editEntry() {
@@ -81,13 +82,10 @@ export class EntryComponent implements OnInit, AfterViewInit {
   }
 
   deleteEntry() {
-
     this.entriesService.remove(this.entry.id)
       .subscribe((entry) => {
         this.deletedEntry.emit(this.entry.id);
       });
-
-
     this.isEditing = false;
     this.showMore = false;
   }

@@ -10,11 +10,21 @@ export class FollowersComponent implements OnInit {
 
   constructor(private follower: FollowerService) { }
 
+  search:string;
+
   searchResults:Array<any>;
   followers:Array<any> = [];
+  toggleClear = false;
 
+  clearSearch(){
+    console.log('toggle')
+    this.search ='';
+    this.toggleClear = false;
+    this.searchResults = [];
+  }
   searchFollowers(event): void {
     if(event.target.value.length > 0) {
+        this.toggleClear = true;
         this.follower.search(event.target.value).subscribe((users:Array<any>)=>{
 
           this.searchResults = [];

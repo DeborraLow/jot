@@ -7,6 +7,7 @@ export interface Entry {
     title?: string;
     summary?: string;
     entry_text?: string;
+    image?: string;
     publisher?: User;
     publish_date: Date;
     created_at: Date;
