@@ -1,7 +1,8 @@
 <header class="jot-g">
   <div class="container">
     <div class="u-3-4">
-      <img src="/assets/images/logo.png" width="60" class="logo"/>
+      <img src="/assets/images/loho.png" *ngIf="light" width="60" class="logo"/>
+      <img src="/assets/images/logo.png" *ngIf="!light" width="60" class="logo"/>
     </div>
     <div class="u-1-4 align-right">
       <ul>

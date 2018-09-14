@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {AuthenticationService} from '../../../_Services/authentication.service';
 @Component({
   selector: 'app-header',
@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.authService.LoggedIn;
   }
 
+  @Input() light:boolean;
   showLogin : boolean;
   showSignup : boolean;
   showForgot : boolean;
