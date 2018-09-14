@@ -104,12 +104,12 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.entriesService.entryLikes(this.entry.id).subscribe();
     this.checkHeart();
 
-    console.log(this.entry.engagement.like);
+    // console.log(this.entry.engagement.like);
 
   }
 
   checkHeart() {
-    this.user.myID().subscribe(id => {
+    this.user.getMyID().subscribe(id => {
       console.log('ID', id);
       const check = this.entry.engagement.like.user.find(i => i === id);
       if (check) {

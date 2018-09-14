@@ -269,11 +269,7 @@ router.put('/likes/:id', (req, res, next) => {
             const newTotal = engagement.like.total - 1;
             Engagement.update({ entryId: req.params.id }, { $set: { 'like.total': newTotal }, $pull: { 'like.user': req.user._id } }, (err, data) => {
                 if (err) {
-<<<<<<< HEAD
                 
-=======
-
->>>>>>> af0bc8110debd6ceee7821faeacfcd1dbbc82b36
                     res.status(400).json({ message: 'Something went wronh!' });
                     return;
                 }
@@ -287,12 +283,7 @@ router.put('/likes/:id', (req, res, next) => {
                     res.status(400).json({ message: 'Something went wronh!' });
                     return;
                 }
-<<<<<<< HEAD
                    res.status(200).json({ message: 'Success' });
-=======
-
-                res.status(200).json({ message: 'Success' });
->>>>>>> af0bc8110debd6ceee7821faeacfcd1dbbc82b36
             })
         }
 
