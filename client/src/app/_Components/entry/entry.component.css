@@ -205,8 +205,13 @@ textarea {
     font-size: 12px;
 }
 
-likes {
-    font: 16px
+.likes {
+    font: 16px;
+}
+
+.likes button {
+    border: none;
+    outline: none;
 }
 
 img {

@@ -12,4 +12,5 @@ export interface Entry {
     created_at: Date;
     emojis?: Emoji[];
     isPublic?:boolean;
+    engagement:any;
 }

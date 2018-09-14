@@ -2,12 +2,13 @@ import { Entry } from './../../_Models/Entry';
 import { EntriesService } from './../../_Services/entries.service';
 import { Component, OnInit, Input, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from './../../_Services/user.service';
 
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.css'],
-  providers: [EntriesService]
+  providers: [EntriesService, UserService]
 
 })
 export class EntryComponent implements OnInit, AfterViewInit {
@@ -17,9 +18,11 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   constructor(
     private entriesService: EntriesService,
+
     private router: Router,
     private route: ActivatedRoute,
-    private el: ElementRef
+    private el: ElementRef,
+    private user: UserService
   ) { }
 
   public EditorOptions: Object = {
@@ -37,6 +40,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
   showMore: boolean;
   entryHeight: number;
   youSure: boolean;
+  likeClicked: boolean;
 
   ngAfterViewInit() {
     const entryHeight = this.el.nativeElement.firstChild.childNodes[3].getElementsByTagName('div').item(0);
@@ -48,6 +52,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.isEditing = false;
     this.showMore = false;
     this.youSure = false;
+
   }
 
   setPrivacy(privacy: string) {
@@ -97,9 +102,21 @@ export class EntryComponent implements OnInit, AfterViewInit {
   }
 
   likeEntry() {
-    console.log('I like it');
     this.entriesService.entryLikes(this.entry.id).subscribe();
+
+    this.user.myID().subscribe(id => {
+      console.log('ID', id);
+      const check = this.entry.engagement.like.user.find(i => i === id);
+      if (check) {
+        this.likeClicked = false;
+      } else {
+        this.likeClicked = true;
+      }
+    });
+    console.log(this.entry.engagement.like);
+
   }
+
 
 
 }
