@@ -558,7 +558,7 @@ module.exports = "\ntextarea {\n    resize: none;\n}\n\n/* WRAPS ENTIRE ENTRY */
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"entry-container\">\n\n  <ul class=\"actions\" *ngIf=\"entry.mine\">\n    <li *ngIf=\"!isEditing\">\n      <button class=\"edit-button\" (click)=\"editEntry()\"><i class=\"fas fa-pencil-alt\"></i></button>\n    </li>\n    <li *ngIf=\"isEditing\">\n      <button class=\"edit-button\" (click)=\"updateEntry()\"><i class=\"fas fa-save\"></i></button>\n    </li>\n\n  </ul>\n  <!-- Entry Header -->\n\n  <!-- Edit form -->\n  <form #entryForm=\"ngForm\">\n    <div class=\"entry-header\" [ngStyle]=\"{'background-image':  true ? 'url('+entry.image+')': '' }\">\n\n      <!-- Show title and summary -->\n      <div class=\"title\" *ngIf=\"!isEditing\">{{entry.title}}</div>\n      <div class=\"title\">{{entry.username}}</div>\n      <!-- HIDDEN - Edit title and summary -->\n      <div class=\"edit-input\" *ngIf=\"isEditing && entry.mine\">\n        <input class=\"edit-input\" type=\"text\" [(ngModel)]=\"entry.title\" name=\"title\" placeholder=\"Title\">\n        <app-file-uploader (UploadPath)=\"uploadPath($event)\" [Path]=\"true\"></app-file-uploader>\n      </div>\n\n      <!-- DATE -->\n      <p class=\"entry-date\">{{ (entry.status==\"draft\") ? entry.created_at : entry.publish_date }}</p>\n\n      <!-- DELETE BUTTON -->\n      <div *ngIf=\"isEditing && entry.mine\">\n\n        <div *ngIf=\"!youSure\" class=\"action-delete\">\n          <button class=\"edit-button\" (click)=\"areYouSure()\"><i class=\"fas fa-trash\"></i></button>\n        </div>\n\n        <div *ngIf=\"youSure\">\n          <div class=\"do-not-delete\">\n            <button class=\"edit-button\" (click)=\"areYouSure()\"><i class=\"fas fa-undo\" style=\"color:lightseagreen\"></i></button>\n          </div>\n\n          <div class=\"action-delete\">\n            <button class=\"edit-button\" (click)=\"deleteEntry()\"><i class=\"fas fa-trash\" style=\"color:red\"></i></button>\n          </div>\n        </div>\n\n      </div>\n\n    </div>\n  </form>\n\n  <!-- Emojis -->\n\n  <div class=\"edit-emoji\">\n    <app-emoji (emojiEmitter)=\"emojiEmtter($event)\" [isEditing]=\"isEditing\" [emoji]=\"emojis\"></app-emoji>\n  </div>\n\n  <!-- Entry text -->\n  <div class=\"entry-text-container\" [ngClass]=\"{ 'show-more': isEditing || showMore }\" [ngStyle]=\"{'height':  isEditing || showMore ? entryHeight+'px': '' }\">\n    <div *ngIf=\"isEditing\">\n      <textarea [froalaEditor]='EditorOptions' [(froalaModel)]=\"entry.entry_text\"></textarea>\n    </div>\n    <div *ngIf=\"!isEditing\" class=\"fr-view\" id=\"entry-content\">\n      <div [outerHTML]=\"entry.entry_text\"></div>\n    </div>\n  </div>\n\n  <!-- HIDDEN - Publish detail -->\n\n  <div class=\"publisher\" *ngIf=\"isEditing && entry.mine\">\n    <form [ngSwitch]=\"published\" #publishForm=\"ngForm\">\n      <span>Share: </span>\n      <span class=\" radio\">\n        <label for=\"private\">Private </label>\n        <input type=\"radio\" class=\"publish-radio\" name=\"publish-type\" [ngModel]=\"!entry.isPublic\" value=\"private\"\n          (click)=\"setPrivacy('private')\" checked ngModel>\n      </span>\n      <span class=\"radio\">\n        <label for=\"public\">Public </label>\n        <input type=\"radio\" class=\"publish-radio\" name=\"publish-type\" value=\"public\" [ngModel]=\"entry.isPublic\" (click)=\"setPrivacy('public')\"\n          ngModel>\n      </span>\n    </form>\n  </div>\n\n\n\n  <!-- footer for entry -->\n  <div class=\"entry-footer\">\n    <!-- <div class=\"extend-entry-button\">\n      <button class=\"extend-entry-button\" (click)=\"publishToggler()\">\n        {{ (isPublic) ? 'PRIVATE' : 'PUBLIC' }}\n      </button> </div>\n      <div> -->\n    <div>\n\n    </div>\n\n    <div>\n      <button class=\"extend-entry-button\" (click)=\"showMoreToggler()\">\n        {{ (showMore) ? 'SHOW LESS' : 'SHOW MORE' }}\n      </button>\n    </div>\n    <div class=\"likes\">\n      <span>{{entry.engagement.like.total}}</span>\n      <button (click)=\"likeEntry()\"><i class=\"fas fa-heart\" [ngStyle]=\"{'color':  likeClicked ? 'red': 'gray' }\"></i></button>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"entry-container\">\n\n  <ul class=\"actions\" *ngIf=\"entry.mine\">\n    <li *ngIf=\"!isEditing\">\n      <button class=\"edit-button\" (click)=\"editEntry()\"><i class=\"fas fa-pencil-alt\"></i></button>\n    </li>\n    <li *ngIf=\"isEditing\">\n      <button class=\"edit-button\" (click)=\"updateEntry()\"><i class=\"fas fa-save\"></i></button>\n    </li>\n\n  </ul>\n  <!-- Entry Header -->\n\n  <!-- Edit form -->\n  <form #entryForm=\"ngForm\">\n    <div class=\"entry-header\" [ngStyle]=\"{'background-image':  true ? 'url('+entry.image+')': '' }\">\n\n      <!-- Show title and summary -->\n      <div class=\"title\" *ngIf=\"!isEditing\">{{entry.title}}</div>\n      <div class=\"title\">{{entry.username}}</div>\n      <!-- HIDDEN - Edit title and summary -->\n      <div class=\"edit-input\" *ngIf=\"isEditing && entry.mine\">\n        <input class=\"edit-input\" type=\"text\" [(ngModel)]=\"entry.title\" name=\"title\" placeholder=\"Title\">\n        <app-file-uploader (UploadPath)=\"uploadPath($event)\" [Path]=\"true\"></app-file-uploader>\n      </div>\n\n      <!-- DATE -->\n      <p class=\"entry-date\">{{ (entry.status==\"draft\") ? entry.created_at : entry.publish_date }}</p>\n\n      <!-- DELETE BUTTON -->\n      <div *ngIf=\"isEditing && entry.mine\">\n\n        <div *ngIf=\"!youSure\" class=\"action-delete\">\n          <button class=\"edit-button\" (click)=\"areYouSure()\"><i class=\"fas fa-trash\"></i></button>\n        </div>\n\n        <div *ngIf=\"youSure\">\n          <div class=\"do-not-delete\">\n            <button class=\"edit-button\" (click)=\"areYouSure()\"><i class=\"fas fa-undo\" style=\"color:lightseagreen\"></i></button>\n          </div>\n\n          <div class=\"action-delete\">\n            <button class=\"edit-button\" (click)=\"deleteEntry()\"><i class=\"fas fa-trash\" style=\"color:red\"></i></button>\n          </div>\n        </div>\n\n      </div>\n\n    </div>\n  </form>\n\n  <!-- Emojis -->\n\n  <div class=\"edit-emoji\">\n    <app-emoji (emojiEmitter)=\"emojiEmtter($event)\" [isEditing]=\"isEditing\" [emoji]=\"emojis\"></app-emoji>\n  </div>\n\n  <!-- Entry text -->\n  <div class=\"entry-text-container\" [ngClass]=\"{ 'show-more': isEditing || showMore }\" [ngStyle]=\"{'height':  isEditing || showMore ? entryHeight+'px': '' }\">\n    <div *ngIf=\"isEditing\">\n      <textarea [froalaEditor]='EditorOptions' [(froalaModel)]=\"entry.entry_text\"></textarea>\n    </div>\n    <div *ngIf=\"!isEditing\" class=\"fr-view\" id=\"entry-content\">\n      <div [outerHTML]=\"entry.entry_text\"></div>\n    </div>\n  </div>\n\n  <!-- HIDDEN - Publish detail -->\n\n  <div class=\"publisher\" *ngIf=\"isEditing && entry.mine\">\n    <form [ngSwitch]=\"published\" #publishForm=\"ngForm\">\n      <span>Share: </span>\n      <span class=\" radio\">\n        <label for=\"private\">Private </label>\n        <input type=\"radio\" class=\"publish-radio\" name=\"publish-type\" [ngModel]=\"!entry.isPublic\" value=\"private\"\n          (click)=\"setPrivacy('private')\" checked ngModel>\n      </span>\n      <span class=\"radio\">\n        <label for=\"public\">Public </label>\n        <input type=\"radio\" class=\"publish-radio\" name=\"publish-type\" value=\"public\" [ngModel]=\"entry.isPublic\" (click)=\"setPrivacy('public')\"\n          ngModel>\n      </span>\n    </form>\n  </div>\n\n\n\n  <!-- footer for entry -->\n  <div class=\"entry-footer\">\n    <!-- <div class=\"extend-entry-button\">\n      <button class=\"extend-entry-button\" (click)=\"publishToggler()\">\n        {{ (isPublic) ? 'PRIVATE' : 'PUBLIC' }}\n      </button> </div>\n      <div> -->\n    <div>\n\n    </div>\n\n    <div>\n      <button class=\"extend-entry-button\" (click)=\"showMoreToggler()\">\n        {{ (showMore) ? 'SHOW LESS' : 'SHOW MORE' }}\n      </button>\n    </div>\n    <div class=\"likes\">\n      <span>{{likes}}</span>\n      <button (click)=\"likeEntry()\"><i class=\"fas fa-heart\" [ngStyle]=\"{'color':  likeClicked ? 'red': 'gray' }\"></i></button>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -613,12 +613,22 @@ var EntryComponent = /** @class */ (function () {
         this.entryHeight = entryHeight.offsetHeight;
     };
     EntryComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.emojis = this.entry.emojis;
         this.isEditing = false;
         this.showMore = false;
         this.youSure = false;
         this.likeClicked = false;
-        this.checkHeart();
+        this.likes = this.entry.engagement.like.total;
+        this.user.getMyID().subscribe(function (id) {
+            var check = _this.entry.engagement.like.user.find(function (i) { return i === id.id; });
+            if (!check) {
+                _this.likeClicked = false;
+            }
+            else {
+                _this.likeClicked = true;
+            }
+        });
     };
     EntryComponent.prototype.uploadPath = function (path) {
         this.entry.image = path;
@@ -660,22 +670,17 @@ var EntryComponent = /** @class */ (function () {
         this.entry.emojis = emojis;
     };
     EntryComponent.prototype.likeEntry = function () {
-        this.entriesService.entryLikes(this.entry.id).subscribe();
-        this.checkHeart();
-        // console.log(this.entry.engagement.like);
-    };
-    EntryComponent.prototype.checkHeart = function () {
         var _this = this;
+        this.entriesService.entryLikes(this.entry.id).subscribe();
         this.user.getMyID().subscribe(function (id) {
-            console.log('ID', id);
-            console.log(_this.entry.engagement.like.user);
-            var check = _this.entry.engagement.like.user.find(function (i) { return i === id; });
-            if (check) {
-                console.log('Match found:', _this.likeClicked);
+            if (_this.likeClicked) {
+                _this.likes = _this.likes - 1;
+                _this.entry.engagement.like.user = _this.entry.engagement.like.user.filter(function (i) { return i.id !== id.id; });
                 _this.likeClicked = false;
             }
             else {
-                console.log('No match found:', _this.likeClicked);
+                _this.likes = _this.likes + 1;
+                _this.entry.engagement.like.user = _this.entry.engagement.like.user.concat([id.id]);
                 _this.likeClicked = true;
             }
         });
