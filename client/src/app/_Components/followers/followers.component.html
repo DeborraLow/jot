@@ -16,7 +16,7 @@
   <div class="u-1 follower" *ngFor="let user of searchResults">
       <div class="joy-g">
         <div class="u-1-6">
-          <img class="avatar" src="http://127.0.0.1:3000{{user.avatar}}">
+          <img class="avatar" src="{{user.avatar}}">
         </div>
         <div class="u-5-8 align-left">
             <strong class="name">{{user.first_name}} {{user.last_name}}</strong>
@@ -35,7 +35,7 @@
             <span class="status {{user.status}}"></span>
         </div>
         <div class="u-1-8">
-          <img class="avatar" src="http://127.0.0.1:3000{{user.avatar}}">
+          <img class="avatar" src="{{user.avatar}}">
         </div>
         <div class="u-5-8 align-left">
             <strong class="name">{{user.first_name}} {{user.last_name}}</strong>
