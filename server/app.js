@@ -69,7 +69,6 @@ app.use(require('node-sass-middleware')({
 app.set('views', path.join(__dirname, 'views/client'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public', 'assets')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
