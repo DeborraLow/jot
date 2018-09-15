@@ -41,7 +41,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
   entryHeight: number;
   youSure: boolean;
   likeClicked: boolean;
-
+likes:number;
   ngAfterViewInit() {
     const entryHeight = this.el.nativeElement.firstChild.childNodes[3].getElementsByTagName('div').item(0);
     this.entryHeight = entryHeight.offsetHeight;
@@ -53,7 +53,17 @@ export class EntryComponent implements OnInit, AfterViewInit {
     this.showMore = false;
     this.youSure = false;
     this.likeClicked = false;
-    this.checkHeart();
+    this.likes = this.entry.engagement.like.total;
+    this.user.getMyID().subscribe((id:any) => {
+
+      const check = this.entry.engagement.like.user.find(i => i === id.id);
+
+      if (!check) {
+        this.likeClicked = false;
+      } else {
+        this.likeClicked = true;
+      }
+    });
 
   }
   uploadPath(path) {
@@ -103,24 +113,16 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   likeEntry() {
     this.entriesService.entryLikes(this.entry.id).subscribe();
-    this.checkHeart();
 
-    // console.log(this.entry.engagement.like);
+    this.user.getMyID().subscribe((id:any) => {
 
-  }
-
-  checkHeart() {
-    this.user.getMyID().subscribe(id => {
-      console.log('ID', id);
-      console.log(this.entry.engagement.like.user);
-      const check = this.entry.engagement.like.user.find(i => i === id);
-      if (check) {
-        console.log('Match found:', this.likeClicked);
-
+      if (this.likeClicked) {
+        this.likes = this.likes - 1;
+        this.entry.engagement.like.user = this.entry.engagement.like.user.filter(i=>i.id !== id.id);
         this.likeClicked = false;
-
       } else {
-        console.log('No match found:', this.likeClicked);
+        this.likes = this.likes + 1;
+        this.entry.engagement.like.user = [...this.entry.engagement.like.user, id.id];
         this.likeClicked = true;
       }
     });
