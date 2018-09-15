@@ -8,6 +8,9 @@
     font-weight: normal;
     font-style: normal;
   }
+.fr-wrapper > div:first-child {
+    display: none;
+}
 
 body, html {
     font-family: 'HiraginoKaku-GothicPro', PingFang SC, Arial!important;
