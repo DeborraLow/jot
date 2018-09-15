@@ -14,9 +14,9 @@ import { AuthGuardService } from './_Services/auth-guard.service';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'explorer', component: ExplorerComponent },
+    { path: 'explorer', component: ExplorerComponent,canActivate: [AuthGuardService] },
     { path: 'me', component: ProfileComponent, canActivate: [AuthGuardService] },
-    { path: 'timeline', component: TimelineComponent },
-    { path: 'entry/:id', component: EntryComponent },
+    { path: 'timeline', component: TimelineComponent, canActivate: [AuthGuardService] },
+    { path: 'entry/:id', component: EntryComponent,canActivate: [AuthGuardService] },
     // { path: '**', redirectTo: '' }
 ];
