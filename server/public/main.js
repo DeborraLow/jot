@@ -2349,10 +2349,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [
     { path: '', component: _Layouts_home_home_component__WEBPACK_IMPORTED_MODULE_1__["HomeComponent"] },
-    { path: 'explorer', component: _Layouts_explorer_explorer_component__WEBPACK_IMPORTED_MODULE_2__["ExplorerComponent"] },
+    { path: 'explorer', component: _Layouts_explorer_explorer_component__WEBPACK_IMPORTED_MODULE_2__["ExplorerComponent"], canActivate: [_Services_auth_guard_service__WEBPACK_IMPORTED_MODULE_5__["AuthGuardService"]] },
     { path: 'me', component: _Layouts_profile_profile_component__WEBPACK_IMPORTED_MODULE_3__["ProfileComponent"], canActivate: [_Services_auth_guard_service__WEBPACK_IMPORTED_MODULE_5__["AuthGuardService"]] },
-    { path: 'timeline', component: _Layouts_timeline_timeline_component__WEBPACK_IMPORTED_MODULE_4__["TimelineComponent"] },
-    { path: 'entry/:id', component: _Components_entry_entry_component__WEBPACK_IMPORTED_MODULE_0__["EntryComponent"] },
+    { path: 'timeline', component: _Layouts_timeline_timeline_component__WEBPACK_IMPORTED_MODULE_4__["TimelineComponent"], canActivate: [_Services_auth_guard_service__WEBPACK_IMPORTED_MODULE_5__["AuthGuardService"]] },
+    { path: 'entry/:id', component: _Components_entry_entry_component__WEBPACK_IMPORTED_MODULE_0__["EntryComponent"], canActivate: [_Services_auth_guard_service__WEBPACK_IMPORTED_MODULE_5__["AuthGuardService"]] },
 ];
 
 
@@ -2373,7 +2373,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    api_url: 'http://vacate.seanzamora.com'
+    api_url: 'http://127.0.0.1'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error
