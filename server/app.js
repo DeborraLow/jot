@@ -96,7 +96,7 @@ app.use('/api', uploadApi)
 
 
 app.use((req, res, next) => {
-  res.sendfile(__dirname + '/views/client/index.html');
+  res.sendfile(__dirname + '/views/client/index.hbs');
 });
 
 
