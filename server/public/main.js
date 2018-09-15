@@ -1320,7 +1320,7 @@ module.exports = "body {\n    background-color: #b5b0bb;\n    background-image: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header light=\"true\"></app-header>\n<div class=\"jot-g container\">\n    <div class=\"u-3-4\">\n        <div *ngFor=\"let entry of entries\">\n            <app-entry [entry]=\"entry\" (deletedEntry)=\"deletedEntry($event)\"></app-entry>\n        </div>\n    </div>\n    <div class=\"u-1-4\">\n        <app-add-entry (newEntry)=\"initNewEntry($event)\"></app-add-entry>\n        <app-followers></app-followers>\n    </div>\n</div>"
+module.exports = "<app-header light=\"true\"></app-header>\n<div class=\"jot-g container\">\n    <div class=\"u-3-4\">\n        <div *ngFor=\"let entry of entries\">\n            <app-entry [entry]=\"entry\" (deletedEntry)=\"deletedEntry($event)\"></app-entry>\n        </div>\n    </div>\n    <div class=\"u-1-4\">\n        <div class=\"fixer\">\n                <app-add-entry (newEntry)=\"initNewEntry($event)\"></app-add-entry>\n                <app-followers></app-followers>\n        </div>\n        \n    </div>\n</div>"
 
 /***/ }),
 
@@ -1460,7 +1460,7 @@ module.exports = ".tinted-image {\n    background: \n      linear-gradient(\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "    <app-header light=\"true\"></app-header>\n    <div class=\"jot-g container\">\n        <div class=\"u-3-4\">\n            <div *ngFor=\"let entry of entries\">\n                <app-entry [entry]=\"entry\" (deletedEntry)=\"deletedEntry($event)\"></app-entry>\n            </div>\n        </div>\n        <div class=\"u-1-4\">\n            <app-add-entry (newEntry)=\"initNewEntry($event)\"></app-add-entry>\n            <app-followers></app-followers>\n        </div>\n    </div>"
+module.exports = "    <app-header light=\"true\"></app-header>\n    <div class=\"jot-g container\">\n        <div class=\"u-3-4\">\n            <div *ngFor=\"let entry of entries\">\n                <app-entry [entry]=\"entry\" (deletedEntry)=\"deletedEntry($event)\"></app-entry>\n            </div>\n        </div>\n        <div class=\"u-1-4\">\n                <div class=\"fixer\">\n                        <app-add-entry (newEntry)=\"initNewEntry($event)\"></app-add-entry>\n                        <app-followers></app-followers>\n                </div>\n        </div>\n    </div>"
 
 /***/ }),
 
@@ -1537,7 +1537,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-header light=\"true\"></app-header>\n<div class=\"jot-g container\">\n    <div class=\"u-3-4\">\n        <div *ngFor=\"let entry of entries\">\n            <app-entry [entry]=\"entry\" (deletedEntry)=\"deletedEntry($event)\"></app-entry>\n        </div>\n    </div>\n    <div class=\"u-1-4\">\n        <app-add-entry (newEntry)=\"initNewEntry($event)\"></app-add-entry>\n        <app-followers></app-followers>\n    </div>\n</div>"
+module.exports = "<app-header light=\"true\"></app-header>\n<div class=\"jot-g container\">\n    <div class=\"u-3-4\">\n        <div *ngFor=\"let entry of entries\">\n            <app-entry [entry]=\"entry\" (deletedEntry)=\"deletedEntry($event)\"></app-entry>\n        </div>\n    </div>\n    <div class=\"u-1-4\">\n            <div class=\"fixer\">\n                    <app-add-entry (newEntry)=\"initNewEntry($event)\"></app-add-entry>\n                    <app-followers></app-followers>\n            </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -2378,7 +2378,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    api_url: 'http://vacate.seanzamora.com'
+    api_url: 'http://jot.seanzamora.com'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error
