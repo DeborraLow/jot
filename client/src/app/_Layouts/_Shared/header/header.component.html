@@ -2,16 +2,16 @@
 <header class="jot-g">
   <div class="container">
     <div class="u-1-8">
-      <img src="/assets/images/loho.png" *ngIf="light" width="60" class="logo"/>
-      <img src="/assets/images/logo.png" *ngIf="!light" width="60" class="logo"/>
-    
+      <img src="/assets/images/loho.png" *ngIf="light" width="60" class="logo" />
+      <img src="/assets/images/logo.png" *ngIf="!light" width="60" class="logo" />
+
     </div>
-    <div class="u-5-8" >
-        <ul *ngIf="isLoggedIn" class="nav">
-            <li><a routerLink="/me" routerLinkActive="active">profile</a></li>
-            <li><a routerLink="/timeline" routerLinkActive="active">timeline</a></li>
-            <li><a routerLink="/explorer" routerLinkActive="active">exploerer</a></li>
-          </ul>
+    <div class="u-5-8">
+      <ul *ngIf="isLoggedIn" class="nav">
+        <li><a routerLink="/me" routerLinkActive="active">profile</a></li>
+        <li><a routerLink="/timeline" routerLinkActive="active">timeline</a></li>
+        <li><a routerLink="/explorer" routerLinkActive="active">explorer</a></li>
+      </ul>
     </div>
     <div class="u-6-24 align-right">
       <ul>
@@ -19,20 +19,25 @@
           <button (click)="logout()" class="btn btn-default">Logout</button>
         </li>
         <li *ngIf="!isLoggedIn">
-            <button (click)="toggleLogin()" class="btn btn-default">login</button>
+          <button (click)="toggleLogin()" class="btn btn-default" *ngIf="light">login</button>
+          <button (click)="toggleLogin()" class="btn btn-default" style="color: #fff; border: 1px solid #fff" *ngIf="
+            !light">login</button>
+
         </li>
         <li *ngIf="!isLoggedIn">
-            <button class="btn" (click)="toggleSignup()">signup</button>
+          <button class="btn btn-default" (click)="toggleSignup()" *ngIf="light">1signup</button>
+          <button class="btn btn-default" style="color: #fff; border: 1px solid #fff" (click)="toggleSignup()" *ngIf="!light">signup</button>
+
         </li>
       </ul>
     </div>
   </div>
 </header>
 <div class="modal-wrapper" *ngIf="showModal" (click)="closeModal()"></div>
-<div class="modal"  *ngIf="showModal">
-    <app-message></app-message>
-    <button (click)="closeModal()">X</button>
-    <app-login *ngIf="showLogin" (showForgot)="toggleForgot($event)"></app-login>
-    <app-forgot *ngIf="showForgot"></app-forgot>
-    <app-signup *ngIf="showSignup" (signUpComplete)="signUpComplete($event)"></app-signup>
+<div class="modal" *ngIf="showModal">
+  <app-message></app-message>
+  <button (click)="closeModal()">X</button>
+  <app-login *ngIf="showLogin" (showForgot)="toggleForgot($event)"></app-login>
+  <app-forgot *ngIf="showForgot"></app-forgot>
+  <app-signup *ngIf="showSignup" (signUpComplete)="signUpComplete($event)"></app-signup>
 </div>

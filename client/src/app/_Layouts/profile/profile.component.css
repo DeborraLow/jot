@@ -1,6 +1,5 @@
 .tinted-image {
     background: 
-      /* top, transparent red, faked with gradient */ 
       linear-gradient(
         rgba(250, 247, 247, 0.725), 
         rgba(226, 219, 219, 0.725)

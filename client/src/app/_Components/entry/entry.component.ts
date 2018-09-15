@@ -57,7 +57,7 @@ export class EntryComponent implements OnInit, AfterViewInit {
 
   }
   uploadPath(path) {
-      this.entry.image = path;
+    this.entry.image = path;
   }
   setPrivacy(privacy: string) {
     switch (privacy) {

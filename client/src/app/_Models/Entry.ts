@@ -1,5 +1,5 @@
-import {User} from './User';
-import {Emoji} from './Emoji';
+import { User } from './User';
+import { Emoji } from './Emoji';
 
 export interface Entry {
     id?: string;
@@ -12,6 +12,7 @@ export interface Entry {
     publish_date: Date;
     created_at: Date;
     emojis?: Emoji[];
-    isPublic?:boolean;
-    engagement:any;
+    isPublic?: boolean;
+    engagement: any;
+    username?: string;
 }

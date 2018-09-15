@@ -17,7 +17,7 @@
 
       <!-- Show title and summary -->
       <div class="title" *ngIf="!isEditing">{{entry.title}}</div>
-
+      <div class="title">{{entry.username}}</div>
       <!-- HIDDEN - Edit title and summary -->
       <div class="edit-input" *ngIf="isEditing && entry.mine">
         <input class="edit-input" type="text" [(ngModel)]="entry.title" name="title" placeholder="Title">
