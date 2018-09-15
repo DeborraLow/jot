@@ -2373,7 +2373,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    api_url: 'http://127.0.0.1:3000'
+    api_url: 'http://vacate.seanzamora.com'
 };
 /*
  * In development mode, for easier debugging, you can ignore zone related error
